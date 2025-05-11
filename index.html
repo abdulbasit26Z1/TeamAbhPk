@@ -1,455 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" href="blanklogo.png" type="image/x-icon">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Team Abh Pk</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  :root {
-    --primary-color: #48bb78;
-    --primary-dark: #2f855a;
-    --text-color: #2c3e50;
-    --text-light: #4a5568;
-    --bg-dark: #1a202c;
-    --bg-light: #f9fafb;
-    --white: #ffffff;
-    --transition: all 0.3s ease;
-  }
-  
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  
-  /* Header & Navigation */
-  header {
-    background: var(--bg-dark);
-    color: var(--white);
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  
-  header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-  }
-  
-  header a.logo {
-    font-weight: 700;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    color: var(--primary-color);
-    text-decoration: none;
-    letter-spacing: 1px;
-  }
-  
-  /* Mobile Menu Button */
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    margin-left: 1.5rem;
-  }
-  
-  nav a {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    padding: 0.5rem;
-  }
-  
-  nav a:hover, nav a:focus {
-    color: var(--primary-color);
-    outline: none;
-  }
-  
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-    color: var(--white);
-    padding: clamp(3rem, 8vw, 5rem) 1rem clamp(4rem, 8vw, 6rem);
-    text-align: center;
-  }
-  
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-    font-weight: 800;
-    line-height: 1.2;
-  }
-  
-  .hero p {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    max-width: 700px;
-    margin: 0 auto 2rem;
-  }
-  
-  /* Buttons */
-  .btn-primary {
-    background: var(--white);
-    color: var(--primary-dark);
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 500px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
-    transition: var(--transition);
-  }
-  
-  .btn-primary:hover, .btn-primary:focus {
-    background: var(--primary-dark);
-    color: var(--white);
-    outline: none;
-    transform: translateY(-2px);
-  }
-  
-  /* Main Content */
-  main {
-    max-width: 1100px;
-    margin: 3rem auto 6rem;
-    padding: 0 1rem;
-  }
-  
-  section {
-    margin-bottom: clamp(2rem, 6vw, 4rem);
-  }
-  
-  .section-title {
-    text-align: center;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: var(--bg-dark);
-    position: relative;
-  }
-  
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: var(--primary-color);
-    margin: 0.5rem auto 0;
-    border-radius: 2px;
-  }
-  
-  /* Features Grid */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: clamp(1rem, 3vw, 2rem);
-    padding: 0 1rem;
-  }
-  
-  .feature-card {
-    background: var(--white);
-    padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: var(--transition);
-  }
-  
-  .feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .feature-card svg {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 1rem;
-    fill: var(--primary-color);
-  }
-  
-  .feature-card h3 {
-    margin: 1rem 0 0.5rem;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--bg-dark);
-  }
-  
-  .feature-card p {
-    font-size: 0.9rem;
-    color: var(--text-light);
-  }
-  
-  /* Apps Showcase */
-  .apps-showcase {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: clamp(1rem, 3vw, 2rem);
-    padding: 0 1rem;
-  }
-  
-  .app-card {
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: var(--transition);
-  }
-  
-  .app-card:hover {
-    box-shadow: 0 20px 30px rgba(72, 187, 120, 0.4);
-  }
-  
-  .app-image {
-    background: #e6fffa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 140px;
-    padding: 1rem;
-  }
-  
-  .app-image img {
-    max-height: 100px;
-    max-width: 100%;
-    height: auto;
-    width: auto;
-  }
-  
-  .app-content {
-    padding: 1rem 1.25rem 1.5rem;
-    flex-grow: 1;
-  }
-  
-  .app-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: var(--bg-dark);
-  }
-  
-  .app-desc {
-    font-size: 0.9rem;
-    color: var(--text-light);
-  }
-  
-  /* Footer */
-  footer {
-    background: var(--bg-dark);
-    color: #a0aec0;
-    padding: 2rem 1rem;
-    text-align: center;
-  }
-  
-  footer a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  
-  footer a:hover {
-    text-decoration: underline;
-  }
-  
-  footer .footer-content {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  /* Mobile Navigation */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-      z-index: 1001;
+  <meta charset="UTF-8" />
+  <link rel="icon" href="blanklogo.png" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Abh Pk</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+
+    :root {
+      --clr-primary: #5de0e6;
+      --clr-accent: #8060e0;
+      --clr-bg: #f0f4f8;
+      --clr-surface: rgba(255, 255, 255, 0.6);
+      --clr-text: #1f2937;
+      --transition: 0.5s ease;
+      --radius: 1.25rem;
     }
-    
-    nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 300px;
-      height: 100vh;
-      background: var(--bg-dark);
-      padding: 5rem 2rem 2rem;
-      transition: right 0.3s ease;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(12px);
+      background: var(--clr-surface);
       z-index: 1000;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     }
-    
-    nav.active {
-      right: 0;
+    .logo {
+      font-size: 1.5rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+      -webkit-background-clip: text; color: transparent;
     }
-    
-    nav ul {
-      flex-direction: column;
-    }
-    
-    nav li {
-      margin: 0.5rem 0;
-    }
-    
+    nav { display: flex; gap: 1.5rem; }
     nav a {
-      display: block;
-      padding: 0.75rem;
-      border-radius: 4px;
+      position: relative; padding: .5rem; font-weight: 500;
+      color: var(--clr-text); text-decoration: none;
+      transition: color .3s;
     }
-    
-    nav a:hover {
-      background: rgba(255,255,255,0.1);
+    nav a::after {
+      content: ""; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--clr-primary);
+      transition: width var(--transition);
     }
-  }
-  
-  /* Small screen adjustments */
-  @media (max-width: 480px) {
+    nav a:hover { color: var(--clr-primary); }
+    nav a:hover::after { width: 100%; }
+
+    /* HERO */
     .hero {
-      padding: 2.5rem 1rem 3.5rem;
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 0 1rem;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      color: #fff;
+      position: relative; overflow: hidden;
     }
-    
+    .hero h1 {
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 700; line-height: 1.2;
+      background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8));
+      -webkit-background-clip: text; color: transparent;
+      margin-bottom: 1rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeInUp .8s forwards .3s;
+    }
+    .hero p {
+      font-size: clamp(1rem,2.5vw,1.25rem);
+      max-width: 700px; margin-bottom: 2rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeInUp .8s forwards .6s;
+    }
     .btn-primary {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
+      display: inline-block; padding: .75rem 2rem;
+      background: #fff; color: var(--clr-accent);
+      font-weight: 700; border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-decoration: none; transition: transform var(--transition);
+      opacity: 0; transform: translateY(20px);
+      animation: fadeInUp .8s forwards .9s;
     }
-    
-    .feature-card, .app-card {
-      padding: 1.25rem 1rem;
+    .btn-primary:hover { transform: translateY(-4px); }
+
+    /* WAVE SEPARATOR */
+    .hero svg {
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 120px;
+      fill: var(--clr-bg);
     }
-  }
-</style>
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-title {
+      font-size: 2rem; font-weight: 700; text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: ""; width: 80px; height: 3px;
+      background: var(--clr-primary);
+      position: absolute; bottom: -12px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ANIMATION KEYFRAMES */
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* GRID & CARDS */
+    .grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    }
+    .feature-card {
+      background: var(--clr-surface);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      transform-style: preserve-3d;
+      transition: transform .3s, box-shadow .3s;
+      opacity: 0; transform: translateY(20px);
+      will-change: transform, opacity;
+    }
+    .feature-card.visible {
+      animation: fadeInUp .8s forwards;
+    }
+    .feature-card:hover {
+      transform: rotateX(5deg) rotateY(5deg) translateZ(10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    }
+    .feature-card svg {
+      width: 48px; height: 48px; margin-bottom: 1rem;
+      fill: var(--clr-primary);
+    }
+    .feature-card h3 {
+      font-size: 1.25rem; margin-bottom: .75rem;
+    }
+    .feature-card p {
+      color: #475569; font-size: 1rem; line-height: 1.4;
+    }
+
+    /* APPS */
+    .apps-showcase {
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    }
+    .app-card {
+      background: var(--clr-surface);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      transition: transform .3s, box-shadow .3s;
+      opacity: 0; transform: translateY(20px);
+      will-change: transform, opacity;
+    }
+    .app-card.visible {
+      animation: fadeInUp .8s forwards;
+    }
+    .app-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    }
+    .app-image {
+      height: 180px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(93,224,230,.2), rgba(128,96,224,.2));
+    }
+    .app-image img { max-height: 100px; }
+
+    .app-content {
+      padding: 1.5rem;
+    }
+    .app-title {
+      font-size: 1.25rem; font-weight: 600; margin-bottom: .5rem;
+    }
+    .app-desc {
+      color: #475569; font-size: 1rem; line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 3rem 1rem;
+      color: #64748b; font-size: .9rem;
+    }
+    footer a {
+      color: var(--clr-primary); transition: color .3s;
+    }
+    footer a:hover { color: var(--clr-accent); }
+
+    /* RESPONSIVE HEADER MENU */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; background: none; border: none; font-size: 1.5rem; }
+      nav { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+            background: var(--clr-surface); backdrop-filter: blur(12px);
+            display:flex; flex-direction:column; padding:4rem 2rem; gap:1.5rem;
+            transition: right var(--transition); }
+      nav.active { right: 0; }
+      nav a { font-size: 1.125rem; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <a href="index.html" class="logo" aria-label="Team Abh Pk">Team Abh Pk</a>
-    <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
-    <nav aria-label="Primary Navigation">
-      <ul>
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="apps.html">Apps</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-      </ul>
+  <header>
+    <a href="index.html" class="logo">Team Abh Pk</a>
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <nav>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="services.html">Services</a>
+      <a href="team.html">Team</a>
+      <a href="careers.html">Careers</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main role="main">
-  <section class="hero" aria-label="Company Introduction">
-    <h1>Innovative Software Solutions for a Digital World</h1>
-    <p>At Team Abh Pk, we craft powerful and elegant software applications that help businesses accelerate their growth and optimize operations.</p>
-    <a href="apps.html" class="btn-primary">Explore Our Apps</a>
-  </section>
+  <main>
+    <section class="hero">
+      <h1>Innovative Software Solutions for a Digital World</h1>
+      <p>At Team Abh Pk, we craft powerful and elegant software applications that help businesses accelerate their growth and optimize operations.</p>
+      <a href="apps.html" class="btn-primary">Explore Our Apps</a>
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 V40 Q600,120 1200,40 V0z"></path></svg>
+    </section>
 
-  <section aria-labelledby="features-title">
-    <h2 class="section-title" id="features-title">What We Offer</h2>
-    <div class="features-grid">
-      <article class="feature-card" tabindex="0">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2L2 7v7a10 10 0 0020 0V7l-10-5z"/></svg>
-        <h3>Custom Software Development</h3>
-        <p>Tailored software crafted to fit your business processes and goals precisely.</p>
-      </article>
-      <article class="feature-card" tabindex="0">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-        <h3>Cloud & Infrastructure</h3>
-        <p>Scalable cloud solutions and infrastructure services supporting modern workloads.</p>
-      </article>
-      <article class="feature-card" tabindex="0">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" ry="2"/></svg>
-        <h3>Consulting & Strategy</h3>
-        <p>Expert advisory services to shape technology strategy and digital transformation.</p>
-      </article>
-    </div>
-  </section>
+    <section aria-labelledby="features-title">
+      <h2 class="section-title" id="features-title">What We Offer</h2>
+      <div class="grid features-grid">
+        <article class="feature-card" tabindex="0">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2L2 7v7a10 10 0 0020 0V7l-10-5z"/></svg>
+          <h3>Custom Software Development</h3>
+          <p>Tailored software crafted to fit your business processes and goals precisely.</p>
+        </article>
+        <article class="feature-card" tabindex="0">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+          <h3>Cloud & Infrastructure</h3>
+          <p>Scalable cloud solutions and infrastructure services supporting modern workloads.</p>
+        </article>
+        <article class="feature-card" tabindex="0">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" ry="2"/></svg>
+          <h3>Consulting & Strategy</h3>
+          <p>Expert advisory services to shape technology strategy and digital transformation.</p>
+        </article>
+      </div>
+    </section>
 
-  <section aria-labelledby="apps-title">
-    <h2 class="section-title" id="apps-title">Our Notable Apps</h2>
-    <div class="apps-showcase">
-      <article class="app-card" tabindex="0">
-        <div class="app-image" aria-label="App 1: TaskMaster">
-          <img src="app_icon.png" alt="App Logo" loading="lazy"/>
-        </div>
-        <div class="app-content">
-          <h3 class="app-title">Mrearn</h3>
-          <p class="app-desc">This is an earning application, where user can listen to Holy Books and earn Ads watching Avertisement.</p>
-        </div>
-      </article>
-      <article class="app-card" tabindex="0">
-        <div class="app-image" aria-label="App 2: CloudSync">
-          <img src="blanklogo.png" alt="CloudSync App Logo" loading="lazy"/>
-        </div>
-        <div class="app-content">
-          <h3 class="app-title">Ab2d Enginec</h3>
-          <p class="app-desc">This is a tool for developers Who can use this to turn their Ideas to software using visual scripting.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-</main>
+    <section aria-labelledby="apps-title">
+      <h2 class="section-title" id="apps-title">Our Notable Apps</h2>
+      <div class="grid apps-showcase">
+        <article class="app-card" tabindex="0">
+          <div class="app-image" aria-label="App 1: TaskMaster">
+            <img src="app_icon.png" alt="App Logo" loading="lazy"/>
+          </div>
+          <div class="app-content">
+            <h3 class="app-title">Mrearn</h3>
+            <p class="app-desc">This is an earning application, where user can listen to Holy Books and earn Ads watching Avertisement.</p>
+          </div>
+        </article>
+        <article class="app-card" tabindex="0">
+          <div class="app-image" aria-label="App 2: CloudSync">
+            <img src="blanklogo.png" alt="CloudSync App Logo" loading="lazy"/>
+          </div>
+          <div class="app-content">
+            <h3 class="app-title">Ab2d Enginec</h3>
+            <p class="app-desc">This is a tool for developers Who can use this to turn their Ideas to software using visual scripting.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 
-<footer>
-  <div class="footer-content">
+  <footer>
     <p>&copy; 2025 Team Abh Pk. All rights reserved.</p>
-    <p>Follow us on
-      <a href="#" aria-label="TechEra Twitter" target="_blank" rel="noopener noreferrer">Twitter</a>,
-      <a href="#" aria-label="TechEra LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>,
-      <a href="#" aria-label="TechEra Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <p>
+      Follow us on
+      <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>,
+      <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>,
+      <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
     </p>
-  </div>
-</footer>
+  </footer>
 
-<script>
-  // Mobile menu toggle functionality
-  document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('nav').classList.toggle('active');
-  });
-  
-  // Close menu when clicking on a link (for mobile)
-  document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.querySelector('nav').classList.remove('active');
+  <script>
+    // menu toggle
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    btn.addEventListener('click', () => nav.classList.toggle('active'));
+
+    // reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.feature-card, .app-card').forEach(el => {
+      observer.observe(el);
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
