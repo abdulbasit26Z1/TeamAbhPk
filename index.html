@@ -4,214 +4,221 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Team Abh Pk</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <title>Team Abh Pk - Buy Services</title>
+  <meta name="description" content="Professional software development services">
+  <meta name="keywords" content="web development, mobile apps, software solutions">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- Custom CSS for Buyable Services -->
   <style>
-    /* Service Purchase Modal Styles */
-    .service-purchase-modal {
-      display: none;
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #106eea;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    .header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 9999;
-      overflow-y: auto;
+      background: #fff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 15px 0;
     }
-    
-    .service-purchase-content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: #106eea;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .navmenu ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navmenu li {
       position: relative;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #aaa;
-    }
-    
-    .close-modal:hover {
-      color: #000;
-    }
-    
-    .service-purchase-form h3 {
-      margin-bottom: 20px;
-      color: #106eea;
-    }
-    
-    .service-purchase-form .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .service-purchase-form label {
+
+    .navmenu a {
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
       display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
+      transition: color 0.3s;
     }
-    
-    .service-purchase-form input,
-    .service-purchase-form select,
-    .service-purchase-form textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    
-    .service-purchase-form textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    
-    .service-purchase-form .price-display {
-      font-size: 24px;
-      font-weight: bold;
+
+    .navmenu a:hover {
       color: #106eea;
-      margin: 15px 0;
     }
-    
-    .service-purchase-form .btn-submit {
-      background-color: #106eea;
+
+    .btn-getstarted {
+      background: #106eea;
       color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
-      transition: background-color 0.3s;
-      width: 100%;
-    }
-    
-    .service-purchase-form .btn-submit:hover {
-      background-color: #0d5db8;
-    }
-    
-    .service-purchase-form .btn-submit:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-    
-    /* Service Item Buy Button */
-    .service-buy-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 15px;
-      background-color: #28a745;
-      color: white;
+      padding: 10px 25px;
       border-radius: 4px;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: background-color 0.3s;
+      transition: background 0.3s;
     }
-    
-    .service-buy-btn:hover {
-      background-color: #218838;
+
+    .btn-getstarted:hover {
+      background: #0d5db8;
       color: white;
     }
-    
-    /* Service Package Options */
-    .service-packages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 15px 0;
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #106eea 0%, #0d5db8 100%);
+      color: white;
+      padding: 150px 0 100px;
+      margin-top: 70px;
     }
-    
-    .package-option {
-      flex: 1;
-      min-width: 120px;
-      padding: 15px;
-      border: 2px solid #ddd;
-      border-radius: 5px;
-      text-align: center;
-      cursor: pointer;
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-get-started {
+      background: white;
+      color: #106eea;
+      padding: 12px 30px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
       transition: all 0.3s;
     }
-    
-    .package-option:hover {
-      border-color: #106eea;
+
+    .btn-get-started:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
     }
-    
-    .package-option.selected {
-      border-color: #106eea;
-      background-color: #f0f8ff;
+
+    /* Services Section */
+    .services {
+      background: #f8f9fa;
     }
-    
-    .package-name {
-      font-weight: bold;
-      margin-bottom: 5px;
+
+    .service-item {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
     }
-    
-    .package-price {
+
+    .service-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-item .icon {
+      font-size: 2.5rem;
       color: #106eea;
-      font-weight: 500;
+      margin-bottom: 20px;
     }
-    
-    /* Success Message */
-    .success-message {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      background-color: #f8fff8;
-      border: 1px solid #28a745;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-    
-    .success-message i {
-      font-size: 48px;
-      color: #28a745;
+
+    .service-item h4 {
+      font-size: 1.3rem;
       margin-bottom: 15px;
+      color: #333;
     }
-    
+
+    .service-item .description {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* Buy Button Styles */
+    .service-buy-btn {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .service-buy-btn:hover {
+      background: #218838;
+      color: white;
+    }
+
     /* Cart Indicator */
     .cart-indicator {
       position: relative;
-      display: inline-block;
-      margin-left: 15px;
+      margin-left: 20px;
     }
-    
+
     .cart-count {
       position: absolute;
       top: -8px;
       right: -8px;
-      background-color: #e74c3c;
+      background: #dc3545;
       color: white;
       border-radius: 50%;
       width: 20px;
@@ -221,7 +228,167 @@
       align-items: center;
       justify-content: center;
     }
-    
+
+    /* Modal Styles */
+    .service-purchase-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      overflow-y: auto;
+    }
+
+    .service-purchase-content {
+      background: white;
+      margin: 50px auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s;
+    }
+
+    .close-modal:hover {
+      color: #333;
+    }
+
+    .service-purchase-form h3 {
+      color: #106eea;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #106eea;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Package Options */
+    .service-packages {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .package-option {
+      flex: 1;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .package-option:hover {
+      border-color: #106eea;
+    }
+
+    .package-option.selected {
+      border-color: #106eea;
+      background: #f0f8ff;
+    }
+
+    .package-name {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .package-price {
+      color: #106eea;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .price-display {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #106eea;
+      margin: 20px 0;
+    }
+
+    .btn-submit {
+      background: #106eea;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      background: #0d5db8;
+    }
+
+    /* Success Message */
+    .success-message {
+      text-align: center;
+      padding: 30px;
+      background: #f8fff8;
+      border: 1px solid #28a745;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .success-message i {
+      font-size: 3rem;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+
+    .success-message h4 {
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
     /* Cart Modal */
     .cart-modal {
       display: none;
@@ -230,26 +397,24 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 9998;
-      overflow-y: auto;
     }
-    
+
     .cart-content {
-      background-color: #fff;
-      margin: 5% auto;
+      background: white;
+      margin: 50px auto;
       padding: 30px;
       width: 90%;
       max-width: 800px;
       border-radius: 10px;
       position: relative;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
+
     .cart-items {
       margin: 20px 0;
     }
-    
+
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -257,97 +422,300 @@
       padding: 15px 0;
       border-bottom: 1px solid #eee;
     }
-    
+
     .cart-item-details h4 {
       margin: 0;
-      font-size: 16px;
+      color: #333;
     }
-    
+
     .cart-item-details p {
       margin: 5px 0;
       color: #666;
     }
-    
+
     .cart-item-price {
       font-weight: bold;
       color: #106eea;
     }
-    
+
     .remove-item {
       background: none;
       border: none;
-      color: #e74c3c;
+      color: #dc3545;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 1.2rem;
     }
-    
+
     .cart-total {
       text-align: right;
-      font-size: 20px;
+      font-size: 1.3rem;
       font-weight: bold;
       margin: 20px 0;
+      color: #333;
     }
-    
+
     .cart-actions {
       display: flex;
+      gap: 15px;
       justify-content: space-between;
     }
-    
+
     .btn-continue-shopping,
     .btn-checkout {
-      padding: 10px 20px;
+      padding: 12px 25px;
+      border: none;
       border-radius: 5px;
       cursor: pointer;
       font-weight: 500;
+      transition: background 0.3s;
     }
-    
+
     .btn-continue-shopping {
-      background-color: #6c757d;
+      background: #6c757d;
       color: white;
-      border: none;
     }
-    
+
+    .btn-continue-shopping:hover {
+      background: #5a6268;
+    }
+
     .btn-checkout {
-      background-color: #106eea;
+      background: #106eea;
       color: white;
-      border: none;
     }
-    
-    /* Responsive adjustments */
+
+    .btn-checkout:hover {
+      background: #0d5db8;
+    }
+
+    /* About Section */
+    .about {
+      background: white;
+    }
+
+    .about img {
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .about h1 {
+      color: #106eea;
+      margin-bottom: 20px;
+    }
+
+    .about ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .about li i {
+      color: #28a745;
+      margin-right: 10px;
+    }
+
+    .read-more {
+      color: #106eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Stats Section */
+    .stats {
+      background: linear-gradient(135deg, #106eea 0%, #0d5db8 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .stats-item span {
+      font-size: 2.5rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .stats-item p {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    /* Features Section */
+    .features {
+      background: white;
+    }
+
+    .features-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .features-item i {
+      font-size: 1.5rem;
+      color: #106eea;
+      margin-right: 15px;
+      margin-top: 5px;
+    }
+
+    .features-item h4 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: #f8f9fa;
+    }
+
+    .info-item {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .info-item i {
+      font-size: 2rem;
+      color: #106eea;
+      margin-bottom: 15px;
+    }
+
+    .info-item h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2c3e50;
+      color: white;
+    }
+
+    .footer-about p {
+      color: #bdc3c7;
+    }
+
+    .social-links a {
+      color: white;
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+
+    .footer-links h4 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #bdc3c7;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-contact p {
+      color: #bdc3c7;
+      margin-bottom: 5px;
+    }
+
+    .copyright {
+      border-top: 1px solid #34495e;
+      padding-top: 20px;
+      margin-top: 40px;
+      color: #bdc3c7;
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
+      .navmenu {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
       .service-packages {
         flex-direction: column;
       }
-      
+
       .cart-actions {
         flex-direction: column;
-        gap: 10px;
       }
-      
-      .btn-continue-shopping,
-      .btn-checkout {
-        width: 100%;
+
+      .header .container {
+        flex-wrap: wrap;
+      }
+
+      .cart-indicator {
+        margin-left: auto;
       }
     }
-  </style>
 
-  <!-- =======================================================
-  * Template Name: Techie
-  * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    /* Grid System */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+    }
+
+    .col-lg-6, .col-lg-4, .col-lg-3, .col-md-6, .col-md-12, .col-6, .col-12 {
+      padding: 0 15px;
+    }
+
+    .col-lg-6 { width: 50%; }
+    .col-lg-4 { width: 33.333%; }
+    .col-lg-3 { width: 25%; }
+    .col-md-6 { width: 50%; }
+    .col-md-12 { width: 100%; }
+    .col-6 { width: 50%; }
+    .col-12 { width: 100%; }
+
+    @media (max-width: 992px) {
+      .col-lg-6, .col-lg-4, .col-lg-3 { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .col-md-6 { width: 100%; }
+    }
+
+    /* Utility Classes */
+    .d-flex { display: flex; }
+    .align-items-center { align-items: center; }
+    .justify-content-center { justify-content: center; }
+    .justify-content-between { justify-content: space-between; }
+    .flex-column { flex-direction: column; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .text-center { text-align: center; }
+    .text-md-start { text-align: left; }
+    .mt-4 { margin-top: 1.5rem; }
+    .mb-4 { margin-bottom: 1.5rem; }
+    .py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .img-fluid { max-width: 100%; height: auto; }
+    .w-100 { width: 100%; }
+    .h-100 { height: 100%; }
+  </style>
 </head>
 
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+  <header id="header" class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
         <h1 class="sitename">Team Abh Pk</h1>
       </a>
 
@@ -356,312 +724,162 @@
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Blogs</a></li>
-              <li class="dropdown"><a href="#"><span>Top Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Application Development</a></li>
-                  <li><a href="#">Website Development</a></li>
-                  <li><a href="#">Graphic Design</a></li>
-                  <li><a href="#">Digital Marketing</a></li>
-                  <li><a href="#">Video Editing</a></li>
-                </ul>
-              </li>
-              <li><a href="#">FAQs</a></li>
-               <li><a href="#">Apps</a></li>
-              <li><a href="#">Privacy</a></li>
-             
-            </ul>
-          </li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="#about">Get Started</a>
-      
-      <!-- Cart Icon -->
-      <div class="cart-indicator">
-        <a href="#" id="cart-icon" class="d-flex align-items-center">
-          <i class="bi bi-cart3" style="font-size: 24px;"></i>
-          <span class="cart-count">0</span>
-        </a>
+      <div class="d-flex align-items-center">
+        <a class="btn-getstarted" href="#about">Get Started</a>
+        
+        <!-- Cart Icon -->
+        <div class="cart-indicator">
+          <a href="#" id="cart-icon" class="d-flex align-items-center">
+            <i class="bi bi-cart3" style="font-size: 24px;"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
       </div>
-
     </div>
   </header>
 
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section accent-background">
-
+    <section id="hero" class="hero section">
       <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1>Welcome to <br> Team Abh Pk</h1>
+        <div class="row">
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <h1>Welcome to Team Abh Pk</h1>
             <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
             <div class="d-flex">
               <a href="#about" class="btn-get-started">Get Started</a>
             </div>
           </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+          <div class="col-lg-6">
+            <img src="https://via.placeholder.com/600x400/106eea/ffffff?text=Team+Abh+Pk" class="img-fluid" alt="Hero Image">
           </div>
         </div>
       </div>
-
-    </section><!-- /Hero Section -->
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
-
       <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="https://via.placeholder.com/600x400/106eea/ffffff?text=About+Us" class="img-fluid" alt="About Us">
           </div>
-
-          <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-6 content">
             <h1>About Us</h1>
-            <p class="fst-italic">
-             Team Abh Pk, founded in 2018, Our Services are :
-            </p>
+            <p class="fst-italic">Team Abh Pk, founded in 2018, Our Services are:</p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span> We specialize in technologies like React.js, Angular.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>We specialize in technologies like React.js, Angular.</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Delivering Scalable & Growth-Focused Software Solutions.</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Experts in Modern Web & Mobile Technologies.</span></li>
-            
             </ul>
             <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
-
         </div>
-
       </div>
-
-    </section><!-- /About Section -->
+    </section>
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section accent-background">
-
-      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
+    <section id="stats" class="stats section">
+      <div class="container">
+        <div class="row">
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+            <div class="stats-item">
+              <span>232</span>
               <p>Clients</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+            <div class="stats-item">
+              <span>521</span>
               <p>Projects</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+            <div class="stats-item">
+              <span>1453</span>
               <p>Hours Of Support</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+            <div class="stats-item">
+              <span>32</span>
               <p>Workers</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
         </div>
-
       </div>
-
-    </section><!-- /Stats Section -->
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>From concept to deployment, we deliver end-to-end technology solutions that drive business growth and digital transformation.</p>
-      </div><!-- End Section Title -->
-
       <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Web Development</a></h4>
-                <p class="description">Cutting-edge web applications that push the boundaries of what's possible</p>
-                <a href="#" class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</a>
-              </div>
-            </div>
-          </div>
-          <!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">AI Solutions</a></h4>
-                <p class="description">Artificial intelligence that transforms businesses and lives</p>
-                <a href="#" class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Cyber Security</a></h4>
-                <p class="description">Unbreachable security systems that protect what matters most</p>
-                <a href="#" class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Dev Ops</a></h4>
-                <p class="description">Lightning-fast deployment pipelines that accelerate innovation</p>
-                <a href="#" class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Cloud Architecture</a></h4>
-                <p class="description">Scalable cloud solutions built for the future</p>
-                <a href="#" class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Mobile Apps</a></h4>
-                <p class="description">Revolutionary mobile experiences that users will never forget</p>
-                <a href="#" class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">SEO</a></h4>
-                <p class="description">Search engine optimization that drives organic traffic and visibility</p>
-                <a href="#" class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">CRM Solutions</a></h4>
-                <p class="description">Customer relationship management systems that streamline your business</p>
-                <a href="#" class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</a>
-              </div>
-            </div>
-          </div>
-          <!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">IT Support</a></h4>
-                <p class="description">Comprehensive IT support services for your business infrastructure</p>
-                <a href="#" class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Networking</a></h4>
-                <p class="description">Network infrastructure solutions for reliable connectivity</p>
-                <a href="#" class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">E Commerce</a></h4>
-                <p class="description">Complete e-commerce solutions that drive online sales</p>
-                <a href="#" class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Graphic Designing</a></h4>
-                <p class="description">Creative visual solutions that elevate your brand identity</p>
-                <a href="#" class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Digital Marketing</a></h4>
-                <p class="description">Strategic digital marketing campaigns that grow your business</p>
-                <a href="#" class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
-              <div>
-                <h4 class="title"><a href="#" class="stretched-link">Video Editing</a></h4>
-                <p class="description">Professional video editing for your business & ads</p>
-                <a href="#" class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
+        <div class="section-title">
+          <h2>Our Services</h2>
+          <p>From concept to deployment, we deliver end-to-end technology solutions that drive business growth and digital transformation.</p>
         </div>
 
-      </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-briefcase"></i></div>
+              <h4>Web Development</h4>
+              <p class="description">Cutting-edge web applications that push the boundaries of what's possible</p>
+              <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now - $999</button>
+            </div>
+          </div>
 
-    </section><!-- /Services Section -->
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-card-checklist"></i></div>
+              <h4>AI Solutions</h4>
+              <p class="description">Artificial intelligence that transforms businesses and lives</p>
+              <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now - $1999</button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-bar-chart"></i></div>
+              <h4>Cyber Security</h4>
+              <p class="description">Unbreachable security systems that protect what matters most</p>
+              <button class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now - $1499</button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-binoculars"></i></div>
+              <h4>Dev Ops</h4>
+              <p class="description">Lightning-fast deployment pipelines that accelerate innovation</p>
+              <button class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now - $1299</button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-brightness-high"></i></div>
+              <h4>Cloud Architecture</h4>
+              <p class="description">Scalable cloud solutions built for the future</p>
+              <button class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now - $1799</button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item">
+              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+              <h4>Mobile Apps</h4>
+              <p class="description">Revolutionary mobile experiences that users will never forget</p>
+              <button class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now - $1599</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Service Purchase Modal -->
     <div id="service-purchase-modal" class="service-purchase-modal">
@@ -677,7 +895,7 @@
           <div class="form-group">
             <label>Select Package</label>
             <div class="service-packages">
-              <div class="package-option" data-package="basic" data-multiplier="1">
+              <div class="package-option selected" data-package="basic" data-multiplier="1">
                 <div class="package-name">Basic</div>
                 <div class="package-price">$<span id="basic-price">0</span></div>
               </div>
@@ -750,543 +968,91 @@
       </div>
     </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Our Process</h2>
-        <p>We follow a proven methodology that ensures project success from start to finish.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4 justify-content-between">
-          <div class="features-image col-lg-5 order-lg-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/features.svg" class="img-fluid" alt=""></div>
-          <div class="col-lg-6 d-flex flex-column justify-content-center">
-
-            <div class="features-item d-flex ps-0 ps-lg-3 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-archive flex-shrink-0"></i>
-              <div>
-                <h4>Requirement Analysis</h4>
-                <p>Gathering and analyzing business requirements, documenting functional and non-functional specifications.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-basket flex-shrink-0"></i>
-              <div>
-                <h4>System Design</h4>
-                <p>Creating architecture diagrams, database schemas, and detailed technical specifications.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-broadcast flex-shrink-0"></i>
-              <div>
-                <h4>Implementation & Testing</h4>
-                <p>Coding the application following best practices, design patterns, and coding standards.Comprehensive testing including unit testing, integration testing, and user acceptance testing.</p>
-              </div>
-              
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="500">
-              <i class="bi bi-camera-reels flex-shrink-0"></i>
-              <div>
-                <h4>Deployment & Maintenance</h4>
-                <p>Deploying the application to production environment with proper configuration management.Ongoing support, bug fixes, performance monitoring, and feature enhancements.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-         
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Features Section -->
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>What our clients say about our services and solutions</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper" data-speed="600" data-delay="5000" data-breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: 1, &quot;spaceBetween&quot;: 40 }, &quot;1200&quot;: { &quot;slidesPerView&quot;: 3, &quot;spaceBetween&quot;: 40 } }">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-            <p>
-              <i class=" bi bi-quote quote-icon-left"></i>
-                <span>Team Abh Pk delivered an exceptional e-commerce solution that increased our online sales by 45%. Their attention to detail and technical expertise is remarkable.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>The AI solution developed by Team Abh Pk transformed our business operations. Their team was professional, responsive, and delivered beyond our expectations.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Operations Director</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Working with Team Abh Pk on our mobile app was a fantastic experience. They understood our vision and delivered a product that our users love.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Product Manager</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Check out some of our recent projects and success stories</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-web">Web</li>
-            <li data-filter=".filter-ecommerce">E-commerce</li>
-          </ul><!-- End Portfolio Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Fitness Tracker App</a></h4>
-                  <p>Cross-platform mobile application with AI-powered workout recommendations</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Corporate Website</a></h4>
-                  <p>Responsive corporate website with CMS and integrated analytics</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ecommerce">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Online Store</a></h4>
-                  <p>Full-featured e-commerce platform with payment integration</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Portfolio Section -->
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Flexible pricing options for different business needs</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="pricing-item">
-              <h3>Starter</h3>
-              <h4><sup>$</sup>499<span> / project</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Basic website or app</span></li>
-                <li><i class="bi bi-check"></i> <span>Responsive design</span></li>
-                <li><i class="bi bi-check"></i> <span>1 month support</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Advanced features</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Custom integrations</span></li>
-              </ul>
-              <a href="#contact" class="buy-btn">Get Quote</a>
-            </div>
-          </div><!-- End Pricing Item -->
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="pricing-item featured">
-              <h3>Business</h3>
-              <h4><sup>$</sup>1299<span> / project</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Custom web application</span></li>
-                <li><i class="bi bi-check"></i> <span>Database integration</span></li>
-                <li><i class="bi bi-check"></i> <span>3 months support</span></li>
-                <li><i class="bi bi-check"></i> <span>Basic SEO</span></li>
-                <li><i class="bi bi-check"></i> <span>Payment integration</span></li>
-              </ul>
-              <a href="#contact" class="buy-btn">Get Quote</a>
-            </div>
-          </div><!-- End Pricing Item -->
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="pricing-item">
-              <h3>Enterprise</h3>
-              <h4><sup>$</sup>2499<span> / project</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Complex web application</span></li>
-                <li><i class="bi bi-check"></i> <span>Advanced features</span></li>
-                <li><i class="bi bi-check"></i> <span>6 months support</span></li>
-                <li><i class="bi bi-check"></i> <span>Advanced SEO</span></li>
-                <li><i class="bi bi-check"></i> <span>Multiple integrations</span></li>
-              </ul>
-              <a href="#contact" class="buy-btn">Get Quote</a>
-            </div>
-          </div><!-- End Pricing Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Pricing Section -->
-
-    <!-- Faq Section -->
-    <section id="faq" class="faq section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>Common questions about our services and process</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row justify-content-center">
-
-          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="faq-container">
-
-              <div class="faq-item faq-active">
-                <h3>How long does a typical project take?</h3>
-                <div class="faq-content">
-                  <p>Project timelines vary based on complexity. A simple website might take 2-4 weeks, while a complex web application could take 2-4 months. We provide detailed timelines during our initial consultation.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Do you provide ongoing support after project completion?</h3>
-                <div class="faq-content">
-                  <p>Yes, we offer various support packages depending on your needs. All projects include a warranty period, and we can provide ongoing maintenance, updates, and technical support.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Can you work with our existing design or development team?</h3>
-                <div class="faq-content">
-                  <p>Absolutely! We frequently collaborate with in-house teams, other agencies, or freelancers. We're flexible and can adapt to your preferred workflow.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>What technologies do you specialize in?</h3>
-                <div class="faq-content">
-                  <p>We work with a wide range of technologies including React, Angular, Vue.js, Node.js, Python, PHP, and various databases. We choose the best technology stack for each project's specific requirements.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-            </div>
-
-          </div><!-- End Faq Column-->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Faq Section -->
-
-    <!-- Team Section -->
-    <section id="team" class="team section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Meet our talented team of developers, designers, and strategists</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-                        <!-- Basit -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Basit.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Abdul Basit</h4>
-                <span>CEO & Co-Founder</span>
-                <p>Visionary leader with 12+ years in tech. Former VP at Google, passionate about AI and sustainable technology.</p>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-                       <!-- Zafar -->
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Zafar.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Muhammad Zafar</h4>
-                <span>CTO & Co-Founder</span>
-                <p>Full-stack architect with expertise in scalable systems. Ex-Netflix engineer, blockchain enthusiast.</p>
-                <h7>System Architecture,DevOps,Blockchain,<br>Cloud Computing</h7>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-                              <!-- Ahmad -->
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Ahmad.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Ahmad Ihsan</h4>
-                <span>Lead Frontend Developer</span>
-                <p>React specialist with a passion for performance optimization and modern web technologies.</p>
-             <h7> React,TypeScript,Performance,<br>Testing</h7>
-
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-                            <!-- Arslan -->
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/arslan.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Muhammad Arslan</h4>
-                <span>Accountant</span>
-                <p>Financial expert with 8+ years in tech industry accounting. Ensures smooth financial operations and budgeting.</p>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Team Section -->
-
     <!-- Contact Section -->
     <section id="contact" class="contact section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>Ready to transform your ideas into reality? We're here to help you every step of the way.</p>
+        </div>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Ready to transform your ideas into reality? We're here to help you every step of the way.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
+        <div class="row">
           <div class="col-lg-6">
-
-            <div class="row gy-4">
+            <div class="row">
               <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="200">
+                <div class="info-item">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
                   <p>Raiwand road</p>
-                  <p>Lahore , PAkistan</p>
+                  <p>Lahore, Pakistan</p>
                 </div>
-              </div><!-- End Info Item -->
-
+              </div>
               <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
+                <div class="info-item">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
                   <p>+92 332 8657885</p>
                   <p>+92 3700602339</p>
                 </div>
-              </div><!-- End Info Item -->
-
+              </div>
               <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
+                <div class="info-item">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
                   <p>teamabhpk@gmail.com</p>
                 </div>
-              </div><!-- End Info Item -->
-
+              </div>
               <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="500">
+                <div class="info-item">
                   <i class="bi bi-clock"></i>
                   <h3>Open Hours</h3>
                   <p>Monday - Sunday</p>
                   <p>24/7/365</p>
                 </div>
-              </div><!-- End Info Item -->
-
+              </div>
             </div>
-
           </div>
 
           <div class="col-lg-6">
-  <form action="https://formspree.io/f/mzzkjvwy" method="POST" data-aos="fade-up" data-aos-delay="200">
-    <div class="row gy-4">
-
-      <div class="col-md-6">
-        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-      </div>
-
-      <div class="col-md-6">
-        <input type="email" name="_replyto" class="form-control" placeholder="Your Email" required>
-      </div>
-
-      <div class="col-12">
-        <input type="text" name="_subject" class="form-control" placeholder="Subject" required>
-      </div>
-
-      <div class="col-12">
-        <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
-      </div>
-
-      <div class="col-12 text-center">
-        <button type="submit">Send Message</button>
-      </div>
-
-    </div>
-  </form>
-</div>
-<!-- End Contact Form -->
-
+            <form action="https://formspree.io/f/mzzkjvwy" method="POST">
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" name="_replyto" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="col-12">
+                  <input type="text" name="_subject" class="form-control" placeholder="Subject" required>
+                </div>
+                <div class="col-12">
+                  <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
+                </div>
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn-submit">Send Message</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-
       </div>
-
-    </section><!-- /Contact Section -->
+    </section>
 
   </main>
 
-  <footer id="footer" class="footer accent-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
         <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Team Abh Pk</span>
+          <a href="index.html" class="logo">
+            <h3 class="sitename">Team Abh Pk</h3>
           </a>
           <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
@@ -1314,49 +1080,23 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>raiwand road</p>
+          <p>Raiwand road</p>
           <p>Lahore</p>
           <p>Pakistan</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+93 332 8657885</span></p>
-          <p><strong>Email:</strong> <span>teamabhpk@gmail.com</span></p>
+          <p class="mt-4"><strong>Phone:</strong> +92 332 8657885</p>
+          <p><strong>Email:</strong> teamabhpk@gmail.com</p>
         </div>
-
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Team Abh PK</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <!-- Service Purchase JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Service purchase functionality
