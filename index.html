@@ -411,14 +411,564 @@
       opacity: 0.95;
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .service-card { min-height: 300px; }
-      .service-card-header { padding: 14px; }
-      .service-card-body { padding: 12px 14px; }
-      .service-card-footer { padding: 12px 14px; flex-direction: column; align-items: stretch; gap: 8px; }
-      .service-footer-actions { justify-content: space-between; }
-    }
+    /* Services Section - Complete set of service cards */
+    <div class="services-cards" data-aos="fade-up" data-aos-delay="100">
+      <!-- Web Development -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-code-slash"></i></div>
+          <div>
+            <h4 class="service-card-title">Web Development</h4>
+            <div class="service-card-sub">Cutting-edge web applications that push the boundaries</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Responsive, SEO-friendly websites</li>
+            <li>Modern stacks like React / Next.js</li>
+            <li>Performance & accessibility focused</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.9</span>
+                <span style="color:#9aa7bc;font-weight:600;">(523)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Full-stack</div>
+              <div class="service-tag">API</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$999</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Solutions -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-cpu"></i></div>
+          <div>
+            <h4 class="service-card-title">AI Solutions</h4>
+            <div class="service-card-sub">Artificial intelligence that transforms businesses</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Custom ML models & data pipelines</li>
+            <li>Model deployment & monitoring</li>
+            <li>Integration with your systems</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.8</span>
+                <span style="color:#9aa7bc;font-weight:600;">(210)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">NLP</div>
+              <div class="service-tag">Computer Vision</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1999</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cyber Security -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-shield-lock"></i></div>
+          <div>
+            <h4 class="service-card-title">Cyber Security</h4>
+            <div class="service-card-sub">Unbreachable security systems that protect assets</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Security audits & pentesting</li>
+            <li>Hardening & incident response</li>
+            <li>Ongoing monitoring</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.7</span>
+                <span style="color:#9aa7bc;font-weight:600;">(150)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>7 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Audit</div>
+              <div class="service-tag">Monitoring</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1499</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dev Ops -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-gear"></i></div>
+          <div>
+            <h4 class="service-card-title">Dev Ops</h4>
+            <div class="service-card-sub">Lightning-fast deployment pipelines</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>CI/CD pipelines</li>
+            <li>Infrastructure as code</li>
+            <li>Monitoring & SLOs</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.9</span>
+                <span style="color:#9aa7bc;font-weight:600;">(98)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>6 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Kubernetes</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1299</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud Architecture -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-cloud"></i></div>
+          <div>
+            <h4 class="service-card-title">Cloud Architecture</h4>
+            <div class="service-card-sub">Scalable cloud solutions built for the future</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Design & migration</li>
+            <li>Cost optimization</li>
+            <li>High availability</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.8</span>
+                <span style="color:#9aa7bc;font-weight:600;">(132)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>8 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">AWS</div>
+              <div class="service-tag">GCP</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1799</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Apps -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-phone"></i></div>
+          <div>
+            <h4 class="service-card-title">Mobile Apps</h4>
+            <div class="service-card-sub">Revolutionary mobile experiences</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>iOS & Android</li>
+            <li>React Native / Flutter</li>
+            <li>App Store deployment</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>4.9</span>
+                <span style="color:#9aa7bc;font-weight:600;">(244)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>14 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Native</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1599</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-search"></i></div>
+          <div>
+            <h4 class="service-card-title">SEO</h4>
+            <div class="service-card-sub">Search engine optimization that drives organic traffic</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Keyword research & on‑page SEO</li>
+            <li>Technical SEO fixes</li>
+            <li>Monthly reporting & recommendations</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(146)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>7 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">On-Page</div>
+              <div class="service-tag">Audit</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$799</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRM Solutions (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-people"></i></div>
+          <div>
+            <h4 class="service-card-title">CRM Solutions</h4>
+            <div class="service-card-sub">Customer relationship systems that streamline business</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Custom CRM setup & integrations</li>
+            <li>Workflow automation</li>
+            <li>Training & handover</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.7</span><span style="color:#9aa7bc;font-weight:600;">(88)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>6 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Sales</div>
+              <div class="service-tag">Automation</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1399</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IT Support (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-headset"></i></div>
+          <div>
+            <h4 class="service-card-title">IT Support</h4>
+            <div class="service-card-sub">Comprehensive IT support for your infrastructure</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>24/7 helpdesk & ticketing</li>
+            <li>System administration</li>
+            <li>On-site and remote support</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(64)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>2 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Support</div>
+              <div class="service-tag">Maintenance</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$899</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Networking (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-router"></i></div>
+          <div>
+            <h4 class="service-card-title">Networking</h4>
+            <div class="service-card-sub">Network infrastructure solutions for reliable connectivity</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Design & deployment</li>
+            <li>VPN, VLAN, firewall setup</li>
+            <li>Monitoring & performance tuning</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(72)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Infra</div>
+              <div class="service-tag">Security</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1099</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- E Commerce (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-basket"></i></div>
+          <div>
+            <h4 class="service-card-title">E Commerce</h4>
+            <div class="service-card-sub">Complete e-commerce solutions that drive online sales</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Store setup (Shopify/WooCommerce)</li>
+            <li>Payments & shipping integration</li>
+            <li>Conversion optimization</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(201)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>12 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Shopify</div>
+              <div class="service-tag">WooCommerce</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1899</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graphic Designing (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-palette"></i></div>
+          <div>
+            <h4 class="service-card-title">Graphic Designing</h4>
+            <div class="service-card-sub">Creative visual solutions that elevate your brand</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Brand identity & logos</li>
+            <li>Marketing collateral</li>
+            <li>Fast turnarounds</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.9</span><span style="color:#9aa7bc;font-weight:600;">(310)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>3 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Logo</div>
+              <div class="service-tag">Branding</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$699</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Digital Marketing (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-megaphone"></i></div>
+          <div>
+            <h4 class="service-card-title">Digital Marketing</h4>
+            <div class="service-card-sub">Strategic campaigns that grow your business</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>PPC, social ads & strategy</li>
+            <li>Content marketing</li>
+            <li>Analytics & conversion tracking</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(178)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Ads</div>
+              <div class="service-tag">SEO</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$1199</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Editing (added) -->
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-film"></i></div>
+          <div>
+            <h4 class="service-card-title">Video Editing</h4>
+            <div class="service-card-sub">Professional video editing for your business & ads</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            <li>Promo videos & ads</li>
+            <li>Transitions, color grading</li>
+            <li>Formats for social and web</li>
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.7</span><span style="color:#9aa7bc;font-weight:600;">(121)</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>4 Days</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">Ads</div>
+              <div class="service-tag">Social</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$599</div>
+          </div>
+          <div class="service-footer-actions">
+            <button class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </style>
 
   <!-- =======================================================
@@ -830,9 +1380,325 @@
             </div>
           </div>
 
-          <!-- Additional services (SEO, CRM, IT Support, etc.) -->
-          <!-- ...existing code... (you can replicate the structure above for remaining services) ... -->
+          <!-- SEO (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-search"></i></div>
+              <div>
+                <h4 class="service-card-title">SEO</h4>
+                <div class="service-card-sub">Search engine optimization that drives organic traffic</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Keyword research & on‑page SEO</li>
+                <li>Technical SEO fixes</li>
+                <li>Monthly reporting & recommendations</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(146)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>7 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">On-Page</div>
+                  <div class="service-tag">Audit</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$799</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</button>
+              </div>
+            </div>
+          </div>
 
+          <!-- CRM Solutions (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-people"></i></div>
+              <div>
+                <h4 class="service-card-title">CRM Solutions</h4>
+                <div class="service-card-sub">Customer relationship systems that streamline business</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Custom CRM setup & integrations</li>
+                <li>Workflow automation</li>
+                <li>Training & handover</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.7</span><span style="color:#9aa7bc;font-weight:600;">(88)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>6 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Sales</div>
+                  <div class="service-tag">Automation</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$1399</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- IT Support (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-headset"></i></div>
+              <div>
+                <h4 class="service-card-title">IT Support</h4>
+                <div class="service-card-sub">Comprehensive IT support for your infrastructure</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>24/7 helpdesk & ticketing</li>
+                <li>System administration</li>
+                <li>On-site and remote support</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(64)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>2 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Support</div>
+                  <div class="service-tag">Maintenance</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$899</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Networking (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-router"></i></div>
+              <div>
+                <h4 class="service-card-title">Networking</h4>
+                <div class="service-card-sub">Network infrastructure solutions for reliable connectivity</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Design & deployment</li>
+                <li>VPN, VLAN, firewall setup</li>
+                <li>Monitoring & performance tuning</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(72)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Infra</div>
+                  <div class="service-tag">Security</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$1099</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- E Commerce (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-basket"></i></div>
+              <div>
+                <h4 class="service-card-title">E Commerce</h4>
+                <div class="service-card-sub">Complete e-commerce solutions that drive online sales</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Store setup (Shopify/WooCommerce)</li>
+                <li>Payments & shipping integration</li>
+                <li>Conversion optimization</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                    <span>4.8</span>
+                    <span style="color:#9aa7bc;font-weight:600;">(201)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>12 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Shopify</div>
+                  <div class="service-tag">WooCommerce</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$1899</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Graphic Designing (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-palette"></i></div>
+              <div>
+                <h4 class="service-card-title">Graphic Designing</h4>
+                <div class="service-card-sub">Creative visual solutions that elevate your brand</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Brand identity & logos</li>
+                <li>Marketing collateral</li>
+                <li>Fast turnarounds</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                    <span>4.9</span>
+                    <span style="color:#9aa7bc;font-weight:600;">(310)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>3 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Logo</div>
+                  <div class="service-tag">Branding</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$699</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Digital Marketing (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-megaphone"></i></div>
+              <div>
+                <h4 class="service-card-title">Digital Marketing</h4>
+                <div class="service-card-sub">Strategic campaigns that grow your business</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>PPC, social ads & strategy</li>
+                <li>Content marketing</li>
+                <li>Analytics & conversion tracking</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                    <span>4.8</span>
+                    <span style="color:#9aa7bc;font-weight:600;">(178)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Ads</div>
+                  <div class="service-tag">SEO</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$1199</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Editing (added) -->
+          <div class="service-card">
+            <div class="service-card-header">
+              <div class="service-card-icon"><i class="bi bi-film"></i></div>
+              <div>
+                <h4 class="service-card-title">Video Editing</h4>
+                <div class="service-card-sub">Professional video editing for your business & ads</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <ul class="service-bullets">
+                <li>Promo videos & ads</li>
+                <li>Transitions, color grading</li>
+                <li>Formats for social and web</li>
+              </ul>
+              <div class="service-meta">
+                <div class="meta-left">
+                  <div class="meta-item service-rating">
+                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                    <span>4.7</span>
+                    <span style="color:#9aa7bc;font-weight:600;">(121)</span>
+                  </div>
+                  <div class="meta-item"><i class="bi bi-clock"></i><span>4 Days</span></div>
+                </div>
+                <div class="service-tags">
+                  <div class="service-tag">Ads</div>
+                  <div class="service-tag">Social</div>
+                </div>
+              </div>
+            </div>
+            <div class="service-card-footer">
+              <div class="service-price">
+                <div class="from">Starting at</div>
+                <div class="amount">$599</div>
+              </div>
+              <div class="service-footer-actions">
+                <button class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section><!-- /Services Section -->
