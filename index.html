@@ -4,221 +4,211 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Team Abh Pk - Buy Services</title>
-  <meta name="description" content="Professional software development services">
-  <meta name="keywords" content="web development, mobile apps, software solutions">
+  <title>Team Abh Pk</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Buyable Services CSS -->
   <style>
-    /* Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-
-    .section {
-      padding: 80px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: #106eea;
-    }
-
-    .section-title p {
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Header Styles */
-    .header {
+    /* Service Purchase Modal Styles */
+    .service-purchase-modal {
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      padding: 15px 0;
-    }
-
-    .header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo h1 {
-      color: #106eea;
-      font-size: 1.8rem;
-      margin: 0;
-    }
-
-    .navmenu ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navmenu li {
-      position: relative;
-    }
-
-    .navmenu a {
-      color: #333;
-      text-decoration: none;
-      padding: 10px 15px;
-      display: block;
-      transition: color 0.3s;
-    }
-
-    .navmenu a:hover {
-      color: #106eea;
-    }
-
-    .btn-getstarted {
-      background: #106eea;
-      color: white;
-      padding: 10px 25px;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .btn-getstarted:hover {
-      background: #0d5db8;
-      color: white;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, #106eea 0%, #0d5db8 100%);
-      color: white;
-      padding: 150px 0 100px;
-      margin-top: 70px;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
-
-    .btn-get-started {
-      background: white;
-      color: #106eea;
-      padding: 12px 30px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .btn-get-started:hover {
-      background: #f8f9fa;
-      transform: translateY(-2px);
-    }
-
-    /* Services Section */
-    .services {
-      background: #f8f9fa;
-    }
-
-    .service-item {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-      transition: transform 0.3s, box-shadow 0.3s;
       height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      overflow-y: auto;
     }
-
-    .service-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    
+    .service-purchase-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-
-    .service-item .icon {
-      font-size: 2.5rem;
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #aaa;
+    }
+    
+    .close-modal:hover {
+      color: #000;
+    }
+    
+    .service-purchase-form h3 {
+      margin-bottom: 20px;
       color: #106eea;
+    }
+    
+    .service-purchase-form .form-group {
       margin-bottom: 20px;
     }
-
-    .service-item h4 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: #333;
+    
+    .service-purchase-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
     }
-
-    .service-item .description {
-      color: #666;
-      margin-bottom: 20px;
+    
+    .service-purchase-form input,
+    .service-purchase-form select,
+    .service-purchase-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
     }
-
-    /* Buy Button Styles */
+    
+    .service-purchase-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .service-purchase-form .price-display {
+      font-size: 24px;
+      font-weight: bold;
+      color: #106eea;
+      margin: 15px 0;
+    }
+    
+    .service-purchase-form .btn-submit {
+      background-color: #106eea;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    
+    .service-purchase-form .btn-submit:hover {
+      background-color: #0d5db8;
+    }
+    
+    /* Service Item Buy Button */
     .service-buy-btn {
       display: inline-block;
-      background: #28a745;
+      margin-top: 10px;
+      padding: 8px 15px;
+      background-color: #28a745;
       color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 4px;
       text-decoration: none;
+      font-size: 14px;
       font-weight: 500;
+      transition: background-color 0.3s;
       border: none;
       cursor: pointer;
-      transition: background 0.3s;
     }
-
+    
     .service-buy-btn:hover {
-      background: #218838;
+      background-color: #218838;
       color: white;
     }
-
+    
+    /* Service Package Options */
+    .service-packages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .package-option {
+      flex: 1;
+      min-width: 120px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .package-option:hover {
+      border-color: #106eea;
+    }
+    
+    .package-option.selected {
+      border-color: #106eea;
+      background-color: #f0f8ff;
+    }
+    
+    .package-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .package-price {
+      color: #106eea;
+      font-weight: 500;
+    }
+    
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #f8fff8;
+      border: 1px solid #28a745;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    
+    .success-message i {
+      font-size: 48px;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    
     /* Cart Indicator */
     .cart-indicator {
       position: relative;
-      margin-left: 20px;
+      display: inline-block;
+      margin-left: 15px;
     }
-
+    
     .cart-count {
       position: absolute;
       top: -8px;
       right: -8px;
-      background: #dc3545;
+      background-color: #e74c3c;
       color: white;
       border-radius: 50%;
       width: 20px;
@@ -228,167 +218,7 @@
       align-items: center;
       justify-content: center;
     }
-
-    /* Modal Styles */
-    .service-purchase-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 9999;
-      overflow-y: auto;
-    }
-
-    .service-purchase-content {
-      background: white;
-      margin: 50px auto;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      color: #999;
-      transition: color 0.3s;
-    }
-
-    .close-modal:hover {
-      color: #333;
-    }
-
-    .service-purchase-form h3 {
-      color: #106eea;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-      color: #333;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #106eea;
-    }
-
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    /* Package Options */
-    .service-packages {
-      display: flex;
-      gap: 15px;
-      margin: 20px 0;
-    }
-
-    .package-option {
-      flex: 1;
-      padding: 20px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .package-option:hover {
-      border-color: #106eea;
-    }
-
-    .package-option.selected {
-      border-color: #106eea;
-      background: #f0f8ff;
-    }
-
-    .package-name {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .package-price {
-      color: #106eea;
-      font-weight: 500;
-      font-size: 1.1rem;
-    }
-
-    .price-display {
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #106eea;
-      margin: 20px 0;
-    }
-
-    .btn-submit {
-      background: #106eea;
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.3s;
-      width: 100%;
-    }
-
-    .btn-submit:hover {
-      background: #0d5db8;
-    }
-
-    /* Success Message */
-    .success-message {
-      text-align: center;
-      padding: 30px;
-      background: #f8fff8;
-      border: 1px solid #28a745;
-      border-radius: 8px;
-      display: none;
-    }
-
-    .success-message i {
-      font-size: 3rem;
-      color: #28a745;
-      margin-bottom: 15px;
-    }
-
-    .success-message h4 {
-      color: #28a745;
-      margin-bottom: 10px;
-    }
-
+    
     /* Cart Modal */
     .cart-modal {
       display: none;
@@ -397,24 +227,26 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.7);
       z-index: 9998;
+      overflow-y: auto;
     }
-
+    
     .cart-content {
-      background: white;
-      margin: 50px auto;
+      background-color: #fff;
+      margin: 5% auto;
       padding: 30px;
       width: 90%;
       max-width: 800px;
       border-radius: 10px;
       position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-
+    
     .cart-items {
       margin: 20px 0;
     }
-
+    
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -422,300 +254,117 @@
       padding: 15px 0;
       border-bottom: 1px solid #eee;
     }
-
+    
     .cart-item-details h4 {
       margin: 0;
-      color: #333;
+      font-size: 16px;
     }
-
+    
     .cart-item-details p {
       margin: 5px 0;
       color: #666;
     }
-
+    
     .cart-item-price {
       font-weight: bold;
       color: #106eea;
     }
-
+    
     .remove-item {
       background: none;
       border: none;
-      color: #dc3545;
+      color: #e74c3c;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 18px;
     }
-
+    
     .cart-total {
       text-align: right;
-      font-size: 1.3rem;
+      font-size: 20px;
       font-weight: bold;
       margin: 20px 0;
-      color: #333;
     }
-
+    
     .cart-actions {
       display: flex;
-      gap: 15px;
       justify-content: space-between;
     }
-
+    
     .btn-continue-shopping,
     .btn-checkout {
-      padding: 12px 25px;
-      border: none;
+      padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
       font-weight: 500;
-      transition: background 0.3s;
+      border: none;
     }
-
+    
     .btn-continue-shopping {
-      background: #6c757d;
+      background-color: #6c757d;
       color: white;
     }
-
-    .btn-continue-shopping:hover {
-      background: #5a6268;
-    }
-
+    
     .btn-checkout {
-      background: #106eea;
+      background-color: #106eea;
       color: white;
     }
-
-    .btn-checkout:hover {
-      background: #0d5db8;
+    
+    /* Order Confirmation */
+    .order-confirmation {
+      display: none;
+      text-align: center;
+      padding: 30px;
     }
-
-    /* About Section */
-    .about {
-      background: white;
-    }
-
-    .about img {
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .about h1 {
-      color: #106eea;
-      margin-bottom: 20px;
-    }
-
-    .about ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .about li {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .about li i {
+    
+    .order-confirmation i {
+      font-size: 64px;
       color: #28a745;
-      margin-right: 10px;
-    }
-
-    .read-more {
-      color: #106eea;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    /* Stats Section */
-    .stats {
-      background: linear-gradient(135deg, #106eea 0%, #0d5db8 100%);
-      color: white;
-      text-align: center;
-    }
-
-    .stats-item span {
-      font-size: 2.5rem;
-      font-weight: bold;
-      display: block;
-    }
-
-    .stats-item p {
-      font-size: 1.1rem;
-      margin: 0;
-    }
-
-    /* Features Section */
-    .features {
-      background: white;
-    }
-
-    .features-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 30px;
-    }
-
-    .features-item i {
-      font-size: 1.5rem;
-      color: #106eea;
-      margin-right: 15px;
-      margin-top: 5px;
-    }
-
-    .features-item h4 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    /* Contact Section */
-    .contact {
-      background: #f8f9fa;
-    }
-
-    .info-item {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .info-item i {
-      font-size: 2rem;
-      color: #106eea;
-      margin-bottom: 15px;
-    }
-
-    .info-item h3 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    /* Footer */
-    .footer {
-      background: #2c3e50;
-      color: white;
-    }
-
-    .footer-about p {
-      color: #bdc3c7;
-    }
-
-    .social-links a {
-      color: white;
-      margin-right: 15px;
-      font-size: 1.2rem;
-    }
-
-    .footer-links h4 {
-      color: white;
       margin-bottom: 20px;
     }
-
-    .footer-links ul {
-      list-style: none;
-      padding: 0;
+    
+    .order-details {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: left;
     }
-
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-
-    .footer-links a {
-      color: #bdc3c7;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    .footer-contact p {
-      color: #bdc3c7;
-      margin-bottom: 5px;
-    }
-
-    .copyright {
-      border-top: 1px solid #34495e;
-      padding-top: 20px;
-      margin-top: 40px;
-      color: #bdc3c7;
-    }
-
-    /* Responsive Design */
+    
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .navmenu {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
       .service-packages {
         flex-direction: column;
       }
-
+      
       .cart-actions {
         flex-direction: column;
+        gap: 10px;
       }
-
-      .header .container {
-        flex-wrap: wrap;
-      }
-
-      .cart-indicator {
-        margin-left: auto;
+      
+      .btn-continue-shopping,
+      .btn-checkout {
+        width: 100%;
       }
     }
-
-    /* Grid System */
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 -15px;
-    }
-
-    .col-lg-6, .col-lg-4, .col-lg-3, .col-md-6, .col-md-12, .col-6, .col-12 {
-      padding: 0 15px;
-    }
-
-    .col-lg-6 { width: 50%; }
-    .col-lg-4 { width: 33.333%; }
-    .col-lg-3 { width: 25%; }
-    .col-md-6 { width: 50%; }
-    .col-md-12 { width: 100%; }
-    .col-6 { width: 50%; }
-    .col-12 { width: 100%; }
-
-    @media (max-width: 992px) {
-      .col-lg-6, .col-lg-4, .col-lg-3 { width: 100%; }
-    }
-
-    @media (max-width: 768px) {
-      .col-md-6 { width: 100%; }
-    }
-
-    /* Utility Classes */
-    .d-flex { display: flex; }
-    .align-items-center { align-items: center; }
-    .justify-content-center { justify-content: center; }
-    .justify-content-between { justify-content: space-between; }
-    .flex-column { flex-direction: column; }
-    .flex-shrink-0 { flex-shrink: 0; }
-    .text-center { text-align: center; }
-    .text-md-start { text-align: left; }
-    .mt-4 { margin-top: 1.5rem; }
-    .mb-4 { margin-bottom: 1.5rem; }
-    .py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-    .img-fluid { max-width: 100%; height: auto; }
-    .w-100 { width: 100%; }
-    .h-100 { height: 100%; }
   </style>
+
+  <!-- =======================================================
+  * Template Name: Techie
+  * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body class="index-page">
 
-  <header id="header" class="header">
-    <div class="container">
-      <a href="index.html" class="logo">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">Team Abh Pk</h1>
       </a>
 
@@ -724,162 +373,312 @@
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Blogs</a></li>
+              <li class="dropdown"><a href="#"><span>Top Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Application Development</a></li>
+                  <li><a href="#">Website Development</a></li>
+                  <li><a href="#">Graphic Design</a></li>
+                  <li><a href="#">Digital Marketing</a></li>
+                  <li><a href="#">Video Editing</a></li>
+                </ul>
+              </li>
+              <li><a href="#">FAQs</a></li>
+               <li><a href="#">Apps</a></li>
+              <li><a href="#">Privacy</a></li>
+             
+            </ul>
+          </li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <div class="d-flex align-items-center">
-        <a class="btn-getstarted" href="#about">Get Started</a>
-        
-        <!-- Cart Icon -->
-        <div class="cart-indicator">
-          <a href="#" id="cart-icon" class="d-flex align-items-center">
-            <i class="bi bi-cart3" style="font-size: 24px;"></i>
-            <span class="cart-count">0</span>
-          </a>
-        </div>
+      <a class="btn-getstarted" href="#about">Get Started</a>
+      
+      <!-- Cart Icon -->
+      <div class="cart-indicator">
+        <a href="#" id="cart-icon" class="d-flex align-items-center">
+          <i class="bi bi-cart3" style="font-size: 24px;"></i>
+          <span class="cart-count">0</span>
+        </a>
       </div>
+
     </div>
   </header>
 
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="hero" class="hero section accent-background">
+
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6 d-flex flex-column justify-content-center">
-            <h1>Welcome to Team Abh Pk</h1>
+        <div class="row gy-4">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            <h1>Welcome to <br> Team Abh Pk</h1>
             <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
             <div class="d-flex">
               <a href="#about" class="btn-get-started">Get Started</a>
             </div>
           </div>
-          <div class="col-lg-6">
-            <img src="https://via.placeholder.com/600x400/106eea/ffffff?text=Team+Abh+Pk" class="img-fluid" alt="Hero Image">
+          <div class="col-lg-6 order-1 order-lg-2 hero-img">
+            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
           </div>
         </div>
       </div>
-    </section>
+
+    </section><!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
+
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <img src="https://via.placeholder.com/600x400/106eea/ffffff?text=About+Us" class="img-fluid" alt="About Us">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="">
           </div>
-          <div class="col-lg-6 content">
+
+          <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
             <h1>About Us</h1>
-            <p class="fst-italic">Team Abh Pk, founded in 2018, Our Services are:</p>
+            <p class="fst-italic">
+             Team Abh Pk, founded in 2018, Our Services are :
+            </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>We specialize in technologies like React.js, Angular.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> We specialize in technologies like React.js, Angular.</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Delivering Scalable & Growth-Focused Software Solutions.</span></li>
               <li><i class="bi bi-check-circle"></i> <span>Experts in Modern Web & Mobile Technologies.</span></li>
+            
             </ul>
             <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
+
         </div>
+
       </div>
-    </section>
+
+    </section><!-- /About Section -->
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section">
-      <div class="container">
-        <div class="row">
+    <section id="stats" class="stats section accent-background">
+
+      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <span>232</span>
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
               <p>Clients</p>
             </div>
-          </div>
+          </div><!-- End Stats Item -->
+
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <span>521</span>
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
               <p>Projects</p>
             </div>
-          </div>
+          </div><!-- End Stats Item -->
+
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <span>1453</span>
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
               <p>Hours Of Support</p>
             </div>
-          </div>
+          </div><!-- End Stats Item -->
+
           <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <span>32</span>
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
               <p>Workers</p>
             </div>
-          </div>
+          </div><!-- End Stats Item -->
+
         </div>
+
       </div>
-    </section>
+
+    </section><!-- /Stats Section -->
 
     <!-- Services Section -->
     <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Services</h2>
+        <p>From concept to deployment, we deliver end-to-end technology solutions that drive business growth and digital transformation.</p>
+      </div><!-- End Section Title -->
+
       <div class="container">
-        <div class="section-title">
-          <h2>Our Services</h2>
-          <p>From concept to deployment, we deliver end-to-end technology solutions that drive business growth and digital transformation.</p>
+
+        <div class="row gy-4">
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+              <div>
+                <h4 class="title">Web Development</h4>
+                <p class="description">Cutting-edge web applications that push the boundaries of what's possible</p>
+                <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+              <div>
+                <h4 class="title">AI Solutions</h4>
+                <p class="description">Artificial intelligence that transforms businesses and lives</p>
+                <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+              <div>
+                <h4 class="title">Cyber Security</h4>
+                <p class="description">Unbreachable security systems that protect what matters most</p>
+                <button class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
+              <div>
+                <h4 class="title">Dev Ops</h4>
+                <p class="description">Lightning-fast deployment pipelines that accelerate innovation</p>
+                <button class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
+              <div>
+                <h4 class="title">Cloud Architecture</h4>
+                <p class="description">Scalable cloud solutions built for the future</p>
+                <button class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div>
+                <h4 class="title">Mobile Apps</h4>
+                <p class="description">Revolutionary mobile experiences that users will never forget</p>
+                <button class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div>
+                <h4 class="title">SEO</h4>
+                <p class="description">Search engine optimization that drives organic traffic and visibility</p>
+                <button class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+              <div>
+                <h4 class="title">CRM Solutions</h4>
+                <p class="description">Customer relationship management systems that streamline your business</p>
+                <button class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+              <div>
+                <h4 class="title">IT Support</h4>
+                <p class="description">Comprehensive IT support services for your business infrastructure</p>
+                <button class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+              <div>
+                <h4 class="title">Networking</h4>
+                <p class="description">Network infrastructure solutions for reliable connectivity</p>
+                <button class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
+              <div>
+                <h4 class="title">E Commerce</h4>
+                <p class="description">Complete e-commerce solutions that drive online sales</p>
+                <button class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
+              <div>
+                <h4 class="title">Graphic Designing</h4>
+                <p class="description">Creative visual solutions that elevate your brand identity</p>
+                <button class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div>
+                <h4 class="title">Digital Marketing</h4>
+                <p class="description">Strategic digital marketing campaigns that grow your business</p>
+                <button class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div>
+                <h4 class="title">Video Editing</h4>
+                <p class="description">Professional video editing for your business & ads</p>
+                <button class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</button>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
         </div>
 
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-briefcase"></i></div>
-              <h4>Web Development</h4>
-              <p class="description">Cutting-edge web applications that push the boundaries of what's possible</p>
-              <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now - $999</button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-card-checklist"></i></div>
-              <h4>AI Solutions</h4>
-              <p class="description">Artificial intelligence that transforms businesses and lives</p>
-              <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now - $1999</button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-bar-chart"></i></div>
-              <h4>Cyber Security</h4>
-              <p class="description">Unbreachable security systems that protect what matters most</p>
-              <button class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now - $1499</button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-binoculars"></i></div>
-              <h4>Dev Ops</h4>
-              <p class="description">Lightning-fast deployment pipelines that accelerate innovation</p>
-              <button class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now - $1299</button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-brightness-high"></i></div>
-              <h4>Cloud Architecture</h4>
-              <p class="description">Scalable cloud solutions built for the future</p>
-              <button class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now - $1799</button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-              <h4>Mobile Apps</h4>
-              <p class="description">Revolutionary mobile experiences that users will never forget</p>
-              <button class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now - $1599</button>
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
+
+    </section><!-- /Services Section -->
 
     <!-- Service Purchase Modal -->
     <div id="service-purchase-modal" class="service-purchase-modal">
@@ -963,96 +762,189 @@
         
         <div class="cart-actions">
           <button class="btn-continue-shopping" id="continue-shopping-cart">Continue Shopping</button>
-          <button class="btn-checkout" id="proceed-checkout">Proceed to Checkout</button>
+          <button class="btn-checkout" id="proceed-checkout">Place Order</button>
         </div>
       </div>
     </div>
 
+    <!-- Order Confirmation Modal -->
+    <div id="order-confirmation-modal" class="service-purchase-modal">
+      <div class="service-purchase-content">
+        <span class="close-modal">&times;</span>
+        <div class="order-confirmation">
+          <i class="bi bi-check-circle"></i>
+          <h3>Order Placed Successfully!</h3>
+          <p>Thank you for your order. We have received your request and will contact you within 24 hours.</p>
+          
+          <div class="order-details" id="order-details">
+            <!-- Order details will be populated here -->
+          </div>
+          
+          <p><strong>Order ID: <span id="order-id"></span></strong></p>
+          <p>We'll send a confirmation email shortly.</p>
+          <button class="btn-checkout" id="close-order-confirmation">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Process</h2>
+        <p>We follow a proven methodology that ensures project success from start to finish.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4 justify-content-between">
+          <div class="features-image col-lg-5 order-lg-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/features.svg" class="img-fluid" alt=""></div>
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
+
+            <div class="features-item d-flex ps-0 ps-lg-3 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-archive flex-shrink-0"></i>
+              <div>
+                <h4>Requirement Analysis</h4>
+                <p>Gathering and analyzing business requirements, documenting functional and non-functional specifications.</p>
+              </div>
+            </div><!-- End Features Item-->
+
+            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-basket flex-shrink-0"></i>
+              <div>
+                <h4>System Design</h4>
+                <p>Creating architecture diagrams, database schemas, and detailed technical specifications.</p>
+              </div>
+            </div><!-- End Features Item-->
+
+            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-broadcast flex-shrink-0"></i>
+              <div>
+                <h4>Implementation & Testing</h4>
+                <p>Coding the application following best practices, design patterns, and coding standards.Comprehensive testing including unit testing, integration testing, and user acceptance testing.</p>
+              </div>
+              
+            </div><!-- End Features Item-->
+
+            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="500">
+              <i class="bi bi-camera-reels flex-shrink-0"></i>
+              <div>
+                <h4>Deployment & Maintenance</h4>
+                <p>Deploying the application to production environment with proper configuration management.Ongoing support, bug fixes, performance monitoring, and feature enhancements.</p>
+              </div>
+            </div><!-- End Features Item-->
+          </div>
+        </div>
+      </div>
+    </section><!-- /Features Section -->
+
     <!-- Contact Section -->
     <section id="contact" class="contact section">
-      <div class="container">
-        <div class="section-title">
-          <h2>Contact Us</h2>
-          <p>Ready to transform your ideas into reality? We're here to help you every step of the way.</p>
-        </div>
 
-        <div class="row">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Ready to transform your ideas into reality? We're here to help you every step of the way.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
           <div class="col-lg-6">
-            <div class="row">
+
+            <div class="row gy-4">
               <div class="col-md-6">
-                <div class="info-item">
+                <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
                   <p>Raiwand road</p>
-                  <p>Lahore, Pakistan</p>
+                  <p>Lahore , PAkistan</p>
                 </div>
-              </div>
+              </div><!-- End Info Item -->
+
               <div class="col-md-6">
-                <div class="info-item">
+                <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
                   <p>+92 332 8657885</p>
                   <p>+92 3700602339</p>
                 </div>
-              </div>
+              </div><!-- End Info Item -->
+
               <div class="col-md-6">
-                <div class="info-item">
+                <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
                   <p>teamabhpk@gmail.com</p>
                 </div>
-              </div>
+              </div><!-- End Info Item -->
+
               <div class="col-md-6">
-                <div class="info-item">
+                <div class="info-item" data-aos="fade" data-aos-delay="500">
                   <i class="bi bi-clock"></i>
                   <h3>Open Hours</h3>
                   <p>Monday - Sunday</p>
                   <p>24/7/365</p>
                 </div>
-              </div>
+              </div><!-- End Info Item -->
+
             </div>
+
           </div>
 
           <div class="col-lg-6">
-            <form action="https://formspree.io/f/mzzkjvwy" method="POST">
-              <div class="row">
+            <form action="https://formspree.io/f/mzzkjvwy" method="POST" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
                 <div class="col-md-6">
                   <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                 </div>
+
                 <div class="col-md-6">
                   <input type="email" name="_replyto" class="form-control" placeholder="Your Email" required>
                 </div>
+
                 <div class="col-12">
                   <input type="text" name="_subject" class="form-control" placeholder="Subject" required>
                 </div>
+
                 <div class="col-12">
                   <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
                 </div>
+
                 <div class="col-12 text-center">
-                  <button type="submit" class="btn-submit">Send Message</button>
+                  <button type="submit">Send Message</button>
                 </div>
+
               </div>
             </form>
           </div>
+          <!-- End Contact Form -->
+
         </div>
+
       </div>
-    </section>
+
+    </section><!-- /Contact Section -->
 
   </main>
 
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="row">
+  <footer id="footer" class="footer accent-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo">
-            <h3 class="sitename">Team Abh Pk</h3>
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Team Abh Pk</span>
           </a>
           <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
           <div class="social-links d-flex mt-4">
-            <a href="#"><i class="bi bi-twitter-x"></i></a>
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
@@ -1080,12 +972,13 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>Raiwand road</p>
+          <p>raiwand road</p>
           <p>Lahore</p>
           <p>Pakistan</p>
-          <p class="mt-4"><strong>Phone:</strong> +92 332 8657885</p>
-          <p><strong>Email:</strong> teamabhpk@gmail.com</p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+93 332 8657885</span></p>
+          <p><strong>Email:</strong> <span>teamabhpk@gmail.com</span></p>
         </div>
+
       </div>
     </div>
 
@@ -1095,14 +988,36 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
+
   </footer>
 
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Service Purchase JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Service purchase functionality
       const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
       const servicePurchaseModal = document.getElementById('service-purchase-modal');
       const cartModal = document.getElementById('cart-modal');
+      const orderConfirmationModal = document.getElementById('order-confirmation-modal');
       const closeModalButtons = document.querySelectorAll('.close-modal');
       const packageOptions = document.querySelectorAll('.package-option');
       const serviceNameInput = document.getElementById('service-name');
@@ -1117,16 +1032,24 @@
       const cartTotalPrice = document.getElementById('cart-total-price');
       const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
       const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+      const orderDetails = document.getElementById('order-details');
+      const orderIdElement = document.getElementById('order-id');
+      const closeOrderConfirmation = document.getElementById('close-order-confirmation');
       
       let currentService = null;
       let currentBasePrice = 0;
       let selectedPackage = 'basic';
       let cart = [];
+      let orders = [];
       
-      // Initialize cart from localStorage if available
+      // Initialize cart and orders from localStorage if available
       if (localStorage.getItem('serviceCart')) {
         cart = JSON.parse(localStorage.getItem('serviceCart'));
         updateCartCount();
+      }
+      
+      if (localStorage.getItem('serviceOrders')) {
+        orders = JSON.parse(localStorage.getItem('serviceOrders'));
       }
       
       // Service buy button click handler
@@ -1155,6 +1078,7 @@
         button.addEventListener('click', function() {
           servicePurchaseModal.style.display = 'none';
           cartModal.style.display = 'none';
+          orderConfirmationModal.style.display = 'none';
         });
       });
       
@@ -1165,6 +1089,9 @@
         }
         if (e.target === cartModal) {
           cartModal.style.display = 'none';
+        }
+        if (e.target === orderConfirmationModal) {
+          orderConfirmationModal.style.display = 'none';
         }
       });
       
@@ -1211,7 +1138,8 @@
           customerName: customerName,
           customerEmail: customerEmail,
           customerPhone: customerPhone,
-          projectDetails: projectDetails
+          projectDetails: projectDetails,
+          timestamp: new Date().toISOString()
         };
         
         // Add to cart
@@ -1252,23 +1180,44 @@
         cartModal.style.display = 'none';
       });
       
-      // Proceed to checkout
+      // Proceed to checkout - Place Order
       proceedCheckoutBtn.addEventListener('click', function() {
         if (cart.length === 0) {
           alert('Your cart is empty');
           return;
         }
         
-        // In a real implementation, this would redirect to a checkout page
-        // For this demo, we'll just show an alert
-        alert('In a real implementation, this would redirect to a checkout page. For now, your cart items are saved in localStorage.');
+        // Create order
+        const orderId = 'ORD' + Date.now();
+        const order = {
+          id: orderId,
+          items: [...cart],
+          total: calculateCartTotal(),
+          timestamp: new Date().toISOString(),
+          status: 'pending'
+        };
         
-        // Optionally clear the cart after "checkout"
-        // cart = [];
-        // localStorage.removeItem('serviceCart');
-        // updateCartCount();
-        // updateCartDisplay();
-        // cartModal.style.display = 'none';
+        // Add to orders
+        orders.push(order);
+        
+        // Save orders to localStorage
+        localStorage.setItem('serviceOrders', JSON.stringify(orders));
+        
+        // Clear cart
+        cart = [];
+        localStorage.removeItem('serviceCart');
+        updateCartCount();
+        
+        // Show order confirmation
+        showOrderConfirmation(order);
+        
+        // Close cart modal
+        cartModal.style.display = 'none';
+      });
+      
+      // Close order confirmation
+      closeOrderConfirmation.addEventListener('click', function() {
+        orderConfirmationModal.style.display = 'none';
       });
       
       // Helper function to update package prices
@@ -1328,12 +1277,10 @@
         cartItemsContainer.innerHTML = '';
         
         // Calculate total
-        let total = 0;
+        let total = calculateCartTotal();
         
         // Add each cart item
         cart.forEach(item => {
-          total += item.price;
-          
           const cartItemElement = document.createElement('div');
           cartItemElement.className = 'cart-item';
           cartItemElement.innerHTML = `
@@ -1360,12 +1307,38 @@
         });
       }
       
+      // Helper function to calculate cart total
+      function calculateCartTotal() {
+        return cart.reduce((total, item) => total + item.price, 0);
+      }
+      
       // Helper function to remove item from cart
       function removeFromCart(itemId) {
         cart = cart.filter(item => item.id !== itemId);
         localStorage.setItem('serviceCart', JSON.stringify(cart));
         updateCartCount();
         updateCartDisplay();
+      }
+      
+      // Helper function to show order confirmation
+      function showOrderConfirmation(order) {
+        orderIdElement.textContent = order.id;
+        
+        // Build order details
+        let orderDetailsHTML = '<h4>Order Summary:</h4>';
+        order.items.forEach(item => {
+          orderDetailsHTML += `
+            <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+              <strong>${item.service}</strong> - ${item.package} Package<br>
+              Price: $${item.price}<br>
+              Customer: ${item.customerName}
+            </div>
+          `;
+        });
+        orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold;">Total: $${order.total}</div>`;
+        
+        orderDetails.innerHTML = orderDetailsHTML;
+        orderConfirmationModal.style.display = 'block';
       }
     });
   </script>
