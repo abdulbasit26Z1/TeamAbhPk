@@ -1010,338 +1010,426 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Service Purchase JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Service purchase functionality
-      const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
-      const servicePurchaseModal = document.getElementById('service-purchase-modal');
-      const cartModal = document.getElementById('cart-modal');
-      const orderConfirmationModal = document.getElementById('order-confirmation-modal');
-      const closeModalButtons = document.querySelectorAll('.close-modal');
-      const packageOptions = document.querySelectorAll('.package-option');
-      const serviceNameInput = document.getElementById('service-name');
-      const totalPriceDisplay = document.getElementById('total-price');
-      const addToCartBtn = document.getElementById('add-to-cart-btn');
-      const successMessage = document.getElementById('success-message');
-      const continueShoppingBtn = document.getElementById('continue-shopping');
-      const goToCartBtn = document.getElementById('go-to-cart');
-      const cartIcon = document.getElementById('cart-icon');
-      const cartCount = document.querySelector('.cart-count');
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartTotalPrice = document.getElementById('cart-total-price');
-      const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
-      const proceedCheckoutBtn = document.getElementById('proceed-checkout');
-      const orderDetails = document.getElementById('order-details');
-      const orderIdElement = document.getElementById('order-id');
-      const closeOrderConfirmation = document.getElementById('close-order-confirmation');
-      
-      let currentService = null;
-      let currentBasePrice = 0;
-      let selectedPackage = 'basic';
-      let cart = [];
-      let orders = [];
-      
-      // Initialize cart and orders from localStorage if available
-      if (localStorage.getItem('serviceCart')) {
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script loaded - checking elements...');
+    
+    // Service purchase functionality
+    const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
+    const servicePurchaseModal = document.getElementById('service-purchase-modal');
+    const cartModal = document.getElementById('cart-modal');
+    const orderConfirmationModal = document.getElementById('order-confirmation-modal');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    const packageOptions = document.querySelectorAll('.package-option');
+    const serviceNameInput = document.getElementById('service-name');
+    const totalPriceDisplay = document.getElementById('total-price');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const successMessage = document.getElementById('success-message');
+    const continueShoppingBtn = document.getElementById('continue-shopping');
+    const goToCartBtn = document.getElementById('go-to-cart');
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.querySelector('.cart-count');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalPrice = document.getElementById('cart-total-price');
+    const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
+    const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+    const orderDetails = document.getElementById('order-details');
+    const orderIdElement = document.getElementById('order-id');
+    const closeOrderConfirmation = document.getElementById('close-order-confirmation');
+    
+    console.log('Elements found:', {
+        serviceBuyButtons: serviceBuyButtons.length,
+        servicePurchaseModal: !!servicePurchaseModal,
+        cartModal: !!cartModal,
+        orderConfirmationModal: !!orderConfirmationModal,
+        proceedCheckoutBtn: !!proceedCheckoutBtn
+    });
+    
+    let currentService = null;
+    let currentBasePrice = 0;
+    let selectedPackage = 'basic';
+    let cart = [];
+    let orders = [];
+    
+    // Initialize cart and orders from localStorage if available
+    if (localStorage.getItem('serviceCart')) {
         cart = JSON.parse(localStorage.getItem('serviceCart'));
         updateCartCount();
-      }
-      
-      if (localStorage.getItem('serviceOrders')) {
+    }
+    
+    if (localStorage.getItem('serviceOrders')) {
         orders = JSON.parse(localStorage.getItem('serviceOrders'));
-      }
-      
-      // Service buy button click handler
-      serviceBuyButtons.forEach(button => {
+    }
+    
+    // Service buy button click handler
+    serviceBuyButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-          e.preventDefault();
-          currentService = this.getAttribute('data-service');
-          currentBasePrice = parseInt(this.getAttribute('data-base-price'));
-          
-          // Set service name in modal
-          serviceNameInput.value = currentService;
-          
-          // Update package prices
-          updatePackagePrices();
-          
-          // Reset form
-          resetPurchaseForm();
-          
-          // Show modal
-          servicePurchaseModal.style.display = 'block';
+            e.preventDefault();
+            currentService = this.getAttribute('data-service');
+            currentBasePrice = parseInt(this.getAttribute('data-base-price'));
+            
+            console.log('Buy button clicked:', currentService, currentBasePrice);
+            
+            // Set service name in modal
+            if (serviceNameInput) {
+                serviceNameInput.value = currentService;
+            }
+            
+            // Update package prices
+            updatePackagePrices();
+            
+            // Reset form
+            resetPurchaseForm();
+            
+            // Show modal
+            if (servicePurchaseModal) {
+                servicePurchaseModal.style.display = 'block';
+            }
         });
-      });
-      
-      // Close modal handlers
-      closeModalButtons.forEach(button => {
+    });
+    
+    // Close modal handlers
+    closeModalButtons.forEach(button => {
         button.addEventListener('click', function() {
-          servicePurchaseModal.style.display = 'none';
-          cartModal.style.display = 'none';
-          orderConfirmationModal.style.display = 'none';
+            if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+            if (cartModal) cartModal.style.display = 'none';
+            if (orderConfirmationModal) orderConfirmationModal.style.display = 'none';
         });
-      });
-      
-      // Close modal when clicking outside
-      window.addEventListener('click', function(e) {
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
         if (e.target === servicePurchaseModal) {
-          servicePurchaseModal.style.display = 'none';
+            servicePurchaseModal.style.display = 'none';
         }
         if (e.target === cartModal) {
-          cartModal.style.display = 'none';
+            cartModal.style.display = 'none';
         }
         if (e.target === orderConfirmationModal) {
-          orderConfirmationModal.style.display = 'none';
+            orderConfirmationModal.style.display = 'none';
         }
-      });
-      
-      // Package selection handler
-      packageOptions.forEach(option => {
+    });
+    
+    // Package selection handler
+    packageOptions.forEach(option => {
         option.addEventListener('click', function() {
-          // Remove selected class from all options
-          packageOptions.forEach(opt => opt.classList.remove('selected'));
-          
-          // Add selected class to clicked option
-          this.classList.add('selected');
-          
-          // Update selected package
-          selectedPackage = this.getAttribute('data-package');
-          
-          // Update total price
-          updateTotalPrice();
+            // Remove selected class from all options
+            packageOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            this.classList.add('selected');
+            
+            // Update selected package
+            selectedPackage = this.getAttribute('data-package');
+            
+            // Update total price
+            updateTotalPrice();
         });
-      });
-      
-      // Add to cart button handler
-      addToCartBtn.addEventListener('click', function() {
-        const customerName = document.getElementById('customer-name').value;
-        const customerEmail = document.getElementById('customer-email').value;
-        const customerPhone = document.getElementById('customer-phone').value;
-        const projectDetails = document.getElementById('project-details').value;
-        
-        // Validate form
-        if (!customerName || !customerEmail || !customerPhone) {
-          alert('Please fill in all required fields');
-          return;
-        }
-        
-        // Calculate final price
-        const packageMultiplier = parseFloat(document.querySelector('.package-option.selected').getAttribute('data-multiplier'));
-        const finalPrice = currentBasePrice * packageMultiplier;
-        
-        // Create cart item
-        const cartItem = {
-          id: Date.now().toString(),
-          service: currentService,
-          package: selectedPackage,
-          price: finalPrice,
-          customerName: customerName,
-          customerEmail: customerEmail,
-          customerPhone: customerPhone,
-          projectDetails: projectDetails,
-          timestamp: new Date().toISOString()
-        };
-        
-        // Add to cart
-        cart.push(cartItem);
-        
-        // Save to localStorage
-        localStorage.setItem('serviceCart', JSON.stringify(cart));
-        
-        // Update cart count
-        updateCartCount();
-        
-        // Show success message
-        successMessage.style.display = 'block';
-        document.querySelector('.service-purchase-form > *:not(#success-message)').style.display = 'none';
-      });
-      
-      // Continue shopping button handler (from success message)
-      continueShoppingBtn.addEventListener('click', function() {
-        servicePurchaseModal.style.display = 'none';
-        resetPurchaseForm();
-      });
-      
-      // Go to cart button handler (from success message)
-      goToCartBtn.addEventListener('click', function() {
-        servicePurchaseModal.style.display = 'none';
-        resetPurchaseForm();
-        showCartModal();
-      });
-      
-      // Cart icon click handler
-      cartIcon.addEventListener('click', function(e) {
-        e.preventDefault();
-        showCartModal();
-      });
-      
-      // Continue shopping from cart
-      continueShoppingCartBtn.addEventListener('click', function() {
-        cartModal.style.display = 'none';
-      });
-      
-      // Proceed to checkout - Place Order
-      proceedCheckoutBtn.addEventListener('click', function() {
-        if (cart.length === 0) {
-          alert('Your cart is empty');
-          return;
-        }
-        
-        // Create order
-        const orderId = 'ORD' + Date.now();
-        const order = {
-          id: orderId,
-          items: [...cart],
-          total: calculateCartTotal(),
-          timestamp: new Date().toISOString(),
-          status: 'pending'
-        };
-        
-        // Add to orders
-        orders.push(order);
-        
-        // Save orders to localStorage
-        localStorage.setItem('serviceOrders', JSON.stringify(orders));
-        
-        // Clear cart
-        cart = [];
-        localStorage.removeItem('serviceCart');
-        updateCartCount();
-        
-        // Show order confirmation
-        showOrderConfirmation(order);
-        
-        // Close cart modal
-        cartModal.style.display = 'none';
-      });
-      
-      // Close order confirmation
-      closeOrderConfirmation.addEventListener('click', function() {
-        orderConfirmationModal.style.display = 'none';
-      });
-      
-      // Helper function to update package prices
-      function updatePackagePrices() {
+    });
+    
+    // Add to cart button handler
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+            const customerName = document.getElementById('customer-name').value;
+            const customerEmail = document.getElementById('customer-email').value;
+            const customerPhone = document.getElementById('customer-phone').value;
+            const projectDetails = document.getElementById('project-details').value;
+            
+            // Validate form
+            if (!customerName || !customerEmail || !customerPhone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Calculate final price
+            const selectedOption = document.querySelector('.package-option.selected');
+            if (!selectedOption) {
+                alert('Please select a package');
+                return;
+            }
+            
+            const packageMultiplier = parseFloat(selectedOption.getAttribute('data-multiplier'));
+            const finalPrice = currentBasePrice * packageMultiplier;
+            
+            // Create cart item
+            const cartItem = {
+                id: Date.now().toString(),
+                service: currentService,
+                package: selectedPackage,
+                price: finalPrice,
+                customerName: customerName,
+                customerEmail: customerEmail,
+                customerPhone: customerPhone,
+                projectDetails: projectDetails,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add to cart
+            cart.push(cartItem);
+            
+            // Save to localStorage
+            localStorage.setItem('serviceCart', JSON.stringify(cart));
+            
+            // Update cart count
+            updateCartCount();
+            
+            // Show success message
+            if (successMessage) {
+                successMessage.style.display = 'block';
+            }
+            document.querySelectorAll('.service-purchase-form > *:not(#success-message)').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+    }
+    
+    // Continue shopping button handler (from success message)
+    if (continueShoppingBtn) {
+        continueShoppingBtn.addEventListener('click', function() {
+            if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+            resetPurchaseForm();
+        });
+    }
+    
+    // Go to cart button handler (from success message)
+    if (goToCartBtn) {
+        goToCartBtn.addEventListener('click', function() {
+            if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+            resetPurchaseForm();
+            showCartModal();
+        });
+    }
+    
+    // Cart icon click handler
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            showCartModal();
+        });
+    }
+    
+    // Continue shopping from cart
+    if (continueShoppingCartBtn) {
+        continueShoppingCartBtn.addEventListener('click', function() {
+            if (cartModal) cartModal.style.display = 'none';
+        });
+    }
+    
+    // PROCEED TO CHECKOUT - PLACE ORDER (FIXED)
+    if (proceedCheckoutBtn) {
+        proceedCheckoutBtn.addEventListener('click', function() {
+            console.log('🚀 Place Order button clicked - Cart items:', cart);
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+            
+            // Create order
+            const orderId = 'ORD' + Date.now();
+            const order = {
+                id: orderId,
+                items: [...cart], // Copy cart items
+                total: calculateCartTotal(),
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            console.log('✅ Order created:', order);
+            
+            // Add to orders
+            orders.push(order);
+            
+            // Save orders to localStorage
+            localStorage.setItem('serviceOrders', JSON.stringify(orders));
+            console.log('💾 Orders saved to localStorage');
+            
+            // Clear cart
+            cart = [];
+            localStorage.removeItem('serviceCart');
+            updateCartCount();
+            
+            // Show order confirmation
+            showOrderConfirmation(order);
+            
+            // Close cart modal
+            if (cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+    } else {
+        console.log('❌ proceedCheckoutBtn not found!');
+    }
+    
+    // Close order confirmation
+    if (closeOrderConfirmation) {
+        closeOrderConfirmation.addEventListener('click', function() {
+            if (orderConfirmationModal) orderConfirmationModal.style.display = 'none';
+        });
+    }
+    
+    // Helper function to update package prices
+    function updatePackagePrices() {
         const basicPrice = document.getElementById('basic-price');
         const standardPrice = document.getElementById('standard-price');
         const premiumPrice = document.getElementById('premium-price');
         
-        basicPrice.textContent = currentBasePrice;
-        standardPrice.textContent = Math.round(currentBasePrice * 1.5);
-        premiumPrice.textContent = currentBasePrice * 2;
+        if (basicPrice && standardPrice && premiumPrice) {
+            basicPrice.textContent = currentBasePrice;
+            standardPrice.textContent = Math.round(currentBasePrice * 1.5);
+            premiumPrice.textContent = currentBasePrice * 2;
+            
+            // Reset package selection to basic
+            packageOptions.forEach(opt => opt.classList.remove('selected'));
+            const basicOption = document.querySelector('.package-option[data-package="basic"]');
+            if (basicOption) {
+                basicOption.classList.add('selected');
+            }
+            selectedPackage = 'basic';
+            
+            // Update total price
+            updateTotalPrice();
+        }
+    }
+    
+    // Helper function to update total price
+    function updateTotalPrice() {
+        const selectedOption = document.querySelector('.package-option.selected');
+        if (selectedOption && totalPriceDisplay) {
+            const packageMultiplier = parseFloat(selectedOption.getAttribute('data-multiplier'));
+            const totalPrice = currentBasePrice * packageMultiplier;
+            totalPriceDisplay.textContent = totalPrice;
+        }
+    }
+    
+    // Helper function to reset purchase form
+    function resetPurchaseForm() {
+        const customerName = document.getElementById('customer-name');
+        const customerEmail = document.getElementById('customer-email');
+        const customerPhone = document.getElementById('customer-phone');
+        const projectDetails = document.getElementById('project-details');
         
-        // Reset package selection to basic
-        packageOptions.forEach(opt => opt.classList.remove('selected'));
-        document.querySelector('.package-option[data-package="basic"]').classList.add('selected');
-        selectedPackage = 'basic';
-        
-        // Update total price
-        updateTotalPrice();
-      }
-      
-      // Helper function to update total price
-      function updateTotalPrice() {
-        const packageMultiplier = parseFloat(document.querySelector('.package-option.selected').getAttribute('data-multiplier'));
-        const totalPrice = currentBasePrice * packageMultiplier;
-        totalPriceDisplay.textContent = totalPrice;
-      }
-      
-      // Helper function to reset purchase form
-      function resetPurchaseForm() {
-        document.getElementById('customer-name').value = '';
-        document.getElementById('customer-email').value = '';
-        document.getElementById('customer-phone').value = '';
-        document.getElementById('project-details').value = '';
+        if (customerName) customerName.value = '';
+        if (customerEmail) customerEmail.value = '';
+        if (customerPhone) customerPhone.value = '';
+        if (projectDetails) projectDetails.value = '';
         
         // Hide success message and show form
-        successMessage.style.display = 'none';
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
         document.querySelectorAll('.service-purchase-form > *').forEach(el => {
-          el.style.display = 'block';
+            el.style.display = 'block';
         });
-      }
-      
-      // Helper function to update cart count
-      function updateCartCount() {
-        cartCount.textContent = cart.length;
-      }
-      
-      // Helper function to show cart modal
-      function showCartModal() {
+    }
+    
+    // Helper function to update cart count
+    function updateCartCount() {
+        if (cartCount) {
+            cartCount.textContent = cart.length;
+        }
+    }
+    
+    // Helper function to show cart modal
+    function showCartModal() {
         updateCartDisplay();
-        cartModal.style.display = 'block';
-      }
-      
-      // Helper function to update cart display
-      function updateCartDisplay() {
+        if (cartModal) {
+            cartModal.style.display = 'block';
+        }
+    }
+    
+    // Helper function to update cart display
+    function updateCartDisplay() {
         // Clear current cart items
-        cartItemsContainer.innerHTML = '';
+        if (cartItemsContainer) {
+            cartItemsContainer.innerHTML = '';
+        }
         
         // Calculate total
         let total = calculateCartTotal();
         
         // Add each cart item
         cart.forEach(item => {
-          const cartItemElement = document.createElement('div');
-          cartItemElement.className = 'cart-item';
-          cartItemElement.innerHTML = `
-            <div class="cart-item-details">
-              <h4>${item.service} - ${item.package.charAt(0).toUpperCase() + item.package.slice(1)} Package</h4>
-              <p>Customer: ${item.customerName}</p>
-            </div>
-            <div class="cart-item-price">$${item.price}</div>
-            <button class="remove-item" data-id="${item.id}">&times;</button>
-          `;
-          
-          cartItemsContainer.appendChild(cartItemElement);
+            const cartItemElement = document.createElement('div');
+            cartItemElement.className = 'cart-item';
+            cartItemElement.innerHTML = `
+                <div class="cart-item-details">
+                    <h4>${item.service} - ${item.package.charAt(0).toUpperCase() + item.package.slice(1)} Package</h4>
+                    <p>Customer: ${item.customerName}</p>
+                </div>
+                <div class="cart-item-price">$${item.price}</div>
+                <button class="remove-item" data-id="${item.id}">&times;</button>
+            `;
+            
+            if (cartItemsContainer) {
+                cartItemsContainer.appendChild(cartItemElement);
+            }
         });
         
         // Update total price
-        cartTotalPrice.textContent = total;
+        if (cartTotalPrice) {
+            cartTotalPrice.textContent = total;
+        }
         
         // Add event listeners to remove buttons
         document.querySelectorAll('.remove-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const itemId = this.getAttribute('data-id');
-            removeFromCart(itemId);
-          });
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-id');
+                removeFromCart(itemId);
+            });
         });
-      }
-      
-      // Helper function to calculate cart total
-      function calculateCartTotal() {
+    }
+    
+    // Helper function to calculate cart total
+    function calculateCartTotal() {
         return cart.reduce((total, item) => total + item.price, 0);
-      }
-      
-      // Helper function to remove item from cart
-      function removeFromCart(itemId) {
+    }
+    
+    // Helper function to remove item from cart
+    function removeFromCart(itemId) {
         cart = cart.filter(item => item.id !== itemId);
         localStorage.setItem('serviceCart', JSON.stringify(cart));
         updateCartCount();
         updateCartDisplay();
-      }
-      
-      // Helper function to show order confirmation
-      function showOrderConfirmation(order) {
-        orderIdElement.textContent = order.id;
+    }
+    
+    // Helper function to show order confirmation
+    function showOrderConfirmation(order) {
+        console.log('🎉 Showing order confirmation for:', order);
+        
+        if (orderIdElement) {
+            orderIdElement.textContent = order.id;
+        }
         
         // Build order details
         let orderDetailsHTML = '<h4>Order Summary:</h4>';
         order.items.forEach(item => {
-          orderDetailsHTML += `
-            <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
-              <strong>${item.service}</strong> - ${item.package} Package<br>
-              Price: $${item.price}<br>
-              Customer: ${item.customerName}
-            </div>
-          `;
+            orderDetailsHTML += `
+                <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                    <strong>${item.service}</strong> - ${item.package} Package<br>
+                    Price: $${item.price}<br>
+                    Customer: ${item.customerName}<br>
+                    Email: ${item.customerEmail}
+                </div>
+            `;
         });
-        orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold;">Total: $${order.total}</div>`;
+        orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold; font-size: 1.2em;">Total: $${order.total}</div>`;
         
-        orderDetails.innerHTML = orderDetailsHTML;
-        orderConfirmationModal.style.display = 'block';
-      }
-    });
-  </script>
+        if (orderDetails) {
+            orderDetails.innerHTML = orderDetailsHTML;
+        }
+        
+        if (orderConfirmationModal) {
+            orderConfirmationModal.style.display = 'block';
+            console.log('✅ Order confirmation modal should be visible now');
+        } else {
+            console.log('❌ orderConfirmationModal not found!');
+        }
+    }
+    
+    console.log('✅ All event listeners attached successfully');
+});
+</script>
 
 </body>
 
