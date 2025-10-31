@@ -1051,6 +1051,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let cart = [];
     let orders = [];
     
+    // WhatsApp configuration
+    const WHATSAPP_NUMBER = '923328657885'; // Your WhatsApp number
+    
     // Initialize cart and orders from localStorage if available
     if (localStorage.getItem('serviceCart')) {
         cart = JSON.parse(localStorage.getItem('serviceCart'));
@@ -1244,6 +1247,9 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('serviceOrders', JSON.stringify(orders));
             console.log('💾 Orders saved to localStorage');
             
+            // Send WhatsApp notification
+            sendWhatsAppNotification(order);
+            
             // Clear cart
             cart = [];
             localStorage.removeItem('serviceCart');
@@ -1266,6 +1272,47 @@ document.addEventListener('DOMContentLoaded', function() {
         closeOrderConfirmation.addEventListener('click', function() {
             if (orderConfirmationModal) orderConfirmationModal.style.display = 'none';
         });
+    }
+    
+    // Function to send WhatsApp notification
+    function sendWhatsAppNotification(order) {
+        // Build the message
+        let message = `📦 *NEW ORDER RECEIVED* 📦\n\n`;
+        message += `*Order ID:* ${order.id}\n`;
+        message += `*Order Date:* ${new Date(order.timestamp).toLocaleString()}\n\n`;
+        message += `*Customer Details:*\n`;
+        
+        // Get customer details from first item
+        if (order.items.length > 0) {
+            const customer = order.items[0];
+            message += `Name: ${customer.customerName}\n`;
+            message += `Email: ${customer.customerEmail}\n`;
+            message += `Phone: ${customer.customerPhone}\n\n`;
+        }
+        
+        message += `*Order Summary:*\n`;
+        order.items.forEach((item, index) => {
+            message += `${index + 1}. ${item.service} - ${item.package} Package\n`;
+            message += `   Price: $${item.price}\n`;
+            if (item.projectDetails) {
+                message += `   Details: ${item.projectDetails.substring(0, 100)}${item.projectDetails.length > 100 ? '...' : ''}\n`;
+            }
+            message += `\n`;
+        });
+        
+        message += `*Total Amount:* $${order.total}\n\n`;
+        message += `Please process this order ASAP! 🚀`;
+        
+        // Encode the message for URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Create WhatsApp URL
+        const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+        
+        // Open WhatsApp in a new tab
+        window.open(whatsappURL, '_blank');
+        
+        console.log('📱 WhatsApp notification sent');
     }
     
     // Helper function to update package prices
