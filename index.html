@@ -27,6 +27,310 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <!-- Custom CSS for Buyable Services -->
+  <style>
+    /* Service Purchase Modal Styles */
+    .service-purchase-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      overflow-y: auto;
+    }
+    
+    .service-purchase-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #aaa;
+    }
+    
+    .close-modal:hover {
+      color: #000;
+    }
+    
+    .service-purchase-form h3 {
+      margin-bottom: 20px;
+      color: #106eea;
+    }
+    
+    .service-purchase-form .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .service-purchase-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    .service-purchase-form input,
+    .service-purchase-form select,
+    .service-purchase-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .service-purchase-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .service-purchase-form .price-display {
+      font-size: 24px;
+      font-weight: bold;
+      color: #106eea;
+      margin: 15px 0;
+    }
+    
+    .service-purchase-form .btn-submit {
+      background-color: #106eea;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    
+    .service-purchase-form .btn-submit:hover {
+      background-color: #0d5db8;
+    }
+    
+    .service-purchase-form .btn-submit:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    
+    /* Service Item Buy Button */
+    .service-buy-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 15px;
+      background-color: #28a745;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    
+    .service-buy-btn:hover {
+      background-color: #218838;
+      color: white;
+    }
+    
+    /* Service Package Options */
+    .service-packages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .package-option {
+      flex: 1;
+      min-width: 120px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .package-option:hover {
+      border-color: #106eea;
+    }
+    
+    .package-option.selected {
+      border-color: #106eea;
+      background-color: #f0f8ff;
+    }
+    
+    .package-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .package-price {
+      color: #106eea;
+      font-weight: 500;
+    }
+    
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #f8fff8;
+      border: 1px solid #28a745;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    
+    .success-message i {
+      font-size: 48px;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    
+    /* Cart Indicator */
+    .cart-indicator {
+      position: relative;
+      display: inline-block;
+      margin-left: 15px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Cart Modal */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+      overflow-y: auto;
+    }
+    
+    .cart-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .cart-items {
+      margin: 20px 0;
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .cart-item-details h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+    
+    .cart-item-details p {
+      margin: 5px 0;
+      color: #666;
+    }
+    
+    .cart-item-price {
+      font-weight: bold;
+      color: #106eea;
+    }
+    
+    .remove-item {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    .cart-total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .btn-continue-shopping,
+    .btn-checkout {
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .btn-continue-shopping {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+    }
+    
+    .btn-checkout {
+      background-color: #106eea;
+      color: white;
+      border: none;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .service-packages {
+        flex-direction: column;
+      }
+      
+      .cart-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .btn-continue-shopping,
+      .btn-checkout {
+        width: 100%;
+      }
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: Techie
   * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
@@ -78,6 +382,14 @@
       </nav>
 
       <a class="btn-getstarted" href="#about">Get Started</a>
+      
+      <!-- Cart Icon -->
+      <div class="cart-indicator">
+        <a href="#" id="cart-icon" class="d-flex align-items-center">
+          <i class="bi bi-cart3" style="font-size: 24px;"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
 
     </div>
   </header>
@@ -195,6 +507,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Web Development</a></h4>
                 <p class="description">Cutting-edge web applications that push the boundaries of what's possible</p>
+                <a href="#" class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</a>
               </div>
             </div>
           </div>
@@ -206,6 +519,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">AI Solutions</a></h4>
                 <p class="description">Artificial intelligence that transforms businesses and lives</p>
+                <a href="#" class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -216,6 +530,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Cyber Security</a></h4>
                 <p class="description">Unbreachable security systems that protect what matters most</p>
+                <a href="#" class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -226,6 +541,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Dev Ops</a></h4>
                 <p class="description">Lightning-fast deployment pipelines that accelerate innovation</p>
+                <a href="#" class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -236,6 +552,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Cloud Architecture</a></h4>
                 <p class="description">Scalable cloud solutions built for the future</p>
+                <a href="#" class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -245,8 +562,8 @@
               <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Mobile Apps</a></h4>
-                <p class="description">Revolutionary mobile experiences that users will never forget
-</p>
+                <p class="description">Revolutionary mobile experiences that users will never forget</p>
+                <a href="#" class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -256,8 +573,8 @@
               <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">SEO</a></h4>
-                <p class="description">Search engine optimization that drives organic traffic and visibility
-</p>
+                <p class="description">Search engine optimization that drives organic traffic and visibility</p>
+                <a href="#" class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -268,6 +585,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">CRM Solutions</a></h4>
                 <p class="description">Customer relationship management systems that streamline your business</p>
+                <a href="#" class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</a>
               </div>
             </div>
           </div>
@@ -279,6 +597,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">IT Support</a></h4>
                 <p class="description">Comprehensive IT support services for your business infrastructure</p>
+                <a href="#" class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -289,6 +608,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Networking</a></h4>
                 <p class="description">Network infrastructure solutions for reliable connectivity</p>
+                <a href="#" class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -299,6 +619,7 @@
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">E Commerce</a></h4>
                 <p class="description">Complete e-commerce solutions that drive online sales</p>
+                <a href="#" class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -308,8 +629,8 @@
               <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Graphic Designing</a></h4>
-                <p class="description">Creative visual solutions that elevate your brand identity
-</p>
+                <p class="description">Creative visual solutions that elevate your brand identity</p>
+                <a href="#" class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -319,8 +640,8 @@
               <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Digital Marketing</a></h4>
-                <p class="description">Strategic digital marketing campaigns that grow your business
-</p>
+                <p class="description">Strategic digital marketing campaigns that grow your business</p>
+                <a href="#" class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -330,8 +651,8 @@
               <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Video Editing</a></h4>
-                <p class="description">Proffestional video editing for your bussiness & ads
-</p>
+                <p class="description">Professional video editing for your business & ads</p>
+                <a href="#" class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -341,6 +662,93 @@
       </div>
 
     </section><!-- /Services Section -->
+
+    <!-- Service Purchase Modal -->
+    <div id="service-purchase-modal" class="service-purchase-modal">
+      <div class="service-purchase-content">
+        <span class="close-modal">&times;</span>
+        <div class="service-purchase-form">
+          <h3>Purchase Service</h3>
+          <div class="form-group">
+            <label for="service-name">Service</label>
+            <input type="text" id="service-name" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label>Select Package</label>
+            <div class="service-packages">
+              <div class="package-option" data-package="basic" data-multiplier="1">
+                <div class="package-name">Basic</div>
+                <div class="package-price">$<span id="basic-price">0</span></div>
+              </div>
+              <div class="package-option" data-package="standard" data-multiplier="1.5">
+                <div class="package-name">Standard</div>
+                <div class="package-price">$<span id="standard-price">0</span></div>
+              </div>
+              <div class="package-option" data-package="premium" data-multiplier="2">
+                <div class="package-name">Premium</div>
+                <div class="package-price">$<span id="premium-price">0</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="price-display">
+            Total: $<span id="total-price">0</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="customer-name">Your Name</label>
+            <input type="text" id="customer-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customer-email">Email</label>
+            <input type="email" id="customer-email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customer-phone">Phone</label>
+            <input type="tel" id="customer-phone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="project-details">Project Details</label>
+            <textarea id="project-details" placeholder="Tell us about your project requirements..."></textarea>
+          </div>
+          
+          <button type="button" class="btn-submit" id="add-to-cart-btn">Add to Cart</button>
+          
+          <div class="success-message" id="success-message">
+            <i class="bi bi-check-circle"></i>
+            <h4>Service Added to Cart!</h4>
+            <p>Your service has been added to your cart. You can continue shopping or proceed to checkout.</p>
+            <button type="button" class="btn-continue-shopping" id="continue-shopping">Continue Shopping</button>
+            <button type="button" class="btn-checkout" id="go-to-cart">Go to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+      <div class="cart-content">
+        <span class="close-modal">&times;</span>
+        <h3>Your Cart</h3>
+        
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items will be dynamically added here -->
+        </div>
+        
+        <div class="cart-total">
+          Total: $<span id="cart-total-price">0</span>
+        </div>
+        
+        <div class="cart-actions">
+          <button class="btn-continue-shopping" id="continue-shopping-cart">Continue Shopping</button>
+          <button class="btn-checkout" id="proceed-checkout">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Features Section -->
     <section id="features" class="features section">
@@ -405,7 +813,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>What our clients say about our services and solutions</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -439,10 +847,10 @@
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
-              <div class="testimonial-item" "="">
+              <div class="testimonial-item">
             <p>
               <i class=" bi bi-quote quote-icon-left"></i>
-                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                <span>Team Abh Pk delivered an exceptional e-commerce solution that increased our online sales by 45%. Their attention to detail and technical expertise is remarkable.</span>
                 <i class="bi bi-quote quote-icon-right"></i>
                 </p>
                 <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
@@ -455,12 +863,12 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                  <span>The AI solution developed by Team Abh Pk transformed our business operations. Their team was professional, responsive, and delivered beyond our expectations.</span>
                   <i class="bi bi-quote quote-icon-right"></i>
                 </p>
                 <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                 <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+                <h4>Operations Director</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -468,38 +876,12 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                  <span>Working with Team Abh Pk on our mobile app was a fantastic experience. They understood our vision and delivered a product that our users love.</span>
                   <i class="bi bi-quote quote-icon-right"></i>
                 </p>
                 <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                 <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
+                <h4>Product Manager</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -517,7 +899,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Check out some of our recent projects and success stories</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -527,9 +909,8 @@
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
             <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
+            <li data-filter=".filter-web">Web</li>
+            <li data-filter=".filter-ecommerce">E-commerce</li>
           </ul><!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
@@ -538,118 +919,28 @@
               <div class="portfolio-content h-100">
                 <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <h4><a href="portfolio-details.html" title="More Details">Fitness Tracker App</a></h4>
+                  <p>Cross-platform mobile application with AI-powered workout recommendations</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web">
               <div class="portfolio-content h-100">
                 <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <h4><a href="portfolio-details.html" title="More Details">Corporate Website</a></h4>
+                  <p>Responsive corporate website with CMS and integrated analytics</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ecommerce">
               <div class="portfolio-content h-100">
                 <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <h4><a href="portfolio-details.html" title="More Details">Online Store</a></h4>
+                  <p>Full-featured e-commerce platform with payment integration</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -668,7 +959,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Pricing</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Flexible pricing options for different business needs</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -677,46 +968,46 @@
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="pricing-item">
-              <h3>Free Plan</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
+              <h3>Starter</h3>
+              <h4><sup>$</sup>499<span> / project</span></h4>
               <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+                <li><i class="bi bi-check"></i> <span>Basic website or app</span></li>
+                <li><i class="bi bi-check"></i> <span>Responsive design</span></li>
+                <li><i class="bi bi-check"></i> <span>1 month support</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Advanced features</span></li>
+                <li class="na"><i class="bi bi-x"></i> <span>Custom integrations</span></li>
               </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+              <a href="#contact" class="buy-btn">Get Quote</a>
             </div>
           </div><!-- End Pricing Item -->
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="pricing-item featured">
-              <h3>Business Plan</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
+              <h3>Business</h3>
+              <h4><sup>$</sup>1299<span> / project</span></h4>
               <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+                <li><i class="bi bi-check"></i> <span>Custom web application</span></li>
+                <li><i class="bi bi-check"></i> <span>Database integration</span></li>
+                <li><i class="bi bi-check"></i> <span>3 months support</span></li>
+                <li><i class="bi bi-check"></i> <span>Basic SEO</span></li>
+                <li><i class="bi bi-check"></i> <span>Payment integration</span></li>
               </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+              <a href="#contact" class="buy-btn">Get Quote</a>
             </div>
           </div><!-- End Pricing Item -->
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="pricing-item">
-              <h3>Developer Plan</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
+              <h3>Enterprise</h3>
+              <h4><sup>$</sup>2499<span> / project</span></h4>
               <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+                <li><i class="bi bi-check"></i> <span>Complex web application</span></li>
+                <li><i class="bi bi-check"></i> <span>Advanced features</span></li>
+                <li><i class="bi bi-check"></i> <span>6 months support</span></li>
+                <li><i class="bi bi-check"></i> <span>Advanced SEO</span></li>
+                <li><i class="bi bi-check"></i> <span>Multiple integrations</span></li>
               </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+              <a href="#contact" class="buy-btn">Get Quote</a>
             </div>
           </div><!-- End Pricing Item -->
 
@@ -732,7 +1023,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Frequently Asked Questions</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Common questions about our services and process</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -744,49 +1035,33 @@
             <div class="faq-container">
 
               <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
+                <h3>How long does a typical project take?</h3>
                 <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
+                  <p>Project timelines vary based on complexity. A simple website might take 2-4 weeks, while a complex web application could take 2-4 months. We provide detailed timelines during our initial consultation.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
+                <h3>Do you provide ongoing support after project completion?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                  <p>Yes, we offer various support packages depending on your needs. All projects include a warranty period, and we can provide ongoing maintenance, updates, and technical support.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
+                <h3>Can you work with our existing design or development team?</h3>
                 <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+                  <p>Absolutely! We frequently collaborate with in-house teams, other agencies, or freelancers. We're flexible and can adapt to your preferred workflow.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
+                <h3>What technologies do you specialize in?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
+                  <p>We work with a wide range of technologies including React, Angular, Vue.js, Node.js, Python, PHP, and various databases. We choose the best technology stack for each project's specific requirements.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
@@ -807,7 +1082,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Meet our talented team of developers, designers, and strategists</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -895,7 +1170,7 @@
               <div class="member-info">
                 <h4>Muhammad Arslan</h4>
                 <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+                <p>Financial expert with 8+ years in tech industry accounting. Ensures smooth financial operations and budgeting.</p>
               </div>
             </div>
           </div><!-- End Team Member -->
@@ -1080,6 +1355,280 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Service Purchase JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Service purchase functionality
+      const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
+      const servicePurchaseModal = document.getElementById('service-purchase-modal');
+      const cartModal = document.getElementById('cart-modal');
+      const closeModalButtons = document.querySelectorAll('.close-modal');
+      const packageOptions = document.querySelectorAll('.package-option');
+      const serviceNameInput = document.getElementById('service-name');
+      const totalPriceDisplay = document.getElementById('total-price');
+      const addToCartBtn = document.getElementById('add-to-cart-btn');
+      const successMessage = document.getElementById('success-message');
+      const continueShoppingBtn = document.getElementById('continue-shopping');
+      const goToCartBtn = document.getElementById('go-to-cart');
+      const cartIcon = document.getElementById('cart-icon');
+      const cartCount = document.querySelector('.cart-count');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalPrice = document.getElementById('cart-total-price');
+      const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
+      const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+      
+      let currentService = null;
+      let currentBasePrice = 0;
+      let selectedPackage = 'basic';
+      let cart = [];
+      
+      // Initialize cart from localStorage if available
+      if (localStorage.getItem('serviceCart')) {
+        cart = JSON.parse(localStorage.getItem('serviceCart'));
+        updateCartCount();
+      }
+      
+      // Service buy button click handler
+      serviceBuyButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          currentService = this.getAttribute('data-service');
+          currentBasePrice = parseInt(this.getAttribute('data-base-price'));
+          
+          // Set service name in modal
+          serviceNameInput.value = currentService;
+          
+          // Update package prices
+          updatePackagePrices();
+          
+          // Reset form
+          resetPurchaseForm();
+          
+          // Show modal
+          servicePurchaseModal.style.display = 'block';
+        });
+      });
+      
+      // Close modal handlers
+      closeModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          servicePurchaseModal.style.display = 'none';
+          cartModal.style.display = 'none';
+        });
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target === servicePurchaseModal) {
+          servicePurchaseModal.style.display = 'none';
+        }
+        if (e.target === cartModal) {
+          cartModal.style.display = 'none';
+        }
+      });
+      
+      // Package selection handler
+      packageOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all options
+          packageOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          
+          // Update selected package
+          selectedPackage = this.getAttribute('data-package');
+          
+          // Update total price
+          updateTotalPrice();
+        });
+      });
+      
+      // Add to cart button handler
+      addToCartBtn.addEventListener('click', function() {
+        const customerName = document.getElementById('customer-name').value;
+        const customerEmail = document.getElementById('customer-email').value;
+        const customerPhone = document.getElementById('customer-phone').value;
+        const projectDetails = document.getElementById('project-details').value;
+        
+        // Validate form
+        if (!customerName || !customerEmail || !customerPhone) {
+          alert('Please fill in all required fields');
+          return;
+        }
+        
+        // Calculate final price
+        const packageMultiplier = parseFloat(document.querySelector('.package-option.selected').getAttribute('data-multiplier'));
+        const finalPrice = currentBasePrice * packageMultiplier;
+        
+        // Create cart item
+        const cartItem = {
+          id: Date.now().toString(),
+          service: currentService,
+          package: selectedPackage,
+          price: finalPrice,
+          customerName: customerName,
+          customerEmail: customerEmail,
+          customerPhone: customerPhone,
+          projectDetails: projectDetails
+        };
+        
+        // Add to cart
+        cart.push(cartItem);
+        
+        // Save to localStorage
+        localStorage.setItem('serviceCart', JSON.stringify(cart));
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Show success message
+        successMessage.style.display = 'block';
+        document.querySelector('.service-purchase-form > *:not(#success-message)').style.display = 'none';
+      });
+      
+      // Continue shopping button handler (from success message)
+      continueShoppingBtn.addEventListener('click', function() {
+        servicePurchaseModal.style.display = 'none';
+        resetPurchaseForm();
+      });
+      
+      // Go to cart button handler (from success message)
+      goToCartBtn.addEventListener('click', function() {
+        servicePurchaseModal.style.display = 'none';
+        resetPurchaseForm();
+        showCartModal();
+      });
+      
+      // Cart icon click handler
+      cartIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        showCartModal();
+      });
+      
+      // Continue shopping from cart
+      continueShoppingCartBtn.addEventListener('click', function() {
+        cartModal.style.display = 'none';
+      });
+      
+      // Proceed to checkout
+      proceedCheckoutBtn.addEventListener('click', function() {
+        if (cart.length === 0) {
+          alert('Your cart is empty');
+          return;
+        }
+        
+        // In a real implementation, this would redirect to a checkout page
+        // For this demo, we'll just show an alert
+        alert('In a real implementation, this would redirect to a checkout page. For now, your cart items are saved in localStorage.');
+        
+        // Optionally clear the cart after "checkout"
+        // cart = [];
+        // localStorage.removeItem('serviceCart');
+        // updateCartCount();
+        // updateCartDisplay();
+        // cartModal.style.display = 'none';
+      });
+      
+      // Helper function to update package prices
+      function updatePackagePrices() {
+        const basicPrice = document.getElementById('basic-price');
+        const standardPrice = document.getElementById('standard-price');
+        const premiumPrice = document.getElementById('premium-price');
+        
+        basicPrice.textContent = currentBasePrice;
+        standardPrice.textContent = Math.round(currentBasePrice * 1.5);
+        premiumPrice.textContent = currentBasePrice * 2;
+        
+        // Reset package selection to basic
+        packageOptions.forEach(opt => opt.classList.remove('selected'));
+        document.querySelector('.package-option[data-package="basic"]').classList.add('selected');
+        selectedPackage = 'basic';
+        
+        // Update total price
+        updateTotalPrice();
+      }
+      
+      // Helper function to update total price
+      function updateTotalPrice() {
+        const packageMultiplier = parseFloat(document.querySelector('.package-option.selected').getAttribute('data-multiplier'));
+        const totalPrice = currentBasePrice * packageMultiplier;
+        totalPriceDisplay.textContent = totalPrice;
+      }
+      
+      // Helper function to reset purchase form
+      function resetPurchaseForm() {
+        document.getElementById('customer-name').value = '';
+        document.getElementById('customer-email').value = '';
+        document.getElementById('customer-phone').value = '';
+        document.getElementById('project-details').value = '';
+        
+        // Hide success message and show form
+        successMessage.style.display = 'none';
+        document.querySelectorAll('.service-purchase-form > *').forEach(el => {
+          el.style.display = 'block';
+        });
+      }
+      
+      // Helper function to update cart count
+      function updateCartCount() {
+        cartCount.textContent = cart.length;
+      }
+      
+      // Helper function to show cart modal
+      function showCartModal() {
+        updateCartDisplay();
+        cartModal.style.display = 'block';
+      }
+      
+      // Helper function to update cart display
+      function updateCartDisplay() {
+        // Clear current cart items
+        cartItemsContainer.innerHTML = '';
+        
+        // Calculate total
+        let total = 0;
+        
+        // Add each cart item
+        cart.forEach(item => {
+          total += item.price;
+          
+          const cartItemElement = document.createElement('div');
+          cartItemElement.className = 'cart-item';
+          cartItemElement.innerHTML = `
+            <div class="cart-item-details">
+              <h4>${item.service} - ${item.package.charAt(0).toUpperCase() + item.package.slice(1)} Package</h4>
+              <p>Customer: ${item.customerName}</p>
+            </div>
+            <div class="cart-item-price">$${item.price}</div>
+            <button class="remove-item" data-id="${item.id}">&times;</button>
+          `;
+          
+          cartItemsContainer.appendChild(cartItemElement);
+        });
+        
+        // Update total price
+        cartTotalPrice.textContent = total;
+        
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            removeFromCart(itemId);
+          });
+        });
+      }
+      
+      // Helper function to remove item from cart
+      function removeFromCart(itemId) {
+        cart = cart.filter(item => item.id !== itemId);
+        localStorage.setItem('serviceCart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartDisplay();
+      }
+    });
+  </script>
 
 </body>
 
