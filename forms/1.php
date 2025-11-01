@@ -1,10 +1,10 @@
 <?php
 // ====== DATABASE CONNECTION ======
-$host = "localhost";   // usually 'localhost'
-$user = "root";        // phpMyAdmin username
-$pass = "";            // phpMyAdmin password (empty by default)
-$dbname = "testdb";    // create this database in phpMyAdmin
-
+$host = "sql305.ezyro.com";   // usually 'localhost'
+$user = "ezyro_40310090";        // phpMyAdmin username
+$pass = "iT2R5X*Dwdt2aSP";            // phpMyAdmin password (empty by default)
+$dbname = "ezyro_40310090_teamabhpk";    // create this database in phpMyAdmin
+//https://php-myadmin.net/db_structure.php?db=
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 
