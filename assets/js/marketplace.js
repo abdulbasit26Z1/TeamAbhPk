@@ -18,10 +18,18 @@ function escapeHtml(text){
   })[c]);
 }
 
+// Normalize image/file paths so pages served from subpaths still load assets
+function normalizePath(p){
+  if(!p) return p;
+  const s = p.toString();
+  if(s.startsWith('http://') || s.startsWith('https://') || s.startsWith('/')) return s;
+  return '/' + s.replace(/^\/+/, '');
+}
+
 function renderGigCard(job){
   const div = document.createElement('div');
   div.className = 'gig-card';
-  const img = job.image || '/assets/img/portfolio/portfolio-1.jpg';
+  const img = normalizePath(job.image || '/assets/img/portfolio/portfolio-1.jpg');
   const seller = job.seller || {name:'Seller',avatar:'/assets/img/team/team-1.jpg'};
   const rating = job.rating || 4.9;
   const reviews = job.reviews || 12;
@@ -29,10 +37,10 @@ function renderGigCard(job){
   const price = job.price || (Math.floor(Math.random()*900)+50);
 
   div.innerHTML = `
-    <div class="gig-media"><a href="service.html?id=${escapeHtml(job.id)}"><img src="${escapeHtml(img)}" alt="${escapeHtml(job.title)}"></a></div>
+  <div class="gig-media"><a href="service.html?id=${escapeHtml(job.id)}"><img src="${escapeHtml(img)}" alt="${escapeHtml(job.title)}"></a></div>
     <div class="gig-body">
       <h4 class="gig-title"><a href="service.html?id=${escapeHtml(job.id)}">${escapeHtml(job.title)}</a></h4>
-      <div class="gig-seller"><div class="seller-avatar"><img src="${escapeHtml(seller.avatar||'/assets/img/team/team-1.jpg')}" alt=""></div><div>${escapeHtml(seller.name||'Seller')}</div></div>
+  <div class="gig-seller"><div class="seller-avatar"><img src="${escapeHtml(normalizePath(seller.avatar||'/assets/img/team/team-1.jpg'))}" alt=""></div><div>${escapeHtml(seller.name||'Seller')}</div></div>
       <div class="gig-badges">
         <div class="gig-badge">${escapeHtml(job.category||'General')}</div>
         <div class="gig-badge">${escapeHtml(job.level||'Top Rated')}</div>
@@ -132,8 +140,8 @@ if(document.getElementById('service-detail')){
     container.innerHTML = `
       <div class="service-detail-card">
         <div class="row">
-          <div class="col-md-6">
-            <img src="${escapeHtml(job.image||'/assets/img/portfolio/portfolio-1.jpg')}" class="img-fluid rounded" alt="${escapeHtml(job.title)}">
+            <div class="col-md-6">
+            <img src="${escapeHtml(normalizePath(job.image||'/assets/img/portfolio/portfolio-1.jpg'))}" class="img-fluid rounded" alt="${escapeHtml(job.title)}">
           </div>
           <div class="col-md-6">
             <h2>${escapeHtml(job.title)}</h2>
