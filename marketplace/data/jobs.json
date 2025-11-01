@@ -1,0 +1,7 @@
+[
+  {"id":1,"title":"Build a marketing website","category":"Web Development","description":"Create a responsive marketing site with contact form and performance optimization."},
+  {"id":2,"title":"Logo and brand kit","category":"Design","description":"Design a logo, color palette, and simple brand guidelines for a startup."},
+  {"id":3,"title":"SEO content for blog","category":"Writing","description":"Write 6 long-form posts optimized for SEO around fintech topics."},
+  {"id":4,"title":"Social ads campaign","category":"Marketing","description":"Plan and create assets for a 4-week paid social campaign."},
+  {"id":5,"title":"Landing page for app","category":"Web Development","description":"Design and implement a fast landing page with analytics and A/B test hooks."}
+]
