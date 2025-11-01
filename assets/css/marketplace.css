@@ -42,3 +42,41 @@
 	.market-sidebar{order:2}
 }
 
+/* Make existing .service-card (used on main index) match Fiverr-like look */
+.services-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.service-card {
+	background: #fff;
+	border: 1px solid #e6edf3;
+	border-radius: 12px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: transform .16s ease, box-shadow .16s ease;
+	box-shadow: 0 6px 18px rgba(20,30,60,0.04);
+}
+.service-card:hover{ transform: translateY(-8px); box-shadow: 0 18px 40px rgba(20,30,60,0.08); }
+.service-card-header{ padding:16px; display:flex; gap:12px; align-items:center; border-bottom:1px solid #f2f4f7 }
+.service-card-icon{ width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:22px; background:linear-gradient(135deg,#eef6ff 0%, #f7fbff 100%); color:#106eea; flex-shrink:0 }
+.service-card-title{ margin:0; font-size:16px; font-weight:700; color:#0b2540 }
+.service-card-sub{ font-size:13px; color:#65748b }
+.service-card-body{ padding:14px; flex:1; display:flex; flex-direction:column; gap:10px }
+.service-bullets{ list-style:none; padding:0; margin:0; color:#4d5d73; font-size:13px }
+.service-bullets li::before{ content:'•'; color:#106eea; display:inline-block; width:18px; margin-left:-18px }
+.service-meta{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:auto }
+.meta-left{ display:flex; gap:10px; align-items:center }
+.meta-item{ display:flex; gap:6px; align-items:center; background:#f6f8fb; padding:6px 8px; border-radius:6px }
+.service-rating{ color:#f6a623; font-weight:700; display:flex; align-items:center; gap:6px }
+.service-tags{ display:flex; gap:6px; flex-wrap:wrap }
+.service-tag{ background:#f0f6ff; color:#106eea; font-size:12px; padding:6px 8px; border-radius:6px; border:1px solid rgba(16,110,234,0.06) }
+.service-card-footer{ padding:14px; border-top:1px solid #f2f4f7; display:flex; align-items:center; justify-content:space-between; gap:12px }
+.service-price .from{ font-size:12px; color:#7a899a }
+.service-price .amount{ font-size:20px; font-weight:700; color:#0b2540 }
+.service-footer-actions{ display:flex; gap:8px; align-items:center }
+.service-card .service-buy-btn{ background: linear-gradient(90deg,#16b358,#0c9a4a); padding:10px 14px; font-weight:700; border-radius:8px; font-size:14px; color:#fff; border:none }
+.service-card .service-buy-btn:hover{ opacity:0.95 }
+
+/* Service detail small helpers */
+.service-detail-card img{ max-width:100%; border-radius:8px; }
+.service-detail-card h2{ margin-top:0 }
+
+
