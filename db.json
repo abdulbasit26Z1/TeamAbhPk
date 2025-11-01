@@ -8,8 +8,8 @@
     "delivery": "5 Days",
     "rating": 4.9,
     "reviews": 84,
-    "image": "assets/img/portfolio/portfolio-1.jpg",
-    "seller": { "name": "CreativeDev", "avatar": "assets/img/team/team-1.jpg" },
+  "image": "assets/img/portfolio/app-1.jpg",
+  "seller": { "name": "CreativeDev", "avatar": "assets/img/team/team-1.jpg" },
     "features": ["Responsive layout", "Contact form", "SEO basics", "Performance tuning"]
   },
   {
@@ -21,8 +21,8 @@
     "delivery": "3 Days",
     "rating": 4.8,
     "reviews": 210,
-    "image": "assets/img/portfolio/portfolio-2.jpg",
-    "seller": { "name": "BrandStudio", "avatar": "assets/img/team/team-2.jpg" },
+  "image": "assets/img/portfolio/product-1.jpg",
+  "seller": { "name": "BrandStudio", "avatar": "assets/img/team/team-2.jpg" },
     "features": ["Logo concepts", "Color palette", "Logo usage guide"]
   },
   {
@@ -34,8 +34,8 @@
     "delivery": "14 Days",
     "rating": 4.7,
     "reviews": 64,
-    "image": "assets/img/portfolio/portfolio-3.jpg",
-    "seller": { "name": "ContentPro", "avatar": "assets/img/team/team-3.jpg" },
+  "image": "assets/img/portfolio/app-3.jpg",
+  "seller": { "name": "ContentPro", "avatar": "assets/img/team/team-3.jpg" },
     "features": ["6 long-form posts", "On-page SEO", "Keyword research"]
   },
   {
@@ -47,8 +47,8 @@
     "delivery": "7 Days",
     "rating": 4.6,
     "reviews": 41,
-    "image": "assets/img/portfolio/portfolio-4.jpg",
-    "seller": { "name": "AdMasters", "avatar": "assets/img/team/team-4.jpg" },
+  "image": "assets/img/portfolio/product-2.jpg",
+  "seller": { "name": "AdMasters", "avatar": "assets/img/team/team-4.jpg" },
     "features": ["Ad creatives", "Ad copy", "Campaign plan", "Reporting"]
   },
   {
@@ -60,8 +60,8 @@
     "delivery": "4 Days",
     "rating": 4.85,
     "reviews": 28,
-    "image": "assets/img/portfolio/portfolio-5.jpg",
-    "seller": { "name": "LaunchLab", "avatar": "assets/img/team/team-5.jpg" },
+  "image": "assets/img/portfolio/app-2.jpg",
+  "seller": { "name": "LaunchLab", "avatar": "assets/img/team/team-1.jpg" },
     "features": ["Design", "Implementation", "Analytics integration"]
   }
 ]
