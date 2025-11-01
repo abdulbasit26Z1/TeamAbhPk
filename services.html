@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services - Team Abh Pk</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/marketplace.css" rel="stylesheet">
+  <link href="assets/css/services.css" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">Team Abh Pk</a>
+      <nav>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="services.html">Services</a> |
+        <a href="portfolio.html">Portfolio</a> |
+        <a href="team.html">Team</a> |
+        <a href="marketplace/index.html">Marketplace</a> |
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="services" class="section">
+      <div class="container section-title">
+        <h2>Services</h2>
+        <p>Browse services available in the marketplace.</p>
+      </div>
+
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-md-4"><input id="search-input" class="form-control" placeholder="Search services..."></div>
+          <div class="col-md-3"><select id="category-filter" class="form-select"><option value="all">All categories</option></select></div>
+          <div class="col-md-3"><select id="sort-select" class="form-select"><option value="">Sort</option><option value="price-asc">Price low→high</option><option value="price-desc">Price high→low</option><option value="rating">Top rated</option></select></div>
+        </div>
+
+        <div id="gigs-grid" class="row gy-4">
+          <!-- marketplace.js will render gigs here -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">&copy; Team Abh Pk</div>
+  </footer>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/marketplace.js"></script>
+</body>
+</html>
