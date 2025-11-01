@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Abh Pk - Fixed</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/marketplace.css" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index_fixed.html" class="logo">Team Abh Pk</a>
+      <nav>
+        <a href="#hero">Home</a> |
+        <a href="#services">Services</a> |
+        <a href="marketplace/index.html">Marketplace</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="hero" class="section">
+      <div class="container">
+        <h1>Welcome to Team Abh Pk</h1>
+        <p>We provide expert software and marketplace services.</p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container section-title">
+        <h2>Services</h2>
+        <p>Our marketplace listings are loaded from repository data (/db.json).</p>
+      </div>
+      <div class="container">
+        <div id="main-services" class="services-cards" data-aos="fade-up" data-aos-delay="100">
+          <!-- rendered from /db.json -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">&copy; Team Abh Pk</div>
+  </footer>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/marketplace.js"></script>
+</body>
+</html>
