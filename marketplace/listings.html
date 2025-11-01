@@ -38,26 +38,42 @@
 
   <main class="container py-4" style="margin-top:120px;">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h1 class="h3">Job Listings</h1>
-      <a class="btn btn-primary" href="post-job.html">Post a Job</a>
+      <h1 class="h3">Services</h1>
+      <div>
+        <a class="btn btn-primary me-2" href="post-job.html">Post a Job</a>
+        <a class="btn btn-outline-secondary" href="service.html">Create Service</a>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <input id="search-input" class="form-control" placeholder="Search services..." />
+      </div>
+      <div class="col-md-3">
+        <select id="category-filter" class="form-select">
+          <option value="all">All categories</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select id="sort-select" class="form-select">
+          <option value="">Sort</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
     </div>
 
     <div class="row">
       <aside class="col-md-3">
         <div class="card p-3 mb-3">
           <h6>Filters</h6>
-          <select id="category-filter" class="form-select mt-2">
-            <option value="all">All categories</option>
-            <option>Web Development</option>
-            <option>Design</option>
-            <option>Writing</option>
-            <option>Marketing</option>
-          </select>
+          <p class="small text-muted">Use controls on the right to refine results</p>
         </div>
       </aside>
 
       <div class="col-md-9">
-        <div id="jobs-list" class="row g-3">
+        <div id="gigs-grid" class="row g-3">
           <!-- jobs injected by JS -->
         </div>
 
