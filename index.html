@@ -1135,88 +1135,25 @@
       </div><!-- End Section Title -->
 
       <div class="container">
-        <div class="services-cards" data-aos="fade-up" data-aos-delay="100">
-          <!-- Web Development -->
-          <div class="service-card">
-            <div class="service-card-header">
-              <div class="service-card-icon"><i class="bi bi-code-slash"></i></div>
-              <div>
-                <h4 class="service-card-title">Web Development</h4>
-                <div class="service-card-sub">Cutting-edge web applications that push the boundaries</div>
-              </div>
-            </div>
-            <div class="service-card-body">
-              <ul class="service-bullets">
-                <li>Responsive, SEO-friendly websites</li>
-                <li>Modern stacks like React / Next.js</li>
-                <li>Performance & accessibility focused</li>
-              </ul>
-              <div class="service-meta">
-                <div class="meta-left">
-                  <div class="meta-item service-rating">
-                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                    <span>4.9</span>
-                    <span style="color:#9aa7bc;font-weight:600;">(523)</span>
-                  </div>
-                  <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
-                </div>
-                <div class="service-tags">
-                  <div class="service-tag">Full-stack</div>
-                  <div class="service-tag">API</div>
+        <!-- Services will be rendered from repository data (/db/services.json). -->
+        <!-- The marketplace script will populate this container when available. -->
+        <div id="main-services" class="services-cards" data-aos="fade-up" data-aos-delay="100">
+          <!-- If JavaScript is disabled or the feed fails, provide a small static fallback. -->
+          <noscript>
+            <div class="service-card">
+              <div class="service-card-header">
+                <div class="service-card-icon"><i class="bi bi-briefcase"></i></div>
+                <div>
+                  <h4 class="service-card-title">Consulting</h4>
+                  <div class="service-card-sub">Contact us to discuss your requirements.</div>
                 </div>
               </div>
-            </div>
-            <div class="service-card-footer">
-              <div class="service-price">
-                <div class="from">Starting at</div>
-                <div class="amount">$999</div>
-              </div>
-              <div class="service-footer-actions">
-                <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</button>
+              <div class="service-card-body">
+                <p>Enable JavaScript to see live service listings.</p>
               </div>
             </div>
-          </div>
-
-          <!-- AI Solutions -->
-          <div class="service-card">
-            <div class="service-card-header">
-              <div class="service-card-icon"><i class="bi bi-cpu"></i></div>
-              <div>
-                <h4 class="service-card-title">AI Solutions</h4>
-                <div class="service-card-sub">Artificial intelligence that transforms businesses</div>
-              </div>
-            </div>
-            <div class="service-card-body">
-              <ul class="service-bullets">
-                <li>Custom ML models & data pipelines</li>
-                <li>Model deployment & monitoring</li>
-                <li>Integration with your systems</li>
-              </ul>
-              <div class="service-meta">
-                <div class="meta-left">
-                  <div class="meta-item service-rating">
-                    <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                    <span>4.8</span>
-                    <span style="color:#9aa7bc;font-weight:600;">(210)</span>
-                  </div>
-                  <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
-                </div>
-                <div class="service-tags">
-                  <div class="service-tag">NLP</div>
-                  <div class="service-tag">Computer Vision</div>
-                </div>
-              </div>
-            </div>
-            <div class="service-card-footer">
-              <div class="service-price">
-                <div class="from">Starting at</div>
-                <div class="amount">$1999</div>
-              </div>
-              <div class="service-footer-actions">
-                <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</button>
-              </div>
-            </div>
-          </div>
+          </noscript>
+        </div>
 
           <!-- Cyber Security -->
           <div class="service-card">
