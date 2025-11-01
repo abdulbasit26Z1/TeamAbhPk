@@ -152,3 +152,56 @@ if(document.getElementById('service-detail')){
   })();
 }
 
+// Render services on the main index page (#main-services) using the same /db.json source
+if(document.getElementById('main-services')){
+  (async ()=>{
+    const jobs = await fetchJobs();
+    const container = document.getElementById('main-services');
+    container.innerHTML = '';
+    // render as the same .service-card used in the template
+    jobs.slice(0, 12).forEach(job=>{
+      const card = document.createElement('div');
+      card.className = 'service-card';
+      const price = job.price || 'Contact';
+      const delivery = job.delivery || 'N/A';
+      card.innerHTML = `
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-briefcase"></i></div>
+          <div>
+            <h4 class="service-card-title"><a href="marketplace/service.html?id=${escapeHtml(job.id)}">${escapeHtml(job.title)}</a></h4>
+            <div class="service-card-sub">${escapeHtml((job.description||'').slice(0,120))}</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            ${(job.features||[]).slice(0,3).map(f=>`<li>${escapeHtml(f)}</li>`).join('')}
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>${escapeHtml((job.rating||4.8).toString())}</span>
+                <span style="color:#9aa7bc;font-weight:600;">(${escapeHtml((job.reviews||0).toString())})</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>${escapeHtml(delivery)}</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">${escapeHtml(job.category||'General')}</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$${escapeHtml(price.toString())}</div>
+          </div>
+          <div class="service-footer-actions">
+            <a class="service-buy-btn" href="marketplace/service.html?id=${escapeHtml(job.id)}">View Details</a>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  })();
+}
+
