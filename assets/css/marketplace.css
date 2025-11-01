@@ -1,0 +1,6 @@
+/* Marketplace specific styles */
+.hero{padding:4rem 0;background:linear-gradient(90deg,#f8fafc,#ffffff)}
+.card.p-3{border-radius:.5rem}
+#quick-listings .card{min-height:110px}
+.job-card{transition:box-shadow .15s ease}
+.job-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)}

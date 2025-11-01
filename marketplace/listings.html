@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketplace — Job Listings</title>
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/marketplace.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h3">Job Listings</h1>
+      <a class="btn btn-primary" href="post-job.html">Post a Job</a>
+    </div>
+
+    <div class="row">
+      <aside class="col-md-3">
+        <div class="card p-3 mb-3">
+          <h6>Filters</h6>
+          <select id="category-filter" class="form-select mt-2">
+            <option value="all">All categories</option>
+            <option>Web Development</option>
+            <option>Design</option>
+            <option>Writing</option>
+            <option>Marketing</option>
+          </select>
+        </div>
+      </aside>
+
+      <div class="col-md-9">
+        <div id="jobs-list" class="row g-3">
+          <!-- jobs injected by JS -->
+        </div>
+
+        <nav class="mt-4">
+          <ul class="pagination" id="pagination"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/marketplace.js"></script>
+</body>
+</html>

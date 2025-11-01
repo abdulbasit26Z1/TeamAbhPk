@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketplace — Home</title>
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/marketplace.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">YourSite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Main Site</a></li>
+          <li class="nav-item"><a class="nav-link" href="listings.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="post-job.html">Post a Job</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container text-center">
+      <h1>Find freelancers or post projects</h1>
+      <p class="lead">A lightweight marketplace demo — listings, posting form, and simple dashboard.</p>
+      <p>
+        <a class="btn btn-primary me-2" href="listings.html">Browse Jobs</a>
+        <a class="btn btn-outline-secondary" href="post-job.html">Post a Job</a>
+      </p>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <section>
+      <h2>Popular categories</h2>
+      <div class="row g-3">
+        <div class="col-md-3"><div class="card p-3 text-center">Web Development</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">Design</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">Writing</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">Marketing</div></div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Quick listings</h2>
+      <div id="quick-listings" class="row g-3 mt-2">
+        <!-- JS will populate a few sample cards -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-light py-3">
+    <div class="container text-center small">© YourSite Marketplace</div>
+  </footer>
+
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/marketplace.js"></script>
+</body>
+</html>
