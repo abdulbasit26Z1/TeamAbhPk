@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "title": "Build a marketing website",
+    "category": "Web Development",
+    "description": "Create a responsive marketing site with contact form and performance optimization.",
+    "price": 499,
+    "delivery": "5 Days",
+    "rating": 4.9,
+    "reviews": 84,
+    "image": "assets/img/portfolio/app-1.jpg",
+    "seller": { "name": "CreativeDev", "avatar": "assets/img/team/team-1.jpg" },
+    "features": ["Responsive layout", "Contact form", "SEO basics", "Performance tuning"]
+  },
+  {
+    "id": "2",
+    "title": "Logo and brand kit",
+    "category": "Design",
+    "description": "Design a logo, color palette, and simple brand guidelines for a startup.",
+    "price": 199,
+    "delivery": "3 Days",
+    "rating": 4.8,
+    "reviews": 210,
+    "image": "assets/img/portfolio/product-1.jpg",
+    "seller": { "name": "BrandStudio", "avatar": "assets/img/team/team-2.jpg" },
+    "features": ["Logo concepts", "Color palette", "Logo usage guide"]
+  },
+  {
+    "id": "3",
+    "title": "SEO content for blog",
+    "category": "Writing",
+    "description": "Write 6 long-form posts optimized for SEO around fintech topics.",
+    "price": 299,
+    "delivery": "14 Days",
+    "rating": 4.7,
+    "reviews": 64,
+    "image": "assets/img/portfolio/app-3.jpg",
+    "seller": { "name": "ContentPro", "avatar": "assets/img/team/team-3.jpg" },
+    "features": ["6 long-form posts", "On-page SEO", "Keyword research"]
+  },
+  {
+    "id": "4",
+    "title": "Social ads campaign",
+    "category": "Marketing",
+    "description": "Plan and create assets for a 4-week paid social campaign.",
+    "price": 599,
+    "delivery": "7 Days",
+    "rating": 4.6,
+    "reviews": 41,
+    "image": "assets/img/portfolio/product-2.jpg",
+    "seller": { "name": "AdMasters", "avatar": "assets/img/team/team-4.jpg" },
+    "features": ["Ad creatives", "Ad copy", "Campaign plan", "Reporting"]
+  },
+  {
+    "id": "5",
+    "title": "Landing page for app",
+    "category": "Web Development",
+    "description": "Design and implement a fast landing page with analytics and A/B test hooks.",
+    "price": 349,
+    "delivery": "4 Days",
+    "rating": 4.85,
+    "reviews": 28,
+    "image": "assets/img/portfolio/app-2.jpg",
+    "seller": { "name": "LaunchLab", "avatar": "assets/img/team/team-1.jpg" },
+    "features": ["Design", "Implementation", "Analytics integration"]
+  }
+]
