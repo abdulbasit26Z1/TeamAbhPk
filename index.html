@@ -13,337 +13,353 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Service purchase system loaded');
 
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link href="assets/css/marketplace.css" rel="stylesheet">
-  </head>
-  <body>
+      // Helper safe getters
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+      const getById = (id) => document.getElementById(id);
 
-    <header class="header">
-      <div class="container d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo">Team Abh Pk</a>
-        <nav>
-          <a href="#hero">Home</a> |
-          <a href="#services">Services</a> |
-          <a href="#portfolio">Portfolio</a> |
-          <a href="#team">Team</a> |
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
+      // Grab elements safely
+      const serviceBuyButtons = $$('.service-buy-btn');
+      const servicePurchaseModal = getById('service-purchase-modal');
+      const cartModal = getById('cart-modal');
+      const orderConfirmationModal = getById('order-confirmation-modal');
+      const closeModalButtons = $$('.close-modal');
+      const packageOptions = $$('.package-option');
+      const serviceNameInput = getById('service-name');
+      const totalPriceDisplay = getById('total-price');
+      const addToCartBtn = getById('add-to-cart-btn');
+      const successMessage = getById('success-message');
+      const continueShoppingBtn = getById('continue-shopping');
+      const goToCartBtn = getById('go-to-cart');
+      const cartIcon = getById('cart-icon');
+      const cartCount = $('.cart-count');
+      const cartItemsContainer = getById('cart-items');
+      const cartTotalPrice = getById('cart-total-price');
+      const continueShoppingCartBtn = getById('continue-shopping-cart');
+      const proceedCheckoutBtn = getById('proceed-checkout');
+      const orderDetails = getById('order-details');
+      const orderIdElement = getById('order-id');
+      const closeOrderConfirmation = getById('close-order-confirmation');
 
-    <main class="main">
-      <!-- Hero, Services, Features, Testimonials, Portfolio, Pricing, FAQ, Team, Contact sections -->
-      <!-- (kept the full site body content as before) -->
+      // If there are no buy buttons and no cart UI, skip initializing purchase logic
+      if (serviceBuyButtons.length === 0 && !cartIcon && !servicePurchaseModal) {
+        console.log('No purchase UI detected — skipping service purchase initialization');
+        return;
+      }
 
-<!-- Body content preserved below -->
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      let currentService = null;
+      let currentBasePrice = 0;
+      let selectedPackage = 'basic';
+      let cart = [];
+      let orders = [];
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      // WhatsApp configuration
+      const WHATSAPP_NUMBER = '923328657885';
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      // Initialize cart and orders from localStorage if available
+      try { if (localStorage.getItem('serviceCart')) { cart = JSON.parse(localStorage.getItem('serviceCart')); updateCartCount(); } } catch(e) { console.warn('Could not parse serviceCart', e); }
+      try { if (localStorage.getItem('serviceOrders')) { orders = JSON.parse(localStorage.getItem('serviceOrders')); } } catch(e){ console.warn('Could not parse serviceOrders', e); }
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      // Service Buy Button Click
+      if (serviceBuyButtons.length) {
+        serviceBuyButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            currentService = this.getAttribute('data-service') || currentService;
+            currentBasePrice = parseInt(this.getAttribute('data-base-price')) || currentBasePrice;
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+            if (serviceNameInput) serviceNameInput.value = currentService || '';
+            updatePackagePrices();
+            calculateTotalPrice();
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+            // Reset form fields if present
+            const cname = getById('customer-name'); if (cname) cname.value = '';
+            const cemail = getById('customer-email'); if (cemail) cemail.value = '';
+            const cphone = getById('customer-phone'); if (cphone) cphone.value = '';
+            const pdetails = getById('project-details'); if (pdetails) pdetails.value = '';
+            if (successMessage) successMessage.style.display = 'none';
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+            if (servicePurchaseModal) servicePurchaseModal.style.display = 'block';
+          });
+        });
+      }
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      // Package Selection (guarded)
+      if (packageOptions.length) {
+        packageOptions.forEach(option => {
+          option.addEventListener('click', function() {
+            packageOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPackage = this.getAttribute('data-package') || selectedPackage;
+            calculateTotalPrice();
+          });
+        });
+      }
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
+      // Update package prices
+      function updatePackagePrices() {
+        if (!currentBasePrice) return;
+        const bp = getById('basic-price'); if (bp) bp.textContent = currentBasePrice;
+        const sp = getById('standard-price'); if (sp) sp.textContent = Math.round(currentBasePrice * 1.5);
+        const pp = getById('premium-price'); if (pp) pp.textContent = currentBasePrice * 2;
+      }
 
-          </div><!-- End Portfolio Container -->
+      // Calculate total price
+      function calculateTotalPrice() {
+        let multiplier = 1;
+        switch(selectedPackage) {
+          case 'standard': multiplier = 1.5; break;
+          case 'premium': multiplier = 2; break;
+        }
+        const totalPrice = Math.round(currentBasePrice * multiplier) || 0;
+        if (totalPriceDisplay) totalPriceDisplay.textContent = totalPrice;
+        return totalPrice;
+      }
 
-        </div>
+      // Add to Cart (guarded)
+      if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+          const customerName = (getById('customer-name') || {}).value || '';
+          const customerEmail = (getById('customer-email') || {}).value || '';
+          const customerPhone = (getById('customer-phone') || {}).value || '';
+          const projectDetails = (getById('project-details') || {}).value || '';
 
-      </div>
+          if (!customerName || !customerEmail || !customerPhone) {
+            alert('Please fill in all required fields: Name, Email, and Phone');
+            return;
+          }
 
-    </section><!-- /Portfolio Section -->
+          const totalPrice = calculateTotalPrice();
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
+          const cartItem = {
+            id: Date.now(),
+            service: currentService,
+            package: selectedPackage,
+            basePrice: currentBasePrice,
+            totalPrice: totalPrice,
+            customerName: customerName,
+            customerEmail: customerEmail,
+            customerPhone: customerPhone,
+            projectDetails: projectDetails,
+            timestamp: new Date().toISOString()
+          };
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+          cart.push(cartItem);
+          saveCartToLocalStorage();
+          updateCartCount();
 
-      <div class="container">
+          if (successMessage) successMessage.style.display = 'block';
+        });
+      }
 
-        <div class="row gy-4">
+      // Continue Shopping
+      if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', function() {
+        if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+        if (successMessage) successMessage.style.display = 'none';
+      });
 
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="pricing-item">
-              <h3>Free Plan</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+      // Go to Cart
+      if (goToCartBtn) goToCartBtn.addEventListener('click', function() {
+        if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+        if (successMessage) successMessage.style.display = 'none';
+        showCartModal();
+      });
+
+      // Cart Icon Click
+      if (cartIcon) cartIcon.addEventListener('click', function(e) {
+        e.preventDefault();
+        showCartModal();
+      });
+
+      // Show Cart Modal
+      function showCartModal() {
+        updateCartDisplay();
+        if (cartModal) cartModal.style.display = 'block';
+      }
+
+      // Update Cart Display
+      function updateCartDisplay() {
+        if (!cartItemsContainer) return;
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+          if (cartTotalPrice) cartTotalPrice.textContent = '0';
+          return;
+        }
+
+        cart.forEach(item => {
+          total += item.totalPrice;
+
+          const cartItemElement = document.createElement('div');
+          cartItemElement.className = 'cart-item';
+          cartItemElement.innerHTML = `
+            <div class="cart-item-details">
+              <h4>${item.service}</h4>
+              <p>Package: ${item.package.charAt(0).toUpperCase() + item.package.slice(1)}</p>
+              <p>Customer: ${item.customerName}</p>
             </div>
-          </div><!-- End Pricing Item -->
+            <div class="cart-item-price">$${item.totalPrice}</div>
+            <button class="remove-item" data-id="${item.id}">&times;</button>
+          `;
+          cartItemsContainer.appendChild(cartItemElement);
+        });
 
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="pricing-item featured">
-              <h3>Business Plan</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+        if (cartTotalPrice) cartTotalPrice.textContent = total;
+
+        // Add event listeners to remove buttons
+        Array.from(document.querySelectorAll('.remove-item')).forEach(button => {
+          button.addEventListener('click', function() {
+            const itemId = parseInt(this.getAttribute('data-id'));
+            removeFromCart(itemId);
+          });
+        });
+      }
+
+      // Remove from Cart
+      function removeFromCart(itemId) {
+        cart = cart.filter(item => item.id !== itemId);
+        saveCartToLocalStorage();
+        updateCartCount();
+        updateCartDisplay();
+      }
+
+      // Update Cart Count
+      function updateCartCount() {
+        if (cartCount) cartCount.textContent = cart.length;
+      }
+
+      // Save Cart to Local Storage
+      function saveCartToLocalStorage() {
+        try { localStorage.setItem('serviceCart', JSON.stringify(cart)); } catch(e){console.warn('Could not save cart', e);}
+      }
+
+      // Continue Shopping from Cart
+      if (continueShoppingCartBtn) continueShoppingCartBtn.addEventListener('click', function() {
+        if (cartModal) cartModal.style.display = 'none';
+      });
+
+      // Proceed to Checkout
+      if (proceedCheckoutBtn) proceedCheckoutBtn.addEventListener('click', function() {
+        if (cart.length === 0) {
+          alert('Your cart is empty');
+          return;
+        }
+
+        // Generate order
+        const orderId = 'ORD-' + Date.now();
+        const order = {
+          id: orderId,
+          items: [...cart],
+          total: cart.reduce((sum, item) => sum + item.totalPrice, 0),
+          timestamp: new Date().toISOString(),
+          status: 'pending'
+        };
+
+        orders.push(order);
+        try { localStorage.setItem('serviceOrders', JSON.stringify(orders)); } catch(e){console.warn('Could not save orders', e);}
+
+        // Send to WhatsApp
+        sendOrderToWhatsApp(order);
+
+        // Show confirmation
+        showOrderConfirmation(order);
+
+        // Clear cart
+        cart = [];
+        saveCartToLocalStorage();
+        updateCartCount();
+
+        // Close cart modal
+        if (cartModal) cartModal.style.display = 'none';
+      });
+
+      // Send Order to WhatsApp
+      function sendOrderToWhatsApp(order) {
+        let message = `*NEW SERVICE ORDER - ${order.id}*\n\n`;
+        message += `*Order Summary:*\n`;
+        message += `Total: $${order.total}\n`;
+        message += `Items: ${order.items.length}\n\n`;
+        message += `*Order Details:*\n`;
+
+        order.items.forEach((item, index) => {
+          message += `\n*Item ${index + 1}:*\n`;
+          message += `Service: ${item.service}\n`;
+          message += `Package: ${item.package}\n`;
+          message += `Price: $${item.totalPrice}\n`;
+          message += `Customer: ${item.customerName}\n`;
+          message += `Email: ${item.customerEmail}\n`;
+          message += `Phone: ${item.customerPhone}\n`;
+          if (item.projectDetails) {
+            message += `Details: ${item.projectDetails}\n`;
+          }
+        });
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+        // Open WhatsApp in new tab
+        window.open(whatsappUrl, '_blank');
+      }
+
+      // Show Order Confirmation
+      function showOrderConfirmation(order) {
+        if (orderIdElement) orderIdElement.textContent = order.id;
+
+        if (!orderDetails) return;
+        let orderDetailsHTML = '';
+        order.items.forEach((item, index) => {
+          orderDetailsHTML += `
+            <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
+              <strong>Item ${index + 1}:</strong><br>
+              Service: ${item.service}<br>
+              Package: ${item.package}<br>
+              Price: $${item.totalPrice}<br>
+              Customer: ${item.customerName}
             </div>
-          </div><!-- End Pricing Item -->
+          `;
+        });
 
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="pricing-item">
-              <h3>Developer Plan</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
-            </div>
-          </div><!-- End Pricing Item -->
+        orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold;">Total: $${order.total}</div>`;
+        orderDetails.innerHTML = orderDetailsHTML;
 
-        </div>
+        if (orderConfirmationModal) orderConfirmationModal.style.display = 'block';
+      }
 
-      </div>
+      // Close Order Confirmation
+      if (closeOrderConfirmation) closeOrderConfirmation.addEventListener('click', function() {
+        if (orderConfirmationModal) orderConfirmationModal.style.display = 'none';
+      });
 
-    </section><!-- /Pricing Section -->
+      // Close Modals
+      if (closeModalButtons.length) {
+        closeModalButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            if (servicePurchaseModal) servicePurchaseModal.style.display = 'none';
+            if (cartModal) cartModal.style.display = 'none';
+            if (orderConfirmationModal) orderConfirmationModal.style.display = 'none';
+          });
+        });
+      }
 
-    <!-- Faq Section -->
-    <section id="faq" class="faq section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row justify-content-center">
-
-          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="faq-container">
-
-              <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
-                <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
-                <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-            </div>
-
-          </div><!-- End Faq Column-->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Faq Section -->
-
-    <!-- Team Section -->
-    <section id="team" class="team section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <!-- Basit -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Basit.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Abdul Basit</h4>
-                <span>CEO & Co-Founder</span>
-                <p>Visionary leader with 12+ years in tech. Former VP at Google, passionate about AI and sustainable technology.</p>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <!-- Zafar -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Zafar.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Muhammad Zafar</h4>
-                <span>CTO & Co-Founder</span>
-                <p>Full-stack architect with expertise in scalable systems. Ex-Netflix engineer, blockchain enthusiast.</p>
-                <h7>System Architecture,DevOps,Blockchain,<br>Cloud Computing</h7>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <!-- Ahmad -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Ahmad.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === servicePurchaseModal && servicePurchaseModal) {
+          servicePurchaseModal.style.display = 'none';
+        }
+        if (event.target === cartModal && cartModal) {
+          cartModal.style.display = 'none';
+        }
+        if (event.target === orderConfirmationModal && orderConfirmationModal) {
+          orderConfirmationModal.style.display = 'none';
+        }
+      });
+    });
+    </script>
                 </div>
               </div>
               <div class="member-info">
@@ -551,339 +567,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <!-- Service Purchase JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Service purchase system loaded');
-        
-        // Service purchase functionality
-        const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
-        const servicePurchaseModal = document.getElementById('service-purchase-modal');
-        const cartModal = document.getElementById('cart-modal');
-        const orderConfirmationModal = document.getElementById('order-confirmation-modal');
-        const closeModalButtons = document.querySelectorAll('.close-modal');
-        const packageOptions = document.querySelectorAll('.package-option');
-        const serviceNameInput = document.getElementById('service-name');
-        const totalPriceDisplay = document.getElementById('total-price');
-        const addToCartBtn = document.getElementById('add-to-cart-btn');
-        const successMessage = document.getElementById('success-message');
-        const continueShoppingBtn = document.getElementById('continue-shopping');
-        const goToCartBtn = document.getElementById('go-to-cart');
-        const cartIcon = document.getElementById('cart-icon');
-        const cartCount = document.querySelector('.cart-count');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalPrice = document.getElementById('cart-total-price');
-        const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
-        const proceedCheckoutBtn = document.getElementById('proceed-checkout');
-        const orderDetails = document.getElementById('order-details');
-        const orderIdElement = document.getElementById('order-id');
-        const closeOrderConfirmation = document.getElementById('close-order-confirmation');
-        
-        let currentService = null;
-        let currentBasePrice = 0;
-        let selectedPackage = 'basic';
-        let cart = [];
-        let orders = [];
-        
-        // WhatsApp configuration
-        const WHATSAPP_NUMBER = '923328657885';
-        
-        // Initialize cart and orders from localStorage if available
-        if (localStorage.getItem('serviceCart')) {
-            cart = JSON.parse(localStorage.getItem('serviceCart'));
-            updateCartCount();
-        }
-        
-        if (localStorage.getItem('serviceOrders')) {
-            orders = JSON.parse(localStorage.getItem('serviceOrders'));
-        }
-          // Service Buy Button Click
-        serviceBuyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                currentService = this.getAttribute('data-service');
-                currentBasePrice = parseInt(this.getAttribute('data-base-price'));
-                
-                serviceNameInput.value = currentService;
-                updatePackagePrices();
-                calculateTotalPrice();
-                
-                // Reset form
-                document.getElementById('customer-name').value = '';
-                document.getElementById('customer-email').value = '';
-                document.getElementById('customer-phone').value = '';
-                document.getElementById('project-details').value = '';
-                successMessage.style.display = 'none';
-                
-                servicePurchaseModal.style.display = 'block';
-            });
-        });
-        
-        // Package Selection
-        packageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                packageOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedPackage = this.getAttribute('data-package');
-                calculateTotalPrice();
-            });
-        });
-        
-        // Update package prices
-        function updatePackagePrices() {
-            document.getElementById('basic-price').textContent = currentBasePrice;
-            document.getElementById('standard-price').textContent = Math.round(currentBasePrice * 1.5);
-            document.getElementById('premium-price').textContent = currentBasePrice * 2;
-        }
-        
-        // Calculate total price
-        function calculateTotalPrice() {
-            let multiplier = 1;
-            switch(selectedPackage) {
-                case 'standard': multiplier = 1.5; break;
-                case 'premium': multiplier = 2; break;
-            }
-            const totalPrice = Math.round(currentBasePrice * multiplier);
-            totalPriceDisplay.textContent = totalPrice;
-            return totalPrice;
-        }
-        
-        // Add to Cart
-        addToCartBtn.addEventListener('click', function() {
-            const customerName = document.getElementById('customer-name').value;
-            const customerEmail = document.getElementById('customer-email').value;
-            const customerPhone = document.getElementById('customer-phone').value;
-            const projectDetails = document.getElementById('project-details').value;
-            
-            if (!customerName || !customerEmail || !customerPhone) {
-                alert('Please fill in all required fields: Name, Email, and Phone');
-                return;
-            }
-            
-            const totalPrice = calculateTotalPrice();
-            
-            const cartItem = {
-                id: Date.now(),
-                service: currentService,
-                package: selectedPackage,
-                basePrice: currentBasePrice,
-                totalPrice: totalPrice,
-                customerName: customerName,
-                customerEmail: customerEmail,
-                customerPhone: customerPhone,
-                projectDetails: projectDetails,
-                timestamp: new Date().toISOString()
-            };
-            
-            cart.push(cartItem);
-            saveCartToLocalStorage();
-            updateCartCount();
-            
-            // Show success message
-            successMessage.style.display = 'block';
-        });
-        
-        // Continue Shopping
-        continueShoppingBtn.addEventListener('click', function() {
-            servicePurchaseModal.style.display = 'none';
-            successMessage.style.display = 'none';
-        });
-        
-        // Go to Cart
-        goToCartBtn.addEventListener('click', function() {
-            servicePurchaseModal.style.display = 'none';
-            successMessage.style.display = 'none';
-            showCartModal();
-        });
-        
-        // Cart Icon Click
-        cartIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            showCartModal();
-        });
-        
-        // Show Cart Modal
-        function showCartModal() {
-            updateCartDisplay();
-            cartModal.style.display = 'block';
-        }
-        
-        // Update Cart Display
-        function updateCartDisplay() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
-                cartTotalPrice.textContent = '0';
-                return;
-            }
-            
-            cart.forEach(item => {
-                total += item.totalPrice;
-                
-                const cartItemElement = document.createElement('div');
-                cartItemElement.className = 'cart-item';
-                cartItemElement.innerHTML = `
-                    <div class="cart-item-details">
-                        <h4>${item.service}</h4>
-                        <p>Package: ${item.package.charAt(0).toUpperCase() + item.package.slice(1)}</p>
-                        <p>Customer: ${item.customerName}</p>
-                    </div>
-                    <div class="cart-item-price">$${item.totalPrice}</div>
-                    <button class="remove-item" data-id="${item.id}">&times;</button>
-                `;
-                cartItemsContainer.appendChild(cartItemElement);
-            });
-            
-            cartTotalPrice.textContent = total;
-            
-            // Add event listeners to remove buttons
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', function() {
-                    const itemId = parseInt(this.getAttribute('data-id'));
-                    removeFromCart(itemId);
-                });
-            });
-        }
-        
-        // Remove from Cart
-        function removeFromCart(itemId) {
-            cart = cart.filter(item => item.id !== itemId);
-            saveCartToLocalStorage();
-            updateCartCount();
-            updateCartDisplay();
-        }
-        
-        // Update Cart Count
-        function updateCartCount() {
-            cartCount.textContent = cart.length;
-        }
-        
-        // Save Cart to Local Storage
-        function saveCartToLocalStorage() {
-            localStorage.setItem('serviceCart', JSON.stringify(cart));
-        }
-        
-        // Continue Shopping from Cart
-        continueShoppingCartBtn.addEventListener('click', function() {
-            cartModal.style.display = 'none';
-        });
-        
-        // Proceed to Checkout
-        proceedCheckoutBtn.addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Your cart is empty');
-                return;
-            }
-            
-            // Generate order
-            const orderId = 'ORD-' + Date.now();
-            const order = {
-                id: orderId,
-                items: [...cart],
-                total: cart.reduce((sum, item) => sum + item.totalPrice, 0),
-                timestamp: new Date().toISOString(),
-                status: 'pending'
-            };
-            
-            orders.push(order);
-            localStorage.setItem('serviceOrders', JSON.stringify(orders));
-            
-            // Send to WhatsApp
-            sendOrderToWhatsApp(order);
-            
-            // Show confirmation
-            showOrderConfirmation(order);
-            
-            // Clear cart
-            cart = [];
-            saveCartToLocalStorage();
-            updateCartCount();
-            
-            // Close cart modal
-            cartModal.style.display = 'none';
-        });
-        
-        // Send Order to WhatsApp
-        function sendOrderToWhatsApp(order) {
-            let message = `*NEW SERVICE ORDER - ${order.id}*\n\n`;
-            message += `*Order Summary:*\n`;
-            message += `Total: $${order.total}\n`;
-            message += `Items: ${order.items.length}\n\n`;
-            message += `*Order Details:*\n`;
-            
-            order.items.forEach((item, index) => {
-                message += `\n*Item ${index + 1}:*\n`;
-                message += `Service: ${item.service}\n`;
-                message += `Package: ${item.package}\n`;
-                message += `Price: $${item.totalPrice}\n`;
-                message += `Customer: ${item.customerName}\n`;
-                message += `Email: ${item.customerEmail}\n`;
-                message += `Phone: ${item.customerPhone}\n`;
-                if (item.projectDetails) {
-                    message += `Details: ${item.projectDetails}\n`;
-                }
-            });
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappUrl, '_blank');
-        }
-        
-        // Show Order Confirmation
-        function showOrderConfirmation(order) {
-            orderIdElement.textContent = order.id;
-            
-            let orderDetailsHTML = '';
-            order.items.forEach((item, index) => {
-                orderDetailsHTML += `
-                    <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-                        <strong>Item ${index + 1}:</strong><br>
-                        Service: ${item.service}<br>
-                        Package: ${item.package}<br>
-                        Price: $${item.totalPrice}<br>
-                        Customer: ${item.customerName}
-                    </div>
-                `;
-            });
-            
-            orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold;">Total: $${order.total}</div>`;
-            orderDetails.innerHTML = orderDetailsHTML;
-            
-            orderConfirmationModal.style.display = 'block';
-        }
-        
-        // Close Order Confirmation
-        closeOrderConfirmation.addEventListener('click', function() {
-            orderConfirmationModal.style.display = 'none';
-        });
-        
-        // Close Modals
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                servicePurchaseModal.style.display = 'none';
-                cartModal.style.display = 'none';
-                orderConfirmationModal.style.display = 'none';
-            });
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === servicePurchaseModal) {
-                servicePurchaseModal.style.display = 'none';
-            }
-            if (event.target === cartModal) {
-                cartModal.style.display = 'none';
-            }
-            if (event.target === orderConfirmationModal) {
-                orderConfirmationModal.style.display = 'none';
-            }
-        });
-    });
-</script>
+  <!-- Service Purchase JavaScript handled above (guarded) -->
 
   </body>
 </html>
