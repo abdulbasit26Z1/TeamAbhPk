@@ -1,0 +1,40 @@
+name: Create job via repository_dispatch
+
+on:
+  repository_dispatch:
+    types: [create_job]
+
+permissions:
+  contents: write
+
+jobs:
+  create_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure db/jobs directory exists
+        run: |
+          mkdir -p db/jobs
+
+      - name: Create job file from payload
+        env:
+          JOB_JSON: ${{ toJson(github.event.client_payload.job) }}
+          JOB_ID: ${{ github.event.client_payload.job.id || "" }}
+        run: |
+          if [ -z "$JOB_ID" ]; then
+            JOB_ID=$(date +%s)
+            echo "No job id provided in payload — using timestamp $JOB_ID"
+          else
+            JOB_ID=$JOB_ID
+          fi
+          echo "$JOB_JSON" | jq . > db/jobs/job-${JOB_ID}.json
+
+      - name: Commit and push job file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add db/jobs/job-*.json
+          git commit -m "Add job ${JOB_ID} via repository_dispatch" || echo "No changes to commit"
+          git push origin HEAD:main
