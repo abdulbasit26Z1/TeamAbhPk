@@ -204,7 +204,7 @@
     "delivery": "10 Days",
     "rating": 4.8,
     "reviews": 178,
-    "image": "assets/img/portfolio/app-3.jpg",
+    "image": "assets/img/portfolio/app-1.jpg",
     "seller": { "name": "MarketMakers", "avatar": "assets/img/team/team-4.jpg" },
     "features": ["PPC, social ads & strategy", "Content marketing", "Analytics & conversion tracking"]
   },
@@ -217,7 +217,7 @@
     "delivery": "4 Days",
     "rating": 4.7,
     "reviews": 121,
-    "image": "assets/img/portfolio/product-2.jpg",
+    "image": "assets/img/portfolio/product-1.jpg",
     "seller": { "name": "EditHouse", "avatar": "assets/img/team/team-1.jpg" },
     "features": ["Promo videos & ads", "Transitions, color grading", "Formats for social and web"]
   }
