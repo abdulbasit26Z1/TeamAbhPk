@@ -219,6 +219,6 @@
     "reviews": 121,
     "image": "assets/img/portfolio/product-1.jpg",
     "seller": { "name": "EditHouse", "avatar": "assets/img/team/team-1.jpg" },
-    "features": ["Promo videos & ads", "Transitions, color grading", "Formats for social and web "]
+    "features": ["Promo videos & ads", "Transitions, color grading", "Formats for social and web"]
   }
 ]
