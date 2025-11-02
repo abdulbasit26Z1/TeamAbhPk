@@ -1846,3 +1846,99 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+/* -----------------------------------------------------------------
+   Marketplace / Service Cards & Modals - visual enhancements
+   ----------------------------------------------------------------- */
+.services-cards { gap: 22px; }
+
+.service-card {
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms;
+  min-height: 320px;
+}
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(16,24,40,0.12); }
+
+.service-card-header { padding: 18px 18px 8px 18px; display:flex; gap:12px; align-items:center; }
+.service-card-icon { width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg,#eef6ff 0%, #f7fbff 100%); color:#106eea; font-size:22px; flex-shrink:0; }
+.service-card-title { margin:0; font-size:16px; font-weight:700; color:var(--heading-color); }
+.service-card-sub { font-size:13px; color: #637085; margin-top:4px; }
+
+.service-card-body { padding: 14px 18px; flex:1; display:flex; flex-direction:column; }
+.service-bullets { margin: 0 0 6px 0; padding:0; display:flex; gap:8px; flex-wrap:wrap; }
+.service-bullets li { list-style:none; background: color-mix(in srgb, var(--accent-color), transparent 95%); padding:6px 10px; border-radius:6px; font-size:13px; color: color-mix(in srgb, var(--default-color), transparent 50%); }
+
+.service-meta { display:flex; justify-content:space-between; align-items:center; margin-top:auto; gap:12px; }
+.meta-item { display:flex; gap:8px; align-items:center; padding:6px 8px; border-radius:8px; background:#f6f8fb; font-size:13px; }
+.service-rating { color:#f6a623; font-weight:700; }
+
+.service-card-footer { padding:12px 16px; border-top:1px solid #f2f4f7; display:flex; justify-content:space-between; align-items:center; gap:12px; background:#fff; }
+.service-price .from { font-size:12px; color:#7a899a; }
+.service-price .amount { font-size:20px; font-weight:700; color:var(--heading-color); }
+
+.service-footer-actions { display:flex; gap:10px; align-items:center; }
+.service-view { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:transparent; border:1px solid rgba(16,110,234,0.12); color:#106eea; font-weight:600; font-size:14px; text-decoration:none; transition:all 0.18s; }
+.service-view:hover { background: linear-gradient(90deg,#f0f7ff,#eef6ff); transform:translateY(-2px); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
+
+/* Detail modal content */
+.service-detail-card img { width:100%; height:auto; border-radius:8px; box-shadow:0 8px 30px rgba(16,24,40,0.06); }
+.service-detail-card h2 { margin-top:0; margin-bottom:8px; font-size:22px; }
+.service-detail-card p { color: color-mix(in srgb, var(--default-color), transparent 30%); }
+.service-detail-buy { padding:10px 18px; border-radius:8px; font-weight:700; }
+
+/* Improve purchase modal appearance (already present) */
+.service-purchase-content { max-width:760px; padding:30px; border-radius:12px; }
+.service-purchase-modal { backdrop-filter: blur(3px); }
+
+/* Small responsive tweaks */
+@media (max-width: 767px) {
+  .service-card { min-height: auto; }
+  .service-card-header { padding: 12px; }
+  .service-card-body { padding: 12px; }
+}
+
+/* Service card media (big image) */
+.service-card-media { width:100%; aspect-ratio: 16 / 9; max-height:160px; overflow:hidden; display:block; border-top-left-radius:14px; border-top-right-radius:14px; }
+.service-card-media img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.45s ease; }
+.service-card-media img:hover { transform: scale(1.03); }
+
+/* Redesigned service detail modal */
+#service-detail-modal .service-purchase-content { max-width:920px; width:95%; padding:0; overflow:hidden; border-radius:12px; }
+#service-detail-modal .service-detail-hero { position:relative; height:300px; overflow:hidden; }
+#service-detail-modal .service-detail-hero img { width:100%; height:100%; object-fit:cover; display:block; }
+#service-detail-modal .service-detail-hero:after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,18,36,0.25) 0%, rgba(8,18,36,0.6) 70%); }
+#service-detail-modal .service-detail-body { padding:22px 28px; display:flex; gap:24px; align-items:flex-start; }
+#service-detail-modal .service-detail-info { flex:1; }
+#service-detail-modal .service-detail-side { width:320px; background:linear-gradient(180deg,#fff,#fbfdff); padding:20px; border-left:1px solid #f2f4f7; border-top-right-radius:12px; border-bottom-right-radius:12px; }
+#service-detail-modal .service-detail-title { position:absolute; left:28px; bottom:22px; color:#fff; font-size:26px; font-weight:700; z-index:5; text-shadow:0 6px 18px rgba(0,0,0,0.35); }
+#service-detail-modal .service-seller { display:flex; gap:12px; align-items:center; margin-bottom:10px; }
+#service-detail-modal .service-seller img { width:48px; height:48px; border-radius:50%; object-fit:cover; border:3px solid rgba(255,255,255,0.12); }
+#service-detail-modal .service-tags { margin:8px 0 16px; display:flex; gap:8px; flex-wrap:wrap; }
+#service-detail-modal .service-tag { background:#eef6ff; color:#0b2540; padding:6px 10px; border-radius:8px; font-weight:600; font-size:13px; }
+#service-detail-modal .close-modal { position:absolute; right:18px; top:18px; color:#fff; font-size:30px; z-index:6; }
+
+@media (max-width: 900px) {
+  #service-detail-modal .service-detail-body { flex-direction:column; }
+  #service-detail-modal .service-detail-side { width:100%; border-left:none; border-top:1px solid #f2f4f7; border-radius:0 0 12px 12px; }
+}
+
+/* Smaller card images on small screens */
+@media (max-width: 991px) {
+  .service-card-media { aspect-ratio: 16 / 9; max-height:150px; }
+}
+
+@media (max-width: 767px) {
+  .service-card-media { aspect-ratio: 4 / 3; max-height:130px; }
+  .service-card-media img { object-position: center top; }
+  #service-detail-modal .service-detail-hero { height:220px; }
+}
+
+@media (max-width: 420px) {
+  .service-card-media { aspect-ratio: 4 / 3; max-height:110px; }
+  #service-detail-modal .service-detail-hero { height:180px; }
+}

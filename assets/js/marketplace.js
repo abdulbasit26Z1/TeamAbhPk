@@ -38,7 +38,7 @@ function renderGigCard(job){
   const price = job.price || (Math.floor(Math.random()*900)+50);
 
   div.innerHTML = `
-  <div class="gig-media"><a href="service.html?id=${escapeHtml(job.id)}"><img src="${escapeHtml(img)}" alt="${escapeHtml(job.title)}"></a></div>
+  <div class="gig-media"><a href="service.html?id=${escapeHtml(job.id)}"><img src="${escapeHtml(img)}" width="300" height="200" alt="${escapeHtml(job.title)}"></a></div>
     <div class="gig-body">
       <h4 class="gig-title"><a href="service.html?id=${escapeHtml(job.id)}">${escapeHtml(job.title)}</a></h4>
   <div class="gig-seller"><div class="seller-avatar"><img src="${escapeHtml(normalizePath(seller.avatar||'/assets/img/team/team-1.jpg'))}" alt=""></div><div>${escapeHtml(seller.name||'Seller')}</div></div>
@@ -174,10 +174,11 @@ if(document.getElementById('main-services')){
       const price = job.price || 'Contact';
       const delivery = job.delivery || 'N/A';
       card.innerHTML = `
+  <div class="service-card-media"><img loading="lazy" src="${escapeHtml(normalizePath(job.image||'/assets/img/portfolio/portfolio-1.jpg'))}" alt="${escapeHtml(job.title)}"></div>
         <div class="service-card-header">
           <div class="service-card-icon"><i class="bi bi-briefcase"></i></div>
           <div>
-            <h4 class="service-card-title"><a href="marketplace/service.html?id=${escapeHtml(job.id)}">${escapeHtml(job.title)}</a></h4>
+            <h4 class="service-card-title"><a href="#">${escapeHtml(job.title)}</a></h4>
             <div class="service-card-sub">${escapeHtml((job.description||'').slice(0,120))}</div>
           </div>
         </div>
@@ -205,12 +206,188 @@ if(document.getElementById('main-services')){
             <div class="amount">$${escapeHtml(price.toString())}</div>
           </div>
           <div class="service-footer-actions">
-            <a class="service-buy-btn" href="marketplace/service.html?id=${escapeHtml(job.id)}">View Details</a>
+            <a class="service-view" href="#" data-id="${escapeHtml(job.id)}" data-price="${escapeHtml(price.toString())}">View Details</a>
           </div>
         </div>
       `;
       container.appendChild(card);
     });
+    // cache jobs for modal lookup
+    window.__jobsCache = jobs;
+
+    // helper to build a service-card element from a job
+    function makeServiceCard(job){
+      const card = document.createElement('div');
+      card.className = 'service-card';
+      const price = job.price || 'Contact';
+      const delivery = job.delivery || 'N/A';
+      card.innerHTML = `
+        <div class="service-card-media"><img src="${escapeHtml(normalizePath(job.image||'/assets/img/portfolio/portfolio-1.jpg'))}" alt="${escapeHtml(job.title)}"></div>
+        <div class="service-card-header">
+          <div class="service-card-icon"><i class="bi bi-briefcase"></i></div>
+          <div>
+            <h4 class="service-card-title"><a href="#">${escapeHtml(job.title)}</a></h4>
+            <div class="service-card-sub">${escapeHtml((job.description||'').slice(0,120))}</div>
+          </div>
+        </div>
+        <div class="service-card-body">
+          <ul class="service-bullets">
+            ${(job.features||[]).slice(0,3).map(f=>`<li>${escapeHtml(f)}</li>`).join('')}
+          </ul>
+          <div class="service-meta">
+            <div class="meta-left">
+              <div class="meta-item service-rating">
+                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
+                <span>${escapeHtml((job.rating||4.8).toString())}</span>
+                <span style="color:#9aa7bc;font-weight:600;">(${escapeHtml((job.reviews||0).toString())})</span>
+              </div>
+              <div class="meta-item"><i class="bi bi-clock"></i><span>${escapeHtml(delivery)}</span></div>
+            </div>
+            <div class="service-tags">
+              <div class="service-tag">${escapeHtml(job.category||'General')}</div>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <div class="service-price">
+            <div class="from">Starting at</div>
+            <div class="amount">$${escapeHtml(price.toString())}</div>
+          </div>
+          <div class="service-footer-actions">
+            <a class="service-view" href="#" data-id="${escapeHtml(job.id)}" data-price="${escapeHtml(price.toString())}">View Details</a>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    // main services: render + filtering for homepage controls
+    const mainSearch = document.getElementById('main-search-input');
+    const mainCategory = document.getElementById('main-category-filter');
+    const mainSort = document.getElementById('main-sort-select');
+
+    function renderMain(list){
+      container.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      // limit initial cards to 12 for performance, but allow full rendering when filtered
+      const toRender = list.slice(0, 12);
+      toRender.forEach(j=>{ const wrapper = document.createElement('div'); wrapper.className=''; wrapper.appendChild(makeServiceCard(j)); frag.appendChild(wrapper); });
+      container.appendChild(frag);
+    }
+
+    function applyMainFilters(){
+      const q = (mainSearch && mainSearch.value || '').toLowerCase().trim();
+      const cat = (mainCategory && mainCategory.value || 'all');
+      let filtered = jobs.filter(j=>{
+        const inTitle = j.title && j.title.toLowerCase().includes(q);
+        const inDesc = j.description && j.description.toLowerCase().includes(q);
+        const catOk = cat==='all' || j.category===cat;
+        return (inTitle || inDesc) && catOk;
+      });
+      const sort = (mainSort && mainSort.value) || 'default';
+      if(sort==='price-asc') filtered.sort((a,b)=>(a.price||0)-(b.price||0));
+      if(sort==='price-desc') filtered.sort((a,b)=>(b.price||0)-(a.price||0));
+      if(sort==='rating') filtered.sort((a,b)=>(b.rating||0)-(a.rating||0));
+      renderMain(filtered);
+    }
+
+    // populate categories in main controls if present
+    if(mainCategory){
+      const existing = new Set(Array.from(mainCategory.querySelectorAll('option')).map(o=>o.value));
+      const cats = Array.from(new Set(jobs.map(j=>j.category))).filter(Boolean);
+      cats.forEach(c=>{ if(!existing.has(c)){ const opt = document.createElement('option'); opt.value=c; opt.textContent=c; mainCategory.appendChild(opt); } });
+    }
+
+    if(mainSearch) mainSearch.addEventListener('input', ()=>applyMainFilters());
+    if(mainCategory) mainCategory.addEventListener('change', ()=>applyMainFilters());
+    if(mainSort) mainSort.addEventListener('change', ()=>applyMainFilters());
+
+    // render initial set
+    renderMain(jobs);
+
+    // Delegate click handler for View Details links (so dynamically created items are covered)
+    document.addEventListener('click', function(evt){
+      const view = evt.target.closest && evt.target.closest('.service-view');
+      if(!view) return;
+      evt.preventDefault();
+      const id = view.getAttribute('data-id');
+      const job = (window.__jobsCache||[]).find(j=> (j.id && j.id.toString()) === (id && id.toString()));
+      if(job){ showServiceModal(job); }
+    });
+
+    // helper to show modal with service details
+    function showServiceModal(job){
+      const modal = document.getElementById('service-detail-modal');
+      const content = document.getElementById('service-detail-content');
+      if(!modal || !content) return;
+      const price = job.price || 'Contact';
+      content.innerHTML = `
+        <div class="service-detail-hero">
+          <img loading="lazy" src="${escapeHtml(normalizePath(job.image||'/assets/img/portfolio/portfolio-1.jpg'))}" alt="${escapeHtml(job.title)}">
+          <div class="service-detail-title">${escapeHtml(job.title)}</div>
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="service-detail-body">
+          <div class="service-detail-info">
+            <div class="service-seller">
+              <img src="${escapeHtml(normalizePath((job.seller&&job.seller.avatar)||'/assets/img/team/team-1.jpg'))}" alt="${escapeHtml((job.seller&&job.seller.name)||'Seller')}">
+              <div>
+                <div style="font-weight:700">${escapeHtml((job.seller&&job.seller.name)||'Seller')}</div>
+                <div style="font-size:13px;color:#8b98a8">${escapeHtml(job.category||'General')} • ${escapeHtml(job.delivery||'N/A')}</div>
+              </div>
+            </div>
+            <div class="service-tags">
+              ${ (job.tags||[]).slice(0,5).map(t=>`<div class="service-tag">${escapeHtml(t)}</div>`).join('') }
+            </div>
+            <div style="margin-top:8px;color:#c7d1df;font-weight:700;font-size:14px">Rating: ${escapeHtml((job.rating||4.8).toString())} (${escapeHtml((job.reviews||0).toString())} reviews)</div>
+            <div style="margin-top:14px"><h4>Description</h4><p>${escapeHtml(job.description||'No description provided.')}</p></div>
+            ${job.features ? `<div style="margin-top:12px"><h6>What's included</h6><ul>${job.features.map(f=>`<li>${escapeHtml(f)}</li>`).join('')}</ul></div>` : ''}
+          </div>
+          <div class="service-detail-side">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div>
+                <div style="font-size:12px;color:#7a899a">Starting at</div>
+                <div style="font-size:28px;font-weight:800;color:#0b2540">$${escapeHtml((price||'Contact').toString())}</div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <button class="btn btn-success service-detail-buy" data-id="${escapeHtml(job.id)}" data-price="${escapeHtml((price||'').toString())}" style="width:100%;padding:12px;border-radius:10px;font-weight:800">Buy Now</button>
+            </div>
+            <div style="font-size:13px;color:#6d7b8c">Delivery: ${escapeHtml(job.delivery||'N/A')}</div>
+          </div>
+        </div>
+      `;
+      // attach buy handler inside modal
+      const buyBtn = content.querySelector('.service-detail-buy');
+      if(buyBtn){ buyBtn.addEventListener('click', function(){ openPurchaseModalFromJob(job); }); }
+      // show modal
+      modal.style.display = 'block';
+      // wire close (there is a close-modal inside hero now)
+      const close = content.querySelector('.close-modal') || modal.querySelector('.close-modal');
+      if(close){ close.addEventListener('click',()=>{ modal.style.display='none'; }); }
+      // click outside to close
+      window.addEventListener('click', function ev(e){ if(e.target===modal){ modal.style.display='none'; window.removeEventListener('click', ev); } });
+    }
+
+    // open purchase modal and prefill fields from job object
+    function openPurchaseModalFromJob(job){
+      // fill purchase modal fields expected by service purchase script
+      const serviceNameInput = document.getElementById('service-name');
+      const basicPrice = document.getElementById('basic-price');
+      const standardPrice = document.getElementById('standard-price');
+      const premiumPrice = document.getElementById('premium-price');
+      const totalPriceDisplay = document.getElementById('total-price');
+      const purchaseModal = document.getElementById('service-purchase-modal');
+      if(serviceNameInput) serviceNameInput.value = job.title || '';
+      const base = Number(job.price) || 0;
+      if(basicPrice) basicPrice.textContent = base;
+      if(standardPrice) standardPrice.textContent = Math.round(base * 1.5);
+      if(premiumPrice) premiumPrice.textContent = base * 2;
+      if(totalPriceDisplay) totalPriceDisplay.textContent = base;
+      if(purchaseModal) purchaseModal.style.display = 'block';
+      // close details modal if open
+      const detailsModal = document.getElementById('service-detail-modal'); if(detailsModal) detailsModal.style.display='none';
+    }
   })();
 }
 
