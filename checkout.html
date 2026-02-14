@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Az Meer® Services</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .checkout-title {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .checkout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .checkout-section h2 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-package {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .service-package:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-package h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 1rem 0;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(88, 70, 249, 0.3);
+        }
+
+        .order-summary {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .order-summary h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .payment-method {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-option {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 2rem;
+        }
+
+        .checkout-btn:hover {
+            background: #4a3acc;
+        }
+
+        .checkout-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+                margin-top: 2rem;
+            }
+
+            .payment-method {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Az Meer®</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout -->
+    <div class="container">
+        <div class="checkout-container">
+            <h1 class="checkout-title">Service Checkout</h1>
+
+            <div class="checkout-wrapper">
+                <!-- Service Selection -->
+                <div class="checkout-section">
+                    <h2>Select Service</h2>
+
+                    <div class="service-package" onclick="selectService('web', 2500)">
+                        <h3><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>Web Development</h3>
+                        <p>Custom web applications built with modern technologies.</p>
+                        <div class="service-price">$2,500</div>
+                        <ul class="service-features">
+                            <li>Responsive design</li>
+                            <li>Modern technologies</li>
+                            <li>Performance optimized</li>
+                            <li>SEO friendly</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Select This</button>
+                    </div>
+
+                    <div class="service-package" onclick="selectService('mobile', 3500)">
+                        <h3><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>Mobile App Development</h3>
+                        <p>Native and cross-platform mobile applications.</p>
+                        <div class="service-price">$3,500</div>
+                        <ul class="service-features">
+                            <li>iOS & Android</li>
+                            <li>Cross-platform support</li>
+                            <li>Real-time features</li>
+                            <li>App store ready</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Select This</button>
+                    </div>
+
+                    <div class="service-package" onclick="selectService('design', 1500)">
+                        <h3><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>Graphic Design</h3>
+                        <p>Creative design solutions for your brand.</p>
+                        <div class="service-price">$1,500</div>
+                        <ul class="service-features">
+                            <li>Logo design</li>
+                            <li>Brand identity</li>
+                            <li>UI/UX design</li>
+                            <li>Marketing materials</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Select This</button>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="checkout-section">
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-item">
+                            <span>Service:</span>
+                            <span id="summaryService">Web Development</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Price:</span>
+                            <span>$<span id="summaryPrice">2500</span></span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span>$<span id="summaryTotal">2500</span></span>
+                        </div>
+                    </div>
+
+                    <form id="checkoutForm" data-skip-auto>
+                        <h2 style="margin-top: 2rem;">Contact Information</h2>
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="fullName" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="phone" required placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" id="company" placeholder="Enter your company name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Project Description</label>
+                            <textarea required id="projectDescription" placeholder="Describe your project needs..." rows="4"></textarea>
+                        </div>
+
+                        <h2>Account Access</h2>
+                        <p style="color: var(--text-light); margin-bottom: 1rem;">Create a username and password to track orders on the profile page.</p>
+                        <div id="accountExisting" style="display: none; background: var(--light-bg); padding: 12px; border-radius: 8px; margin-bottom: 1rem;">
+                            Logged in as <strong id="accountUserName">-</strong>. Your order will be saved to this account.
+                        </div>
+                        <div id="accountFields">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="accountUsername" placeholder="Choose a username">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="accountPassword" placeholder="Create a password">
+                            </div>
+                        </div>
+                        <p id="accountStatus" style="color: #d9534f; margin-top: 0.25rem;"></p>
+                        <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-light);">Already have an account? <a href="profile.html">Log in on your profile</a>.</p>
+
+                        <h2>Payment Method</h2>
+                        <div class="payment-method">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="credit-card" checked>
+                                <i class="fas fa-credit-card"></i><br>
+                                Credit Card
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="bank-transfer">
+                                <i class="fas fa-university"></i><br>
+                                Bank Transfer
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="paypal">
+                                <i class="fab fa-paypal"></i><br>
+                                PayPal
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="quote">
+                                <i class="fas fa-file"></i><br>
+                                Get Quote
+                            </label>
+                        </div>
+
+                        <button type="submit" class="checkout-btn">
+                            <i class="fas fa-lock"></i> Complete Order
+                        </button>
+                    </form>
+
+                    <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
+                        <i class="fas fa-shield-alt"></i> Your information is secure and encrypted.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Az Meer®</h3>
+                    <p>Professional software development and digital solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Az Meer®. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        const servicePrices = {
+            'web': 2500,
+            'mobile': 3500,
+            'design': 1500,
+            'marketing': 2000,
+            'video': 1800,
+            'software': 4000
+        };
+
+        let selectedService = {
+            id: 'web',
+            name: 'Web Development',
+            price: 2500
+        };
+
+        function selectService(service, price) {
+            const serviceName = service.charAt(0).toUpperCase() + service.slice(1).replace('-', ' ').replace('software', 'Custom Software');
+            const displayName = service === 'software' ? 'Custom Software' : serviceName + ' Development';
+
+            document.getElementById('summaryService').textContent = displayName;
+            document.getElementById('summaryPrice').textContent = price;
+            document.getElementById('summaryTotal').textContent = price;
+
+            selectedService = {
+                id: service,
+                name: displayName,
+                price: price
+            };
+
+            // Scroll to form
+            document.querySelector('form').scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('form input[type="text"]').focus();
+        }
+
+        // Auto-select service from URL parameter
+        function loadServiceFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const service = params.get('service');
+
+            if (service && servicePrices[service]) {
+                selectService(service, servicePrices[service]);
+            }
+        }
+
+        // Load service when page loads
+        window.addEventListener('load', loadServiceFromURL);
+
+        const checkoutForm = document.getElementById('checkoutForm');
+        const accountFields = document.getElementById('accountFields');
+        const accountExisting = document.getElementById('accountExisting');
+        const accountUserName = document.getElementById('accountUserName');
+        const accountStatus = document.getElementById('accountStatus');
+        const accountUsername = document.getElementById('accountUsername');
+        const accountPassword = document.getElementById('accountPassword');
+
+        function updateAccountUI() {
+            const session = window.AbhAuth.getSession();
+            if (session && session.username) {
+                accountFields.style.display = 'none';
+                accountExisting.style.display = 'block';
+                accountUserName.textContent = session.username;
+            } else {
+                accountFields.style.display = 'block';
+                accountExisting.style.display = 'none';
+            }
+        }
+
+        updateAccountUI();
+
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            accountStatus.textContent = '';
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const projectDescription = document.getElementById('projectDescription').value.trim();
+            const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'credit-card';
+
+            let session = window.AbhAuth.getSession();
+            if (!session || !session.username) {
+                const username = accountUsername.value.trim();
+                const password = accountPassword.value.trim();
+
+                if (!username || !password) {
+                    accountStatus.textContent = 'Please create a username and password to continue.';
+                    return;
+                }
+
+                const registerResult = window.AbhAuth.register(username, password, {
+                    name: fullName,
+                    email: email,
+                    phone: phone,
+                    company: company
+                });
+
+                if (!registerResult.ok) {
+                    if (registerResult.reason === 'exists') {
+                        const loginResult = window.AbhAuth.login(username, password);
+                        if (!loginResult.ok) {
+                            accountStatus.textContent = 'Username already exists. Please log in on your profile page.';
+                            return;
+                        }
+                    } else {
+                        accountStatus.textContent = registerResult.message || 'Unable to create account.';
+                        return;
+                    }
+                }
+                session = window.AbhAuth.getSession();
+            }
+
+            const orderId = `ORD-${Date.now()}`;
+            const order = {
+                id: orderId,
+                username: session.username,
+                serviceId: selectedService.id,
+                serviceName: selectedService.name,
+                price: selectedService.price,
+                status: 'Pending',
+                createdAt: new Date().toISOString(),
+                contact: {
+                    name: fullName,
+                    email: email,
+                    phone: phone,
+                    company: company
+                },
+                projectDescription: projectDescription,
+                paymentMethod: paymentMethod,
+                messages: [
+                    {
+                        id: `msg-${Date.now()}`,
+                        author: 'admin',
+                        text: 'Thanks for your order! An admin will review your request and reply here.',
+                        at: new Date().toISOString()
+                    }
+                ]
+            };
+
+            window.AbhAuth.createOrder(order);
+            window.location.href = `profile.html?order=${encodeURIComponent(orderId)}`;
+        });
+    </script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

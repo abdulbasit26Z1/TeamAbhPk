@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Az Meer® Services</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-shell {
+            padding: 70px 0 40px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-card h2 {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .order-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 320px;
+            overflow: auto;
+        }
+
+        .order-item {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .order-item.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 18px rgba(88, 70, 249, 0.12);
+        }
+
+        .order-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .chat-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 260px;
+            overflow: auto;
+            padding-right: 6px;
+        }
+
+        .chat-message {
+            padding: 10px 12px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .chat-message.admin {
+            align-self: flex-start;
+            background: #f3f4f6;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+            background: #e6f0ff;
+        }
+
+        .chat-meta {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .auth-shell {
+            max-width: 520px;
+            margin: 40px auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .auth-shell form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .auth-shell input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .auth-message {
+            color: #d9534f;
+            min-height: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Az Meer®</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="profile.html" class="nav-link active">Profile</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="profile-shell">
+        <div class="container">
+            <div id="authGate" class="auth-shell" style="display: none;">
+                <div class="profile-card">
+                    <h2>Login</h2>
+                    <form id="loginForm" data-skip-auto>
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <div class="auth-message" id="loginMessage"></div>
+                    </form>
+                </div>
+                <div class="profile-card">
+                    <h2>Create Account</h2>
+                    <form id="registerForm" data-skip-auto>
+                        <input type="text" id="registerName" placeholder="Full name">
+                        <input type="email" id="registerEmail" placeholder="Email">
+                        <input type="text" id="registerUsername" placeholder="Username" required>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+                        <button class="btn btn-secondary" type="submit">Create Account</button>
+                        <div class="auth-message" id="registerMessage"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="dashboard" style="display: none;">
+                <div class="profile-grid">
+                    <div class="profile-card">
+                        <h2>Account</h2>
+                        <div class="profile-badge"><i class="fas fa-user"></i> <span id="profileUsername">-</span></div>
+                        <p style="margin-top: 12px; color: var(--text-light);" id="profileContact">No profile info yet.</p>
+                        <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a class="btn btn-primary" href="checkout.html">New Order</a>
+                            <button class="btn btn-secondary" type="button" id="logoutButton">Logout</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2>Your Orders</h2>
+                        <ul class="order-list" id="orderList"></ul>
+                        <p id="orderEmpty" style="color: var(--text-light); display: none;">No orders yet. Start from the checkout page.</p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2>Order Details</h2>
+                        <div id="orderDetails">
+                            <p style="color: var(--text-light);">Select an order to see details.</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2>Order Chat</h2>
+                        <div class="chat-thread" id="chatThread"></div>
+                        <form id="chatForm" data-skip-auto style="margin-top: 12px; display: flex; gap: 10px;">
+                            <input type="text" id="chatInput" placeholder="Write a message..." style="flex: 1;" required>
+                            <button class="btn btn-primary" type="submit">Send</button>
+                        </form>
+                        <p style="margin-top: 8px; font-size: 0.85rem; color: var(--text-light);">Messages are stored in your browser for GitHub Pages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/profile.js"></script>
+</body>
+
+</html>

@@ -2,290 +2,363 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portfolio Details - Techie Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Techie
-  * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Az Meer®</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-details {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .project-hero {
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+        .project-details h1 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+        .info-box h3 {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .info-box p {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .project-details p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .project-details h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            color: #4a3acc;
+        }
+    </style>
 </head>
 
-<body class="portfolio-details-page">
-
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Techie</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Az Meer®</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#portfolio" class="nav-link active">Portfolio</a></li>
+                <li><a href="index.html#team" class="nav-link">Team</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="btn-getstarted" href="#about">Get Started</a>
-
-    </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title accent-background">
-      <div class="container position-relative">
-        <h1>Portfolio Details</h1>
-        <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Portfolio Details</li>
-          </ol>
-        </nav>
-      </div>
-    </div><!-- End Page Title -->
-
-    <!-- Portfolio Details Section -->
-    <section id="portfolio-details" class="portfolio-details section">
-
-      <div class="container" data-aos="fade-up">
-
-        <div class="portfolio-details-slider swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "navigation": {
-                "nextEl": ".swiper-button-next",
-                "prevEl": ".swiper-button-prev"
-              },
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
-            }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-
-            <div class="swiper-slide">
-              <img src="assets/img/portfolio/app-1.jpg" alt="">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-
-            <div class="swiper-slide">
-              <img src="assets/img/portfolio/product-1.jpg" alt="">
-            </div>
-
-            <div class="swiper-slide">
-              <img src="assets/img/portfolio/branding-1.jpg" alt="">
-            </div>
-
-            <div class="swiper-slide">
-              <img src="assets/img/portfolio/books-1.jpg" alt="">
-            </div>
-
-          </div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-pagination"></div>
         </div>
+    </nav>
 
-        <div class="row justify-content-between gy-4 mt-4">
+    <!-- Project Details -->
+    <div class="container">
+        <div class="project-details">
+            <a href="index.html#portfolio" class="back-link">← Back to Portfolio</a>
 
-          <div class="col-lg-8" data-aos="fade-up">
-            <div class="portfolio-description">
-              <h2>This is an example of portfolio details</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-              <p>
-                Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
-              </p>
+            <h1 id="projectTitle">E-Commerce Platform</h1>
 
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <div>
-                  <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
+            <div class="project-hero">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+
+            <div class="project-info">
+                <div class="info-box">
+                    <h3>Client</h3>
+                    <p id="projectClient">Tech Retail Inc.</p>
                 </div>
-              </div>
-
-              <p>
-                Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
-              </p>
-
-              <p>
-                Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
-              </p>
-
+                <div class="info-box">
+                    <h3>Duration</h3>
+                    <p id="projectDuration">6 months</p>
+                </div>
+                <div class="info-box">
+                    <h3>Technologies</h3>
+                    <p id="projectTech">React, Node.js, MongoDB</p>
+                </div>
+                <div class="info-box">
+                    <h3>Team Size</h3>
+                    <p id="projectTeam">8 members</p>
+                </div>
             </div>
-          </div>
 
-          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
-            <div class="portfolio-info">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong> Web design</li>
-                <li><strong>Client</strong> ASU Company</li>
-                <li><strong>Project date</strong> 01 March, 2020</li>
-                <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
-                <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
-              </ul>
+            <h2>Project Overview</h2>
+            <p id="projectOverview">
+                We developed a comprehensive e-commerce platform that transformed how the client manages online sales.
+            </p>
+
+            <h2>Key Features</h2>
+            <ul id="projectFeatures">
+                <li>Product catalog management</li>
+                <li>Shopping cart and checkout</li>
+                <li>Payment integration</li>
+                <li>User accounts and profiles</li>
+            </ul>
+
+            <h2>Results & Impact</h2>
+            <ul id="projectResults">
+                <li>40% increase in online sales</li>
+                <li>Improved customer satisfaction</li>
+                <li>Reduced cart abandonment by 25%</li>
+                <li>24/7 system uptime</li>
+            </ul>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: var(--light-bg); border-radius: 10px; text-align: center;">
+                <h3>Interested in a Similar Project?</h3>
+                <p style="margin: 1rem 0;">Let's create something amazing for your business.</p>
+                <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
             </div>
-          </div>
-
         </div>
-
-      </div>
-
-    </section><!-- /Portfolio Details Section -->
-
-  </main>
-
-  <footer id="footer" class="footer accent-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Techie</span>
-          </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>A108 Adam Street</p>
-          <p>New York, NY 535022</p>
-          <p>United States</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-          <p><strong>Email:</strong> <span>info@example.com</span></p>
-        </div>
-
-      </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Techie</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Az Meer®</h3>
+                    <p>Leading software development company providing innovative digital solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Az Meer®. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  </footer>
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script>
+        const projectData = {
+            1: {
+                title: 'E-Commerce Platform',
+                icon: 'fas fa-shopping-cart',
+                client: 'Tech Retail Inc.',
+                duration: '6 months',
+                tech: 'React, Node.js, MongoDB',
+                team: '8 members',
+                overview: 'We developed a comprehensive e-commerce platform that transformed how the client manages online sales. The platform handles thousands of transactions daily with secure payment processing.',
+                features: [
+                    'Advanced product catalog management',
+                    'Secure shopping cart and checkout process',
+                    'Payment gateway integration (Stripe, PayPal)',
+                    'User accounts and order management',
+                    'Real-time inventory tracking',
+                    'Analytics and reporting dashboards'
+                ],
+                results: [
+                    '40% increase in online sales',
+                    'Improved customer satisfaction score from 3.2 to 4.7',
+                    'Reduced cart abandonment rate by 25%',
+                    '99.9% system uptime SLA achieved',
+                    'Processing 10,000+ orders monthly'
+                ]
+            },
+            2: {
+                title: 'Social Media App',
+                icon: 'fas fa-share-alt',
+                client: 'Social Connect Ltd.',
+                duration: '8 months',
+                tech: 'React Native, Firebase, Node.js',
+                team: '10 members',
+                overview: 'Created a feature-rich social media application with real-time messaging, video calling, and content sharing capabilities.',
+                features: [
+                    'User authentication and profiles',
+                    'Real-time messaging system',
+                    'Video and voice calling',
+                    'Content feed with filtering',
+                    'Push notifications',
+                    'Media upload and processing'
+                ],
+                results: [
+                    '500K+ downloads in first month',
+                    '4.8-star rating on app stores',
+                    'Daily active users exceeding 100K',
+                    'Real-time features with <100ms latency'
+                ]
+            },
+            3: {
+                title: 'Business Management System',
+                icon: 'fas fa-briefcase',
+                client: 'Corporate Solutions Inc.',
+                duration: '5 months',
+                tech: 'Vue.js, Python, PostgreSQL',
+                team: '6 members',
+                overview: 'Enterprise-level software for streamlined business operations including project management, resource planning, and analytics.',
+                features: [
+                    'Project and task management',
+                    'Team collaboration tools',
+                    'Resource allocation',
+                    'Time tracking and reporting',
+                    'Budget management',
+                    'Performance analytics'
+                ],
+                results: [
+                    '35% improvement in team productivity',
+                    'Reduced project delivery time by 20%',
+                    'Cost savings of $200K annually',
+                    '95% team adoption within 2 months'
+                ]
+            },
+            4: {
+                title: 'Healthcare Portal',
+                icon: 'fas fa-hospital',
+                client: 'MedTech Healthcare',
+                duration: '12 months',
+                tech: 'Angular, Java, PostgreSQL',
+                team: '12 members',
+                overview: 'Secure healthcare management system with telemedicine capabilities, patient records, and appointment scheduling.',
+                features: [
+                    'Secure patient portal',
+                    'Electronic health records (EHR)',
+                    'Telemedicine video consultations',
+                    'Appointment scheduling',
+                    'Prescription management',
+                    'HIPAA compliance'
+                ],
+                results: [
+                    'Serving 50,000+ patients',
+                    '2,000+ successful telemedicine sessions monthly',
+                    'Patient satisfaction score of 4.9/5',
+                    'Zero security incidents'
+                ]
+            },
+            5: {
+                title: 'Educational Platform',
+                icon: 'fas fa-graduation-cap',
+                client: 'EduTech Solutions',
+                duration: '9 months',
+                tech: 'MERN Stack, Stripe API',
+                team: '9 members',
+                overview: 'Interactive online learning platform with video courses, quizzes, progress tracking, and certification.',
+                features: [
+                    'Video course hosting',
+                    'Interactive quizzes',
+                    'Progress tracking',
+                    'Certificate generation',
+                    'Student forums',
+                    'Payment integration'
+                ],
+                results: [
+                    '50,000+ enrolled students',
+                    '100+ published courses',
+                    'Average course completion rate of 85%',
+                    '$500K+ revenue generated'
+                ]
+            },
+            6: {
+                title: 'Analytics Dashboard',
+                icon: 'fas fa-chart-bar',
+                client: 'Data Insights Corp.',
+                duration: '4 months',
+                tech: 'React, D3.js, Node.js, MongoDB',
+                team: '5 members',
+                overview: 'Real-time data visualization and analytics dashboard processing millions of data points.',
+                features: [
+                    'Real-time data visualization',
+                    'Custom report generation',
+                    'Data filtering and search',
+                    'Export to multiple formats',
+                    'Performance optimization',
+                    'Mobile responsive design'
+                ],
+                results: [
+                    'Processing 10M+ data points daily',
+                    'Sub-second query response time',
+                    '99.99% uptime',
+                    'Used by 200+ analysts'
+                ]
+            }
+        };
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+        function loadProjectDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const projectId = params.get('id') || '1';
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+            const project = projectData[projectId];
+            if (project) {
+                document.getElementById('projectTitle').textContent = project.title;
+                document.querySelector('.project-hero i').className = project.icon;
+                document.getElementById('projectClient').textContent = project.client;
+                document.getElementById('projectDuration').textContent = project.duration;
+                document.getElementById('projectTech').textContent = project.tech;
+                document.getElementById('projectTeam').textContent = project.team;
+                document.getElementById('projectOverview').textContent = project.overview;
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+                const featuresList = document.getElementById('projectFeatures');
+                featuresList.innerHTML = '';
+                project.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresList.appendChild(li);
+                });
 
+                const resultsList = document.getElementById('projectResults');
+                resultsList.innerHTML = '';
+                project.results.forEach(result => {
+                    const li = document.createElement('li');
+                    li.textContent = result;
+                    resultsList.appendChild(li);
+                });
+            }
+        }
+
+        loadProjectDetails();
+    </script>
+
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

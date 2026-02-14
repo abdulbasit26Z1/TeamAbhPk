@@ -2,2369 +2,496 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Team Abh Pk</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- Service Purchase CSS -->
-  <style>
-    /* Service Purchase Modal Styles */
-    .service-purchase-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 9999;
-      overflow-y: auto;
-    }
-    .service-purchase-content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #aaa;
-    }
-    .close-modal:hover { color: #000; }
-    .service-purchase-form h3 { margin-bottom: 20px; color: #106eea; }
-    .service-purchase-form .form-group { margin-bottom: 20px; }
-    .service-purchase-form label { display: block; margin-bottom: 5px; font-weight: 500; }
-    .service-purchase-form input, .service-purchase-form select, .service-purchase-form textarea {
-      width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;
-    }
-    .service-purchase-form textarea { min-height: 100px; resize: vertical; }
-    .service-purchase-form .price-display { font-size: 24px; font-weight: bold; color: #106eea; margin: 15px 0; }
-    .service-purchase-form .btn-submit {
-      background-color: #106eea; color: white; border: none; padding: 12px 25px; border-radius: 5px;
-      cursor: pointer; font-size: 16px; font-weight: 500; transition: background-color 0.3s; width: 100%;
-    }
-    .service-purchase-form .btn-submit:hover { background-color: #0d5db8; }
-
-    /* Service Item Buy Button (kept to match existing look where used) */
-    .service-buy-btn {
-      display: inline-block; margin-top: 10px; padding: 8px 15px; background-color: #28a745; color: white;
-      border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background-color 0.3s;
-      border: none; cursor: pointer;
-    }
-    .service-buy-btn:hover { background-color: #218838; color: white; }
-
-    /* Service Package Options */
-    .service-packages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 15px 0;
-    }
-    .package-option {
-      flex: 1;
-      min-width: 120px;
-      padding: 15px;
-      border: 2px solid #ddd;
-      border-radius: 5px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .package-option:hover {
-      border-color: #106eea;
-    }
-    .package-option.selected {
-      border-color: #106eea;
-      background-color: #f0f8ff;
-    }
-    .package-name {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .package-price {
-      color: #106eea;
-      font-weight: 500;
-    }
-
-    /* Success Message */
-    .success-message {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      background-color: #f8fff8;
-      border: 1px solid #28a745;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-    .success-message i {
-      font-size: 48px;
-      color: #28a745;
-      margin-bottom: 15px;
-    }
-
-    /* Cart Indicator */
-    .cart-indicator {
-      position: relative;
-      display: inline-block;
-      margin-left: 15px;
-    }
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: #e74c3c;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Cart Modal */
-    .cart-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 9998;
-      overflow-y: auto;
-    }
-    .cart-content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 30px;
-      width: 90%;
-      max-width: 800px;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    .cart-items {
-      margin: 20px 0;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .cart-item-details h4 {
-      margin: 0;
-      font-size: 16px;
-    }
-    .cart-item-details p {
-      margin: 5px 0;
-      color: #666;
-    }
-    .cart-item-price {
-      font-weight: bold;
-      color: #106eea;
-    }
-    .remove-item {
-      background: none;
-      border: none;
-      color: #e74c3c;
-      cursor: pointer;
-      font-size: 18px;
-    }
-    .cart-total {
-      text-align: right;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-    .cart-actions {
-      display: flex;
-      justify-content: space-between;
-    }
-    .btn-continue-shopping,
-    .btn-checkout {
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 500;
-      border: none;
-    }
-    .btn-continue-shopping {
-      background-color: #6c757d;
-      color: white;
-    }
-    .btn-checkout {
-      background-color: #106eea;
-      color: white;
-    }
-
-    /* Order Confirmation */
-    .order-confirmation {
-      text-align: center;
-      padding: 30px;
-    }
-    .order-confirmation i {
-      font-size: 64px;
-      color: #28a745;
-      margin-bottom: 20px;
-    }
-    .order-details {
-      background: #f8f9fa;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    /* --------------------------------------------------------------------------------
-       NEW: Fiverr-like Service Cards UI
-       -------------------------------------------------------------------------------- */
-    .services-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .service-card {
-      background: #fff;
-      border: 1px solid #e6e9ee;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 6px 18px rgba(20, 30, 60, 0.04);
-      min-height: 320px;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 30px rgba(20, 30, 60, 0.08);
-    }
-
-    .service-card-header {
-      padding: 18px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      border-bottom: 1px solid #f2f4f7;
-    }
-    .service-card-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      background: linear-gradient(135deg, #eef6ff 0%, #f7fbff 100%);
-      color: #106eea;
-      flex-shrink: 0;
-    }
-    .service-card-title {
-      font-weight: 600;
-      font-size: 16px;
-      color: #0b2540;
-      margin: 0;
-    }
-    .service-card-sub {
-      font-size: 13px;
-      color: #65748b;
-      margin-top: 4px;
-    }
-
-    .service-card-body {
-      padding: 14px 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .service-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      color: #4d5d73;
-      font-size: 13px;
-    }
-    .service-bullets li::before {
-      content: '•';
-      color: #106eea;
-      display: inline-block;
-      width: 18px;
-      margin-left: -18px;
-    }
-
-    .service-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      color: #495670;
-      margin-top: auto;
-    }
-
-    .meta-left {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .meta-item {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      background: #f6f8fb;
-      padding: 6px 8px;
-      border-radius: 6px;
-    }
-
-    .service-rating {
-      display: inline-flex;
-      gap: 3px;
-      align-items: center;
-      font-weight: 600;
-      color: #f6a623;
-    }
-    .service-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .service-tag {
-      background: #f0f6ff;
-      color: #106eea;
-      font-size: 12px;
-      padding: 6px 8px;
-      border-radius: 6px;
-      border: 1px solid rgba(16,110,234,0.06);
-    }
-
-    .service-card-footer {
-      padding: 14px 18px;
-      border-top: 1px solid #f2f4f7;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: #fff;
-    }
-    .service-price {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
-    .service-price .from { font-size: 12px; color: #7a899a; }
-    .service-price .amount { font-size: 20px; font-weight: 700; color: #0b2540; }
-
-    .service-footer-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    /* Make the buy button more prominent inside cards */
-    .service-card .service-buy-btn {
-      background: linear-gradient(90deg,#16b358,#0c9a4a);
-      padding: 10px 14px;
-      font-weight: 700;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    .service-card .service-buy-btn:hover {
-      opacity: 0.95;
-    }
-
-    /* Services Section - Complete set of service cards */
-    <div class="services-cards" data-aos="fade-up" data-aos-delay="100">
-      <!-- Web Development -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-code-slash"></i></div>
-          <div>
-            <h4 class="service-card-title">Web Development</h4>
-            <div class="service-card-sub">Cutting-edge web applications that push the boundaries</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Responsive, SEO-friendly websites</li>
-            <li>Modern stacks like React / Next.js</li>
-            <li>Performance & accessibility focused</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.9</span>
-                <span style="color:#9aa7bc;font-weight:600;">(523)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Full-stack</div>
-              <div class="service-tag">API</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$999</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Web Development" data-base-price="999">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Solutions -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-cpu"></i></div>
-          <div>
-            <h4 class="service-card-title">AI Solutions</h4>
-            <div class="service-card-sub">Artificial intelligence that transforms businesses</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Custom ML models & data pipelines</li>
-            <li>Model deployment & monitoring</li>
-            <li>Integration with your systems</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.8</span>
-                <span style="color:#9aa7bc;font-weight:600;">(210)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">NLP</div>
-              <div class="service-tag">Computer Vision</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1999</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="AI Solutions" data-base-price="1999">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cyber Security -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-shield-lock"></i></div>
-          <div>
-            <h4 class="service-card-title">Cyber Security</h4>
-            <div class="service-card-sub">Unbreachable security systems that protect assets</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Security audits & pentesting</li>
-            <li>Hardening & incident response</li>
-            <li>Ongoing monitoring</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.7</span>
-                <span style="color:#9aa7bc;font-weight:600;">(150)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>7 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Audit</div>
-              <div class="service-tag">Monitoring</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1499</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Cyber Security" data-base-price="1499">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dev Ops -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-gear"></i></div>
-          <div>
-            <h4 class="service-card-title">Dev Ops</h4>
-            <div class="service-card-sub">Lightning-fast deployment pipelines</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>CI/CD pipelines</li>
-            <li>Infrastructure as code</li>
-            <li>Monitoring & SLOs</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.9</span>
-                <span style="color:#9aa7bc;font-weight:600;">(98)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>6 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Kubernetes</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1299</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Dev Ops" data-base-price="1299">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cloud Architecture -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-cloud"></i></div>
-          <div>
-            <h4 class="service-card-title">Cloud Architecture</h4>
-            <div class="service-card-sub">Scalable cloud solutions built for the future</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Design & migration</li>
-            <li>Cost optimization</li>
-            <li>High availability</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.8</span>
-                <span style="color:#9aa7bc;font-weight:600;">(132)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>8 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">AWS</div>
-              <div class="service-tag">GCP</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1799</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Cloud Architecture" data-base-price="1799">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile Apps -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-phone"></i></div>
-          <div>
-            <h4 class="service-card-title">Mobile Apps</h4>
-            <div class="service-card-sub">Revolutionary mobile experiences</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>iOS & Android</li>
-            <li>React Native / Flutter</li>
-            <li>App Store deployment</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i>
-                <span>4.9</span>
-                <span style="color:#9aa7bc;font-weight:600;">(244)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>14 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Native</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1599</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Mobile Apps" data-base-price="1599">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEO (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-search"></i></div>
-          <div>
-            <h4 class="service-card-title">SEO</h4>
-            <div class="service-card-sub">Search engine optimization that drives organic traffic</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Keyword research & on‑page SEO</li>
-            <li>Technical SEO fixes</li>
-            <li>Monthly reporting & recommendations</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(146)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>7 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">On-Page</div>
-              <div class="service-tag">Audit</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$799</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="SEO" data-base-price="799">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CRM Solutions (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-people"></i></div>
-          <div>
-            <h4 class="service-card-title">CRM Solutions</h4>
-            <div class="service-card-sub">Customer relationship systems that streamline business</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Custom CRM setup & integrations</li>
-            <li>Workflow automation</li>
-            <li>Training & handover</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.7</span><span style="color:#9aa7bc;font-weight:600;">(88)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>6 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Sales</div>
-              <div class="service-tag">Automation</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1399</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="CRM Solutions" data-base-price="1399">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- IT Support (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-headset"></i></div>
-          <div>
-            <h4 class="service-card-title">IT Support</h4>
-            <div class="service-card-sub">Comprehensive IT support for your infrastructure</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>24/7 helpdesk & ticketing</li>
-            <li>System administration</li>
-            <li>On-site and remote support</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(64)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>2 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Support</div>
-              <div class="service-tag">Maintenance</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$899</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="IT Support" data-base-price="899">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Networking (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-router"></i></div>
-          <div>
-            <h4 class="service-card-title">Networking</h4>
-            <div class="service-card-sub">Network infrastructure solutions for reliable connectivity</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Design & deployment</li>
-            <li>VPN, VLAN, firewall setup</li>
-            <li>Monitoring & performance tuning</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.6</span><span style="color:#9aa7bc;font-weight:600;">(72)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>5 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Infra</div>
-              <div class="service-tag">Security</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1099</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Networking" data-base-price="1099">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- E Commerce (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-basket"></i></div>
-          <div>
-            <h4 class="service-card-title">E Commerce</h4>
-            <div class="service-card-sub">Complete e-commerce solutions that drive online sales</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Store setup (Shopify/WooCommerce)</li>
-            <li>Payments & shipping integration</li>
-            <li>Conversion optimization</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(201)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>12 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Shopify</div>
-              <div class="service-tag">WooCommerce</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1899</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="E Commerce" data-base-price="1899">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Graphic Designing (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-palette"></i></div>
-          <div>
-            <h4 class="service-card-title">Graphic Designing</h4>
-            <div class="service-card-sub">Creative visual solutions that elevate your brand</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Brand identity & logos</li>
-            <li>Marketing collateral</li>
-            <li>Fast turnarounds</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.9</span><span style="color:#9aa7bc;font-weight:600;">(310)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>3 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Logo</div>
-              <div class="service-tag">Branding</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$699</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Graphic Designing" data-base-price="699">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Digital Marketing (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-megaphone"></i></div>
-          <div>
-            <h4 class="service-card-title">Digital Marketing</h4>
-            <div class="service-card-sub">Strategic campaigns that grow your business</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>PPC, social ads & strategy</li>
-            <li>Content marketing</li>
-            <li>Analytics & conversion tracking</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.8</span><span style="color:#9aa7bc;font-weight:600;">(178)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>10 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Ads</div>
-              <div class="service-tag">SEO</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$1199</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Digital Marketing" data-base-price="1199">Buy Now</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Video Editing (added) -->
-      <div class="service-card">
-        <div class="service-card-header">
-          <div class="service-card-icon"><i class="bi bi-film"></i></div>
-          <div>
-            <h4 class="service-card-title">Video Editing</h4>
-            <div class="service-card-sub">Professional video editing for your business & ads</div>
-          </div>
-        </div>
-        <div class="service-card-body">
-          <ul class="service-bullets">
-            <li>Promo videos & ads</li>
-            <li>Transitions, color grading</li>
-            <li>Formats for social and web</li>
-          </ul>
-          <div class="service-meta">
-            <div class="meta-left">
-              <div class="meta-item service-rating">
-                <i class="bi bi-star-fill" style="color:#f6a623;font-size:14px"></i><span>4.7</span><span style="color:#9aa7bc;font-weight:600;">(121)</span>
-              </div>
-              <div class="meta-item"><i class="bi bi-clock"></i><span>4 Days</span></div>
-            </div>
-            <div class="service-tags">
-              <div class="service-tag">Ads</div>
-              <div class="service-tag">Social</div>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <div class="service-price">
-            <div class="from">Starting at</div>
-            <div class="amount">$599</div>
-          </div>
-          <div class="service-footer-actions">
-            <button class="service-buy-btn" data-service="Video Editing" data-base-price="599">Buy Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </style>
-
-  <!-- =======================================================
-  * Template Name: Techie
-  * Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Az Meer® - Software Development & Digital Solutions</title>
+    <meta name="description"
+        content="Az Meer® - Professional software development, web applications, mobile apps, graphic design, and digital marketing solutions.">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Team Abh Pk</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Blogs</a></li>
-              <li class="dropdown"><a href="#"><span>Top Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Application Development</a></li>
-                  <li><a href="#">Website Development</a></li>
-                  <li><a href="#">Graphic Design</a></li>
-                  <li><a href="#">Digital Marketing</a></li>
-                  <li><a href="#">Video Editing</a></li>
-                </ul>
-              </li>
-              <li><a href="#">FAQs</a></li>
-               <li><a href="ringcalculator.html">Apps</a></li>
-              <li><a href="#">Privacy</a></li>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Az Meer®</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">More <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#blogs" class="dropdown-link">Blogs</a></li>
+                        <li><a href="#top-services" class="dropdown-link">Top Services</a></li>
+                        <li><a href="#faqs" class="dropdown-link">FAQs</a></li>
+                        <li><a href="ringcalculator.html" class="dropdown-link">Apps</a></li>
+                        <li><a href="#privacy" class="dropdown-link">Privacy</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li class="nav-action"><button class="btn btn-secondary" type="button" id="openLogin">Login</button></li>
             </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <a class="btn-getstarted" href="#about">Get Started</a>
-      
-      <!-- Cart Icon - Added to header -->
-      <div class="cart-indicator">
-        <a href="#" id="cart-icon" class="d-flex align-items-center">
-          <i class="bi bi-cart3" style="font-size: 24px;"></i>
-          <span class="cart-count">0</span>
-        </a>
-      </div>
-
-    </div>
-  </header>
-
-  <main class="main">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section accent-background">
-
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1>Welcome to <br> Team Abh Pk</h1>
-            <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
-            <div class="d-flex">
-              <a href="#about" class="btn-get-started">Get Started</a>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to Az Meer®</h1>
+                <p class="hero-subtitle">Innovative Software Solutions & Digital Services</p>
+                <p class="hero-description">We specialize in web applications, mobile apps, graphic design, and digital marketing. Let's build your digital future together.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
-          </div>
         </div>
-      </div>
-
-    </section><!-- /Hero Section -->
+    </section>
 
     <!-- About Section -->
-    <section id="about" class="about section">
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-            <h1>About Us</h1>
-            <p class="fst-italic">
-             Team Abh Pk, founded in 2018, Our Services are :
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span> We specialize in technologies like React.js, Angular.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Delivering Scalable & Growth-Focused Software Solutions.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Experts in Modern Web & Mobile Technologies.</span></li>
-            </ul>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-          </div>
-
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Az Meer® is a leading software development company dedicated to delivering high-quality solutions that drive business growth. With years of experience in web development, mobile applications, and digital services, we've helped numerous clients achieve their goals.</p>
+                    <p>Our team of expert developers, designers, and marketing professionals work collaboratively to create innovative solutions tailored to your unique business needs.</p>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check"></i> Professional Web & Mobile Development</li>
+                        <li><i class="fas fa-check"></i> Custom Software Solutions</li>
+                        <li><i class="fas fa-check"></i> UI/UX Design Services</li>
+                        <li><i class="fas fa-check"></i> Digital Marketing Strategies</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support & Maintenance</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-
-      </div>
-
-    </section><!-- /About Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section accent-background">
-
-      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Clients</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Stats Section -->
+    </section>
 
     <!-- Services Section -->
-    <section id="services" class="services section">
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>From concept to deployment, we deliver end-to-end technology solutions that drive business growth and digital transformation.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-        <!-- Services will be rendered from repository data (/db/services.json). -->
-        <!-- The marketplace script will populate this container when available. -->
-
-        <!-- Services Controls: search / category / sort -->
-        <div class="row mb-4 services-controls" data-aos="fade-up" data-aos-delay="50">
-          <div class="col-md-6 mb-2">
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-search"></i></span>
-              <input id="main-search-input" class="form-control" type="search" placeholder="Search services, e.g. 'SEO' or 'React'">
-            </div>
-          </div>
-          <div class="col-md-3 mb-2">
-            <select id="main-category-filter" class="form-select">
-              <option value="all">All categories</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-2">
-            <select id="main-sort-select" class="form-select">
-              <option value="default">Sort: Featured</option>
-              <option value="price-asc">Price: Low → High</option>
-              <option value="price-desc">Price: High → Low</option>
-              <option value="rating">Top rated</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="main-services" class="services-cards" data-aos="fade-up" data-aos-delay="100">
-          <!-- If JavaScript is disabled or the feed fails, provide a small static fallback. -->
-          <noscript>
-            <div class="service-card">
-              <div class="service-card-header">
-                <div class="service-card-icon"><i class="bi bi-briefcase"></i></div>
-                <div>
-                  <h4 class="service-card-title">Consulting</h4>
-                  <div class="service-card-sub">Contact us to discuss your requirements.</div>
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom web applications using modern technologies. Responsive, fast, and scalable solutions for your business.</p>
+                    <a href="service-details.html?service=web" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=web" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
                 </div>
-              </div>
-              <div class="service-card-body">
-                <p>Enable JavaScript to see live service listings.</p>
-              </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>Native and cross-platform mobile applications. iOS and Android solutions that engage your users.</p>
+                    <a href="service-details.html?service=mobile" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=mobile" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>Creative design solutions including logos, branding, and visual content. Stand out from the competition.</p>
+                    <a href="service-details.html?service=design" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=design" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Digital Marketing</h3>
+                    <p>Strategic marketing campaigns to boost your online presence. SEO, social media, and content marketing.</p>
+                    <a href="service-details.html?service=marketing" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=marketing" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Video Editing</h3>
+                    <p>Professional video production and editing. Create engaging video content for your brand.</p>
+                    <a href="service-details.html?service=video" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=video" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Custom Software</h3>
+                    <p>Bespoke software solutions tailored to your specific requirements and business processes.</p>
+                    <a href="service-details.html?service=software" class="learn-more">Learn More →</a>
+                    <a href="checkout.html?service=software" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Buy Now</a>
+                </div>
             </div>
-          </noscript>
         </div>
+    </section>
 
-        
-        </div>
-      </div>
-    </section><!-- /Services Section -->
-
-    <!-- Service Purchase Modal -->
-    <div id="service-purchase-modal" class="service-purchase-modal">
-      <div class="service-purchase-content">
-        <span class="close-modal">&times;</span>
-        <div class="service-purchase-form">
-          <h3>Purchase Service</h3>
-          <div class="form-group">
-            <label for="service-name">Service</label>
-            <input type="text" id="service-name" readonly>
-          </div>
-          
-          <div class="form-group">
-            <label>Select Package</label>
-            <div class="service-packages">
-              <div class="package-option selected" data-package="basic" data-multiplier="1">
-                <div class="package-name">Basic</div>
-                <div class="package-price">$<span id="basic-price">0</span></div>
-              </div>
-              <div class="package-option" data-package="standard" data-multiplier="1.5">
-                <div class="package-name">Standard</div>
-                <div class="package-price">$<span id="standard-price">0</span></div>
-              </div>
-              <div class="package-option" data-package="premium" data-multiplier="2">
-                <div class="package-name">Premium</div>
-                <div class="package-price">$<span id="premium-price">0</span></div>
-              </div>
+    <!-- Top Services Section -->
+    <section id="top-services" class="top-services">
+        <div class="container">
+            <h2 class="section-title">Top Services</h2>
+            <div class="top-services-grid">
+                <div class="top-service-card">
+                    <div class="top-service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Fast, secure, and scalable web solutions tailored to your goals.</p>
+                </div>
+                <div class="top-service-card">
+                    <div class="top-service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Apps</h3>
+                    <p>iOS and Android apps with smooth performance and great UX.</p>
+                </div>
+                <div class="top-service-card">
+                    <div class="top-service-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Digital Marketing</h3>
+                    <p>Campaigns that grow reach, drive leads, and boost revenue.</p>
+                </div>
             </div>
-          </div>
-          
-          <div class="price-display">
-            Total: $<span id="total-price">0</span>
-          </div>
-          
-          <div class="form-group">
-            <label for="customer-name">Your Name</label>
-            <input type="text" id="customer-name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="customer-email">Email</label>
-            <input type="email" id="customer-email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="customer-phone">Phone</label>
-            <input type="tel" id="customer-phone" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="project-details">Project Details</label>
-            <textarea id="project-details" placeholder="Tell us about your project requirements..."></textarea>
-          </div>
-          
-          <button type="button" class="btn-submit" id="add-to-cart-btn">Add to Cart</button>
-          
-          <div class="success-message" id="success-message">
-            <i class="bi bi-check-circle"></i>
-            <h4>Service Added to Cart!</h4>
-            <p>Your service has been added to your cart. You can continue shopping or proceed to checkout.</p>
-            <button type="button" class="btn-continue-shopping" id="continue-shopping">Continue Shopping</button>
-            <button type="button" class="btn-checkout" id="go-to-cart">Go to Cart</button>
-          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Service Detail Modal (pop-up for View Details) -->
-    <div id="service-detail-modal" class="service-purchase-modal">
-      <div class="service-purchase-content">
-        <span class="close-modal">&times;</span>
-        <div id="service-detail-content">
-          <!-- Filled dynamically by assets/js/marketplace.js -->
-          <div style="text-align:center;padding:40px;color:#666">Loading service...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="cart-modal">
-      <div class="cart-content">
-        <span class="close-modal">&times;</span>
-        <h3>Your Cart</h3>
-        
-        <div class="cart-items" id="cart-items">
-          <!-- Cart items will be dynamically added here -->
-        </div>
-        
-        <div class="cart-total">
-          Total: $<span id="cart-total-price">0</span>
-        </div>
-        
-        <div class="cart-actions">
-          <button class="btn-continue-shopping" id="continue-shopping-cart">Continue Shopping</button>
-          <button class="btn-checkout" id="proceed-checkout">Place Order</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Order Confirmation Modal -->
-    <div id="order-confirmation-modal" class="service-purchase-modal">
-      <div class="service-purchase-content">
-        <span class="close-modal">&times;</span>
-        <div class="order-confirmation">
-          <i class="bi bi-check-circle"></i>
-          <h3>Order Placed Successfully!</h3>
-          <p>Thank you for your order. We have received your request and will contact you within 24 hours.</p>
-          
-          <div class="order-details" id="order-details">
-            <!-- Order details will be populated here -->
-          </div>
-          
-          <p><strong>Order ID: <span id="order-id"></span></strong></p>
-          <p>We'll send a confirmation email shortly.</p>
-          <button class="btn-checkout" id="close-order-confirmation">Close</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Features Section -->
-    <section id="features" class="features section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Our Process</h2>
-        <p>We follow a proven methodology that ensures project success from start to finish.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4 justify-content-between">
-          <div class="features-image col-lg-5 order-lg-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/features.svg" class="img-fluid" alt=""></div>
-          <div class="col-lg-6 d-flex flex-column justify-content-center">
-
-            <div class="features-item d-flex ps-0 ps-lg-3 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-archive flex-shrink-0"></i>
-              <div>
-                <h4>Requirement Analysis</h4>
-                <p>Gathering and analyzing business requirements, documenting functional and non-functional specifications.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-basket flex-shrink-0"></i>
-              <div>
-                <h4>System Design</h4>
-                <p>Creating architecture diagrams, database schemas, and detailed technical specifications.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-broadcast flex-shrink-0"></i>
-              <div>
-                <h4>Implementation & Testing</h4>
-                <p>Coding the application following best practices, design patterns, and coding standards.Comprehensive testing including unit testing, integration testing, and user acceptance testing.</p>
-              </div>
-              
-            </div><!-- End Features Item-->
-
-            <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="500">
-              <i class="bi bi-camera-reels flex-shrink-0"></i>
-              <div>
-                <h4>Deployment & Maintenance</h4>
-                <p>Deploying the application to production environment with proper configuration management.Ongoing support, bug fixes, performance monitoring, and feature enhancements.</p>
-              </div>
-            </div><!-- End Features Item-->
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Features Section -->
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper" data-speed="600" data-delay="5000" data-breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: 1, &quot;spaceBetween&quot;: 40 }, &quot;1200&quot;: { &quot;slidesPerView&quot;: 3, &quot;spaceBetween&quot;: 40 } }">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 20
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-            <p>
-              <i class=" bi bi-quote quote-icon-left"></i>
-                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
+    </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul><!-- End Portfolio Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured online store with payment integration</p>
+                    <a href="portfolio-details.html?id=1" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Social Media App</h3>
+                    <p>Interactive mobile application with real-time features</p>
+                    <a href="portfolio-details.html?id=2" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Business Management System</h3>
+                    <p>Enterprise software for streamlined operations</p>
+                    <a href="portfolio-details.html?id=3" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Healthcare Portal</h3>
+                    <p>Secure patient management and telemedicine platform</p>
+                    <a href="portfolio-details.html?id=4" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Educational Platform</h3>
+                    <p>Online learning system with interactive features</p>
+                    <a href="portfolio-details.html?id=5" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time data visualization and reporting tools</p>
+                    <a href="portfolio-details.html?id=6" class="view-more">View Project →</a>
                 </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
-
+            </div>
         </div>
+    </section>
 
-      </div>
-
-    </section><!-- /Portfolio Section -->
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="pricing-item">
-              <h3>Free Plan</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
+    <!-- Blogs Section -->
+    <section id="blogs" class="blogs">
+        <div class="container">
+            <h2 class="section-title">Blogs</h2>
+            <div class="blogs-grid">
+                <article class="blog-card">
+                    <div class="blog-meta">Jan 12, 2026</div>
+                    <h3>Building scalable web platforms</h3>
+                    <p>How we design systems that handle growth without sacrificing speed.</p>
+                    <a href="#" class="blog-link">Read More →</a>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-meta">Dec 20, 2025</div>
+                    <h3>Mobile UX that converts</h3>
+                    <p>Patterns and practices that keep users engaged and returning.</p>
+                    <a href="#" class="blog-link">Read More →</a>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-meta">Nov 05, 2025</div>
+                    <h3>Marketing stacks for modern teams</h3>
+                    <p>Choosing tools that align with strategy and deliver measurable results.</p>
+                    <a href="#" class="blog-link">Read More →</a>
+                </article>
             </div>
-          </div><!-- End Pricing Item -->
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="pricing-item featured">
-              <h3>Business Plan</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
-            </div>
-          </div><!-- End Pricing Item -->
-
-          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="pricing-item">
-              <h3>Developer Plan</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="buy-btn">Buy Now</a>
-            </div>
-          </div><!-- End Pricing Item -->
-
         </div>
+    </section>
 
-      </div>
-
-    </section><!-- /Pricing Section -->
-
-    <!-- Faq Section -->
-    <section id="faq" class="faq section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row justify-content-center">
-
-          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="faq-container">
-
-              <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
-                <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
-                <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
+    <!-- FAQs Section -->
+    <section id="faqs" class="faqs">
+        <div class="container">
+            <h2 class="section-title">FAQs</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>How do we start a project?</summary>
+                    <p>Share your requirements and goals. We will schedule a discovery call and propose a plan.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is your delivery timeline?</summary>
+                    <p>Timelines depend on scope and complexity. We provide a clear schedule after discovery.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you offer ongoing support?</summary>
+                    <p>Yes. We offer maintenance, updates, and performance monitoring after launch.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can you work with our existing systems?</summary>
+                    <p>We can integrate with existing platforms and help modernize legacy workflows.</p>
+                </details>
             </div>
-
-          </div><!-- End Faq Column-->
-
         </div>
-
-      </div>
-
-    </section><!-- /Faq Section -->
+    </section>
 
     <!-- Team Section -->
-    <section id="team" class="team section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <!-- Basit -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Basit.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member team-member-main">
+                    <div class="member-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="member-content">
+                        <h3>Abdul Basit</h3>
+                        <p class="member-role">CEO & Co-Founder</p>
+                        <p class="member-bio">Visionary leader with 12+ years in tech. Former VP at Google, passionate about AI and sustainable technology.</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="member-info">
-                <h4>Abdul Basit</h4>
-                <span>CEO & Co-Founder</span>
-                <p>Visionary leader with 12+ years in tech. Former VP at Google, passionate about AI and sustainable technology.</p>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
 
-          <!-- Zafar -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Zafar.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="team-member team-member-small">
+                    <div class="member-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Muhammad Zafar</h3>
+                    <p class="member-role">CTO & Co-Founder</p>
+                    <p class="member-bio">Full-stack architect with expertise in scalable systems. Ex-Netflix engineer, blockchain enthusiast.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
                 </div>
-              </div>
-              <div class="member-info">
-                <h4>Muhammad Zafar</h4>
-                <span>CTO & Co-Founder</span>
-                <p>Full-stack architect with expertise in scalable systems. Ex-Netflix engineer, blockchain enthusiast.</p>
-                <h7>System Architecture,DevOps,Blockchain,<br>Cloud Computing</h7>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
 
-          <!-- Ahmad -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/Ahmad.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="team-member team-member-small">
+                    <div class="member-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Ahmad Ihsan</h3>
+                    <p class="member-role">Lead Frontend Developer</p>
+                    <p class="member-bio">React specialist with a passion for performance optimization and modern web technologies.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
                 </div>
-              </div>
-              <div class="member-info">
-                <h4>Ahmad Ihsan</h4>
-                <span>Lead Frontend Developer</span>
-                <p>React specialist with a passion for performance optimization and modern web technologies.</p>
-                <h7> React,TypeScript,Performance,<br>Testing</h7>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
 
-          <!-- Arslan -->
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="team/arslan.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="team-member team-member-small">
+                    <div class="member-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Muhammad Arslan</h3>
+                    <p class="member-role">Accountant</p>
+                    <p class="member-bio">Manages financial operations and ensures transparent accounting practices for organizational growth.</p>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-              </div>
-              <div class="member-info">
-                <h4>Muhammad Arslan</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
-              </div>
             </div>
-          </div><!-- End Team Member -->
-
         </div>
-
-      </div>
-
-    </section><!-- /Team Section -->
+    </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Ready to transform your ideas into reality? We're here to help you every step of the way.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6">
-
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="200">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>Raiwand road</p>
-                  <p>Lahore , PAkistan</p>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Location</h3>
+                            <p>Raiwand Road, Lahore, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p>+92 332 8657885</p>
+                            <p>+92 3700602339</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>teamabhpk@gmail.com</p>
+                        </div>
+                    </div>
                 </div>
-              </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+92 332 8657885</p>
-                  <p>+92 3700602339</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>teamabhpk@gmail.com</p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="500">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Sunday</p>
-                  <p>24/7/365</p>
-                </div>
-              </div><!-- End Info Item -->
-
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
             </div>
+        </div>
+    </section>
 
-          </div>
+    <!-- Privacy Section -->
+    <section id="privacy" class="privacy">
+        <div class="container">
+            <h2 class="section-title">Privacy</h2>
+            <div class="privacy-card">
+                <p>We respect your privacy and only collect information needed to deliver services. We never sell your data.</p>
+                <p>For full details on how we handle information, contact us at teamabhpk@gmail.com.</p>
+            </div>
+        </div>
+    </section>
 
-          <div class="col-lg-6">
-            <form action="https://formspree.io/f/mzzkjvwy" method="POST" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-
-                <div class="col-md-6">
-                  <input type="email" name="_replyto" class="form-control" placeholder="Your Email" required>
-                </div>
-
-                <div class="col-12">
-                  <input type="text" name="_subject" class="form-control" placeholder="Subject" required>
-                </div>
-
-                <div class="col-12">
-                  <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-12 text-center">
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
+    <div class="login-modal" id="loginModal" aria-hidden="true">
+        <div class="login-backdrop" data-close="login"></div>
+        <div class="login-panel" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <button class="login-close" type="button" id="closeLogin" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="loginTitle">Login</h2>
+            <p class="login-sub">Access your orders and chat with our team.</p>
+            <form id="loginPopupForm" data-skip-auto>
+                <input type="text" id="popupUsername" placeholder="Username" required>
+                <input type="password" id="popupPassword" placeholder="Password" required>
+                <button class="btn btn-primary" type="submit">Login</button>
+                <p class="login-message" id="popupLoginMessage"></p>
             </form>
-          </div>
-          <!-- End Contact Form -->
-
+            <p class="login-footer">No account? <a href="profile.html">Create one on profile</a>.</p>
         </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
-
-  </main>
-
-  <footer id="footer" class="footer accent-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Team Abh Pk</span>
-          </a>
-          <p>We are a leading software development company specializing in web applications, mobile apps, and custom software solutions. Our team of expert developers delivers high-quality, scalable solutions that drive business growth.</p>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Application Development</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>raiwand road</p>
-          <p>Lahore</p>
-          <p>Pakistan</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+93 332 8657885</span></p>
-          <p><strong>Email:</strong> <span>teamabhpk@gmail.com</span></p>
-        </div>
-
-      </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Team Abh PK</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <!-- Marketplace data renderer (loads services from /db/services.json) -->
-  <script src="assets/js/marketplace.js"></script>
-
-  <!-- Service Purchase JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Service purchase system loaded');
-        
-        // Service purchase functionality
-        const serviceBuyButtons = document.querySelectorAll('.service-buy-btn');
-        const servicePurchaseModal = document.getElementById('service-purchase-modal');
-        const cartModal = document.getElementById('cart-modal');
-        const orderConfirmationModal = document.getElementById('order-confirmation-modal');
-        const closeModalButtons = document.querySelectorAll('.close-modal');
-        const packageOptions = document.querySelectorAll('.package-option');
-        const serviceNameInput = document.getElementById('service-name');
-        const totalPriceDisplay = document.getElementById('total-price');
-        const addToCartBtn = document.getElementById('add-to-cart-btn');
-        const successMessage = document.getElementById('success-message');
-        const continueShoppingBtn = document.getElementById('continue-shopping');
-        const goToCartBtn = document.getElementById('go-to-cart');
-        const cartIcon = document.getElementById('cart-icon');
-        const cartCount = document.querySelector('.cart-count');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalPrice = document.getElementById('cart-total-price');
-        const continueShoppingCartBtn = document.getElementById('continue-shopping-cart');
-        const proceedCheckoutBtn = document.getElementById('proceed-checkout');
-        const orderDetails = document.getElementById('order-details');
-        const orderIdElement = document.getElementById('order-id');
-        const closeOrderConfirmation = document.getElementById('close-order-confirmation');
-        
-        let currentService = null;
-        let currentBasePrice = 0;
-        let selectedPackage = 'basic';
-        let cart = [];
-        let orders = [];
-        
-        // WhatsApp configuration
-        const WHATSAPP_NUMBER = '923328657885';
-        
-        // Initialize cart and orders from localStorage if available
-        if (localStorage.getItem('serviceCart')) {
-            cart = JSON.parse(localStorage.getItem('serviceCart'));
-            updateCartCount();
-        }
-        
-        if (localStorage.getItem('serviceOrders')) {
-            orders = JSON.parse(localStorage.getItem('serviceOrders'));
-        }
-          // Service Buy Button Click
-        serviceBuyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                currentService = this.getAttribute('data-service');
-                currentBasePrice = parseInt(this.getAttribute('data-base-price'));
-                
-                serviceNameInput.value = currentService;
-                updatePackagePrices();
-                calculateTotalPrice();
-                
-                // Reset form
-                document.getElementById('customer-name').value = '';
-                document.getElementById('customer-email').value = '';
-                document.getElementById('customer-phone').value = '';
-                document.getElementById('project-details').value = '';
-                successMessage.style.display = 'none';
-                
-                servicePurchaseModal.style.display = 'block';
-            });
-        });
-        
-        // Package Selection
-        packageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                packageOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedPackage = this.getAttribute('data-package');
-                calculateTotalPrice();
-            });
-        });
-        
-        // Update package prices
-        function updatePackagePrices() {
-            document.getElementById('basic-price').textContent = currentBasePrice;
-            document.getElementById('standard-price').textContent = Math.round(currentBasePrice * 1.5);
-            document.getElementById('premium-price').textContent = currentBasePrice * 2;
-        }
-        
-        // Calculate total price
-        function calculateTotalPrice() {
-            let multiplier = 1;
-            switch(selectedPackage) {
-                case 'standard': multiplier = 1.5; break;
-                case 'premium': multiplier = 2; break;
-            }
-            const totalPrice = Math.round(currentBasePrice * multiplier);
-            totalPriceDisplay.textContent = totalPrice;
-            return totalPrice;
-        }
-        
-        // Add to Cart
-        addToCartBtn.addEventListener('click', function() {
-            const customerName = document.getElementById('customer-name').value;
-            const customerEmail = document.getElementById('customer-email').value;
-            const customerPhone = document.getElementById('customer-phone').value;
-            const projectDetails = document.getElementById('project-details').value;
-            
-            if (!customerName || !customerEmail || !customerPhone) {
-                alert('Please fill in all required fields: Name, Email, and Phone');
-                return;
-            }
-            
-            const totalPrice = calculateTotalPrice();
-            
-            const cartItem = {
-                id: Date.now(),
-                service: currentService,
-                package: selectedPackage,
-                basePrice: currentBasePrice,
-                totalPrice: totalPrice,
-                customerName: customerName,
-                customerEmail: customerEmail,
-                customerPhone: customerPhone,
-                projectDetails: projectDetails,
-                timestamp: new Date().toISOString()
-            };
-            
-            cart.push(cartItem);
-            saveCartToLocalStorage();
-            updateCartCount();
-            
-            // Show success message
-            successMessage.style.display = 'block';
-        });
-        
-        // Continue Shopping
-        continueShoppingBtn.addEventListener('click', function() {
-            servicePurchaseModal.style.display = 'none';
-            successMessage.style.display = 'none';
-        });
-        
-        // Go to Cart
-        goToCartBtn.addEventListener('click', function() {
-            servicePurchaseModal.style.display = 'none';
-            successMessage.style.display = 'none';
-            showCartModal();
-        });
-        
-        // Cart Icon Click
-        cartIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            showCartModal();
-        });
-        
-        // Show Cart Modal
-        function showCartModal() {
-            updateCartDisplay();
-            cartModal.style.display = 'block';
-        }
-        
-        // Update Cart Display
-        function updateCartDisplay() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
-                cartTotalPrice.textContent = '0';
-                return;
-            }
-            
-            cart.forEach(item => {
-                total += item.totalPrice;
-                
-                const cartItemElement = document.createElement('div');
-                cartItemElement.className = 'cart-item';
-                cartItemElement.innerHTML = `
-                    <div class="cart-item-details">
-                        <h4>${item.service}</h4>
-                        <p>Package: ${item.package.charAt(0).toUpperCase() + item.package.slice(1)}</p>
-                        <p>Customer: ${item.customerName}</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Az Meer®</h3>
+                    <p>Leading software development company providing innovative digital solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <div class="cart-item-price">$${item.totalPrice}</div>
-                    <button class="remove-item" data-id="${item.id}">&times;</button>
-                `;
-                cartItemsContainer.appendChild(cartItemElement);
-            });
-            
-            cartTotalPrice.textContent = total;
-            
-            // Add event listeners to remove buttons
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', function() {
-                    const itemId = parseInt(this.getAttribute('data-id'));
-                    removeFromCart(itemId);
-                });
-            });
-        }
-        
-        // Remove from Cart
-        function removeFromCart(itemId) {
-            cart = cart.filter(item => item.id !== itemId);
-            saveCartToLocalStorage();
-            updateCartCount();
-            updateCartDisplay();
-        }
-        
-        // Update Cart Count
-        function updateCartCount() {
-            cartCount.textContent = cart.length;
-        }
-        
-        // Save Cart to Local Storage
-        function saveCartToLocalStorage() {
-            localStorage.setItem('serviceCart', JSON.stringify(cart));
-        }
-        
-        // Continue Shopping from Cart
-        continueShoppingCartBtn.addEventListener('click', function() {
-            cartModal.style.display = 'none';
-        });
-        
-        // Proceed to Checkout
-        proceedCheckoutBtn.addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Your cart is empty');
-                return;
-            }
-            
-            // Generate order
-            const orderId = 'ORD-' + Date.now();
-            const order = {
-                id: orderId,
-                items: [...cart],
-                total: cart.reduce((sum, item) => sum + item.totalPrice, 0),
-                timestamp: new Date().toISOString(),
-                status: 'pending'
-            };
-            
-            orders.push(order);
-            localStorage.setItem('serviceOrders', JSON.stringify(orders));
-            
-            // Send to WhatsApp
-            sendOrderToWhatsApp(order);
-            
-            // Show confirmation
-            showOrderConfirmation(order);
-            
-            // Clear cart
-            cart = [];
-            saveCartToLocalStorage();
-            updateCartCount();
-            
-            // Close cart modal
-            cartModal.style.display = 'none';
-        });
-        
-        // Send Order to WhatsApp
-        function sendOrderToWhatsApp(order) {
-            let message = `*NEW SERVICE ORDER - ${order.id}*\n\n`;
-            message += `*Order Summary:*\n`;
-            message += `Total: $${order.total}\n`;
-            message += `Items: ${order.items.length}\n\n`;
-            message += `*Order Details:*\n`;
-            
-            order.items.forEach((item, index) => {
-                message += `\n*Item ${index + 1}:*\n`;
-                message += `Service: ${item.service}\n`;
-                message += `Package: ${item.package}\n`;
-                message += `Price: $${item.totalPrice}\n`;
-                message += `Customer: ${item.customerName}\n`;
-                message += `Email: ${item.customerEmail}\n`;
-                message += `Phone: ${item.customerPhone}\n`;
-                if (item.projectDetails) {
-                    message += `Details: ${item.projectDetails}\n`;
-                }
-            });
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappUrl, '_blank');
-        }
-        
-        // Show Order Confirmation
-        function showOrderConfirmation(order) {
-            orderIdElement.textContent = order.id;
-            
-            let orderDetailsHTML = '';
-            order.items.forEach((item, index) => {
-                orderDetailsHTML += `
-                    <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
-                        <strong>Item ${index + 1}:</strong><br>
-                        Service: ${item.service}<br>
-                        Package: ${item.package}<br>
-                        Price: $${item.totalPrice}<br>
-                        Customer: ${item.customerName}
-                    </div>
-                `;
-            });
-            
-            orderDetailsHTML += `<div style="margin-top: 15px; font-weight: bold;">Total: $${order.total}</div>`;
-            orderDetails.innerHTML = orderDetailsHTML;
-            
-            orderConfirmationModal.style.display = 'block';
-        }
-        
-        // Close Order Confirmation
-        closeOrderConfirmation.addEventListener('click', function() {
-            orderConfirmationModal.style.display = 'none';
-        });
-        
-        // Close Modals
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                servicePurchaseModal.style.display = 'none';
-                cartModal.style.display = 'none';
-                orderConfirmationModal.style.display = 'none';
-            });
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === servicePurchaseModal) {
-                servicePurchaseModal.style.display = 'none';
-            }
-            if (event.target === cartModal) {
-                cartModal.style.display = 'none';
-            }
-            if (event.target === orderConfirmationModal) {
-                orderConfirmationModal.style.display = 'none';
-            }
-        });
-    });
-</script>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                        <li><a href="#">Graphic Design</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><strong>Address:</strong><br>Raiwand Road, Lahore, Pakistan</p>
+                    <p><strong>Phone:</strong><br>+92 332 8657885<br>+92 3700602339</p>
+                    <p><strong>Email:</strong><br>teamabhpk@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Az Meer®. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
+    <!-- Scroll To Top -->
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
+
 </html>

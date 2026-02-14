@@ -1,218 +1,270 @@
-/**
-* Template Name: Techie
-* Template URL: https://bootstrapmade.com/techie-free-skin-bootstrap-3/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+// ==================== NAVIGATION MENU ==================== 
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-(function() {
-  "use strict";
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
-  function toggleScrolled() {
-    const selectBody = document.querySelector('body');
-    const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
 
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
+        document.querySelectorAll('.dropdown.open').forEach(dropdown => {
+            dropdown.classList.remove('open');
+        });
 
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
-
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        // Add active class to clicked link
+        link.classList.add('active');
     });
+});
 
-  });
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar')) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
-
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
-
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
-
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+        document.querySelectorAll('.dropdown.open').forEach(dropdown => {
+            dropdown.classList.remove('open');
+        });
     }
-  }
-  scrollTop.addEventListener('click', (e) => {
+});
+
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdown = toggle.closest('.dropdown');
+        if (dropdown) {
+            dropdown.classList.toggle('open');
+        }
+    });
+});
+
+// ==================== SMOOTH SCROLLING ==================== 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ==================== SCROLL TO TOP BUTTON ==================== 
+const scrollToTopBtn = document.getElementById('scrollToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+    } else {
+        scrollToTopBtn.classList.remove('show');
+    }
+});
+
+scrollToTopBtn.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+        top: 0,
+        behavior: 'smooth'
     });
-  });
+});
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
+// ==================== CONTACT FORM ==================== 
+const contactForm = document.getElementById('contactForm');
 
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+
+        // Show success message
+        alert('Thank you for your message! We will get back to you soon.');
+
+        // Reset form
+        contactForm.reset();
     });
-  }
-  window.addEventListener('load', aosInit);
+}
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+// ==================== ACTIVE NAV LINK ON SCROLL ==================== 
+window.addEventListener('scroll', () => {
+    let current = '';
 
-  /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
 
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
-
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
-
-  window.addEventListener("load", initSwiper);
-
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
-      });
-    });
-
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
         }
-      }, false);
     });
 
-  });
-
-  /**
-   * Frequently Asked Questions Toggle
-   */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
+        }
     });
-  });
+});
 
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
+// ==================== LAZY LOADING FOR IMAGES ==================== 
+if ('IntersectionObserver' in window) {
+    const imageElements = document.querySelectorAll('img[data-src]');
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    imageElements.forEach(img => imageObserver.observe(img));
+}
+
+// ==================== ANIMATION ON SCROLL ==================== 
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.service-card, .portfolio-item, .team-member').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// ==================== PREVENT FORM SUBMISSION FROM REDIRECTING ==================== 
+document.querySelectorAll('form').forEach(form => {
+    if (form.hasAttribute('data-skip-auto')) {
+        return;
     }
-  });
 
-  /**
-   * Navmenu Scrollspy
-   */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
-  }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+        const inputs = form.querySelectorAll('input, textarea');
+        let isValid = true;
 
-})();
+        inputs.forEach(input => {
+            if (!input.value.trim() && input.required) {
+                isValid = false;
+                input.style.borderColor = '#ff6b6b';
+            } else {
+                input.style.borderColor = '';
+            }
+        });
+
+        if (isValid) {
+            alert('Thank you for your message! We will contact you soon.');
+            form.reset();
+        }
+    });
+});
+
+// ==================== INITIALIZE ==================== 
+console.log('Az Meer® website loaded successfully!');
+
+// ==================== LOGIN MODAL (OPTIONAL) ====================
+const loginModal = document.getElementById('loginModal');
+const openLogin = document.getElementById('openLogin');
+const closeLogin = document.getElementById('closeLogin');
+const loginPopupForm = document.getElementById('loginPopupForm');
+const popupLoginMessage = document.getElementById('popupLoginMessage');
+
+function showLoginModal() {
+    if (!loginModal) return;
+    loginModal.classList.add('show');
+    loginModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function hideLoginModal() {
+    if (!loginModal) return;
+    loginModal.classList.remove('show');
+    loginModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+function updateLoginButton() {
+    if (!openLogin || !window.AbhAuth) return;
+    const session = window.AbhAuth.getSession();
+    if (session && session.username) {
+        openLogin.textContent = 'Profile';
+        openLogin.dataset.profile = 'true';
+    } else {
+        openLogin.textContent = 'Login';
+        openLogin.removeAttribute('data-profile');
+    }
+}
+
+if (openLogin) {
+    openLogin.addEventListener('click', () => {
+        if (openLogin.dataset.profile === 'true') {
+            window.location.href = 'profile.html';
+            return;
+        }
+        showLoginModal();
+    });
+}
+
+if (loginModal) {
+    loginModal.addEventListener('click', (event) => {
+        if (event.target && event.target.dataset && event.target.dataset.close === 'login') {
+            hideLoginModal();
+        }
+    });
+}
+
+if (closeLogin) {
+    closeLogin.addEventListener('click', hideLoginModal);
+}
+
+if (loginPopupForm) {
+    loginPopupForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!window.AbhAuth) {
+            return;
+        }
+        popupLoginMessage.textContent = '';
+        const username = document.getElementById('popupUsername').value.trim();
+        const password = document.getElementById('popupPassword').value.trim();
+        const result = window.AbhAuth.login(username, password);
+        if (!result.ok) {
+            popupLoginMessage.textContent = result.message || 'Unable to login.';
+            return;
+        }
+        updateLoginButton();
+        hideLoginModal();
+        window.location.href = 'profile.html';
+    });
+}
+
+updateLoginButton();
